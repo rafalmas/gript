@@ -1,0 +1,8 @@
+env:
+  node: true
+
+rules:
+  no-console: 0 # allow use of console - use logging library instead
+  strict: [2, "global"] # controls location of Use Strict Directives
+  no-process-env: 0 #allow env.process in dist.gulp
+  no-obj-calls: 0 #ok to use JSON.parse

@@ -1,0 +1,9 @@
+/.idea
+app/bower_components
+/env.properties
+/node_modules
+target
+/tmp
+*~
+env.properties
+.DS_Store
