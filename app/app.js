@@ -21,5 +21,3 @@ angular.module('sample', [
         $locationProvider.hashPrefix('!');
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|tel|mailto|x-wmapp0|chrome-extension):/);
     });
-
-

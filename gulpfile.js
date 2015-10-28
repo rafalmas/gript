@@ -68,5 +68,3 @@ gulp.task('verify-package', function () {
     gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*'])
         .pipe(expect.real('target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'));
 });
-
-
