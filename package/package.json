@@ -55,7 +55,7 @@
   },
   "peerDependencies": {
     "gulp": "^3.9.0",
-    "karma": "^0.12",
+    "karma": "0.12",
     "protractor": "^2.5"
   },
   "keywords": [
