@@ -76,8 +76,6 @@ gulp.task('images', function () {
 });
 
 gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials', 'test', 'lint-checkstyle'], function () {
-    var assets = useref.assets();
-
     return gulp.src('app/index.html')
         .pipe(gulpInject(gulp.src('target/tmp/**/*.js'), {
             read: false,
@@ -85,14 +83,12 @@ gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials'
             addRootSlash: false,
             addPrefix: '..'
         }))
-        .pipe(assets)
+        .pipe(useref())
         .pipe(rev())
         .pipe(gulpIf('*.js', ngAnnotate()))
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css', csso()))
         .pipe(debug())
-        .pipe(assets.restore())
-        .pipe(useref())
         .pipe(revReplace())
         .pipe(gulpIf('*.html', minifyHtml({
             empty: true,

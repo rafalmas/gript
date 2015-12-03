@@ -65,6 +65,8 @@ gulp.task('verify-package', function () {
         .pipe(expect.real('target/gulp-angular-sass-appbuilder/sample-gulpfile.js'));
     gulp.src(['target/gulp-angular-sass-appbuilder/*.md'])
         .pipe(expect.real('target/gulp-angular-sass-appbuilder/README.md'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*'])
+    gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'])
         .pipe(expect.real('target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*.conf.js'])
+        .pipe(expect.real('target/gulp-angular-sass-appbuilder/tasks/karma.conf.js'));
 });
