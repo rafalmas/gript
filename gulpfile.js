@@ -47,12 +47,13 @@ gulp.task('verify-package-foundation', ['build'], function () {
 });
 
 
-// Creates npm package locally under target/package
 gulp.task('create-package', ['dist'], function () {
-    gulp.src(['tasks/*.js'])
+    gulp.src(['tasks/*.js', '!tasks/karma.conf.js'])
         .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
     gulp.src(['package/*'])
         .pipe(gulp.dest('target/gulp-angular-sass-appbuilder'));
+    gulp.src(['package/karma.conf.js'])
+        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
 });
 
 // verify that the npm package contains the files it should
