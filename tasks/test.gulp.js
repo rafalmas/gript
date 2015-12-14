@@ -23,12 +23,11 @@ gulp.task('test', ['get-sources'], function (done) {
         dependencies: true,
         devDependencies: true
     });
-
     new Server({
      configFile: __dirname + '/karma.conf.js',
      files: bowerDeps.js.concat('node_modules/sinon/pkg/sinon.js', filenames.get('js')),
      singleRun: true
- }, done).start();
+ }, function () {done()}).start();
 
 });
 
