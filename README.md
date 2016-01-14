@@ -156,17 +156,11 @@ If the above steps have not worked or you are unsure please visit http://www.ser
         call "C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd" /Release /x86
         call "C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd" /Release /x64
 
-## Building this project
+## Building the `gulp-angular-sass-appbuilder` module
 
-The targets mentioned above will work on the sample `app` project, which was used for the development of the tool.
+The `gulpfile.js` for the `gulp-angular-sass-appbuilder` npm module is located in the root of the project. It contains a Gulp task to package and the verify the npm module:
 
-The `gulpfile.js` in this project is the `gulpfile.js` in the root of this project it contains a Gulp task to package
-the component/module.
+- **create-package**    creates the npm package
+- **verify-package**    verifies its contents
 
-The gulp task is called:
-
-- **create-package**
-- **verify-package**
-
-Which builds and verifies the module/component.
-After that the files are ready to be published to `npm`.
+After that the npm module is ready to be published to the `npm` repository.
