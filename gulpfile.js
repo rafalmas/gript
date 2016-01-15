@@ -1,4 +1,4 @@
-/* jslint node: true */
+/*jslint node: true */
 
 'use strict';
 
@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 require('require-dir')('./tasks');
 
 // Register our default task
-gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'lint', 'test', 'watch']);
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 

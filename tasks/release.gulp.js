@@ -1,4 +1,5 @@
-/*jslint node: true, regexp: true */
+/*jslint node: true*/
+/*global release */
 
 'use strict';
 

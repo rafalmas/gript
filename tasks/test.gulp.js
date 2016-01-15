@@ -1,4 +1,5 @@
-/*jslint node: true */
+/*jslint node: true, nomen: true */
+/*global __dirname*/
 
 'use strict';
 
@@ -24,10 +25,12 @@ gulp.task('test', ['get-sources'], function (done) {
         devDependencies: true
     });
     new Server({
-     configFile: __dirname + '/karma.conf.js',
-     files: bowerDeps.js.concat('node_modules/sinon/pkg/sinon.js', filenames.get('js')),
-     singleRun: true
- }, function () {done()}).start();
+        configFile: __dirname + '/karma.conf.js',
+        files: bowerDeps.js.concat('node_modules/sinon/pkg/sinon.js', filenames.get('js')),
+        singleRun: true
+    }, function () {
+        done();
+    }).start();
 
 });
 
