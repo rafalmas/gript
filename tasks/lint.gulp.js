@@ -41,12 +41,14 @@ gulp.task('jslint', function () {
 });
 
 
-//To enable reporting see: https://gist.github.com/luislavena/f064211759ee0f806c88
+//To enable 'checkstyle' reporting format see: https://gist.github.com/luislavena/f064211759ee0f806c88
 gulp.task('lint-scss', function () {
     return gulp.src(scssFiles)
-        .pipe(scsslint());
-        //.pipe(scsslint({'reporterOutputFormat': 'Checkstyle'}))
-        //.pipe(gulp.dest('target/scss-lint-result.xml'));
+        .pipe(scsslint({
+            //'reporterOutputFormat': 'Checkstyle',
+            'filePipeOutput': 'scss-lint-result.xml'
+        }))
+        .pipe(gulp.dest('target/scss-lint-result'));
 });
 
 
