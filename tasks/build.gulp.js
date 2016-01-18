@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     gulpIf = require('gulp-if'),
     gulpInject = require('gulp-inject'),
     mainBowerFiles = require('main-bower-files'),
-    minifyHtml = require('gulp-minify-html'),
+    htmlmin = require('gulp-htmlmin'),
     naturalSort = require('gulp-natural-sort'),
     ngAnnotate = require('gulp-ng-annotate'),
     ngHtml2js = require('gulp-ng-html2js'),
@@ -49,10 +49,11 @@ gulp.task('build-styles', function () {
 
 gulp.task('partials', function () {
     return gulp.src(['app/**/*.html', '!app/index.html', '!app/bower_components/**/*'])
-        .pipe(minifyHtml({
-            empty: true,
-            spare: true,
-            quotes: true
+        .pipe(htmlmin({
+            removeEmptyAttributes: true,
+            collapseBooleanAttributes: false,
+            collapseWhitespace: true,
+            caseSensitive: true
         }))
         .pipe(ngHtml2js({
             moduleName: gulp.config.module
@@ -90,10 +91,11 @@ gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials'
         .pipe(gulpIf('*.css', csso()))
         .pipe(debug())
         .pipe(revReplace())
-        .pipe(gulpIf('*.html', minifyHtml({
-            empty: true,
-            spare: true,
-            quotes: true
+        .pipe(gulpIf('*.html', htmlmin({
+            removeEmptyAttributes: true,
+            collapseBooleanAttributes: false,
+            collapseWhitespace: true,
+            caseSensitive: true
         })))
         .pipe(gulp.dest('target/dist'))
         .pipe(size());
