@@ -85,7 +85,7 @@ gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials'
             addPrefix: '..'
         }))
         .pipe(useref())
-        .pipe(rev())
+        .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
         .pipe(gulpIf('*.js', ngAnnotate()))
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css', csso()))
