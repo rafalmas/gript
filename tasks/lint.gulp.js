@@ -7,26 +7,20 @@ var gulp = require('gulp'),
     fs = require('fs'),
     jslint = require('gulp-jslint'),
     scsslint = require('gulp-scss-lint'),
-    srcFiles = ['/**/*.js', 'tasks/*.js', 'gulpfile.js', '!app/bower_components/**/*', '!app/patch/**/*'],
+    srcFiles = ['app/**/*.js', 'tasks/*.js', 'gulpfile.js', '!app/bower_components/**/*', '!app/patch/**/*'],
     scssFiles = ['app/*.scss', 'app/sections/**/*.scss', 'app/components/**/*.scss'];
 
 // Runs ESLint
-gulp.task('lint', ['jslint', 'lint-scss'], function () {
-    return gulp.src(srcFiles)
-        .pipe(eslint.formatEach('stylish', process.stderr))
-        .pipe(eslint.failOnError());
-});
-
-// Runs ESLint with Checkstyle-formatted output
-gulp.task('lint-checkstyle', function () {
-    var out;
+gulp.task('eslint', function () {
     if (!fs.existsSync('target')) {
         fs.mkdirSync('target');
     }
-    out = fs.createWriteStream('target/lint-result.xml');
+    var out = fs.createWriteStream('target/es-lint-result.xml');
     return gulp.src(srcFiles)
         .pipe(eslint())
+        .pipe(eslint.format())
         .pipe(eslint.format('checkstyle', out));
+        .pipe(eslint.failAfterError());
 });
 
 // Runs JSLint
@@ -40,15 +34,12 @@ gulp.task('jslint', function () {
         });
 });
 
-
-//To enable 'checkstyle' reporting format see: https://gist.github.com/luislavena/f064211759ee0f806c88
-gulp.task('lint-scss', function () {
+gulp.task('scsslint', function () {
     return gulp.src(scssFiles)
         .pipe(scsslint({
-            //'reporterOutputFormat': 'Checkstyle',
             'filePipeOutput': 'scss-lint-result.xml'
         }))
-        .pipe(gulp.dest('target/scss-lint-result'));
+        .pipe(gulp.dest('target'));
 });
 
 
