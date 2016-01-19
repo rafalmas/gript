@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     fs = require('fs'),
     jslint = require('gulp-jslint'),
     scsslint = require('gulp-scss-lint'),
-    srcFiles = ['app/**/*.js', 'tasks/*.js', 'gulpfile.js', '!app/bower_components/**/*', '!app/patch/**/*'],
+    srcFiles = ['app/**/*.js', 'tasks/*.js', 'gulpfile.js', '!app/bower_components/**/*', '!node_modules/**/*'],
     scssFiles = ['app/*.scss', 'app/sections/**/*.scss', 'app/components/**/*.scss'];
 
 // Runs ESLint
