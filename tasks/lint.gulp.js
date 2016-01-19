@@ -19,7 +19,7 @@ gulp.task('eslint', function () {
     return gulp.src(srcFiles)
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.format('checkstyle', out));
+        .pipe(eslint.format('checkstyle', out))
         .pipe(eslint.failAfterError());
 });
 
