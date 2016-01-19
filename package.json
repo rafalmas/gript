@@ -13,6 +13,7 @@
     "gulp": "3.9.0",
     "gulp-angular-filesort": "1.1.1",
     "gulp-appcache": "0.0.4",
+    "gulp-bower": "0.0.11",
     "gulp-complexity": "0.3.2",
     "gulp-connect": "2.3.1",
     "gulp-csso": "1.0.1",
@@ -46,10 +47,10 @@
     "karma": "0.13.19",
     "karma-coverage": "0.5.3",
     "karma-jasmine": "0.3.6",
-    "jasmine-core": "~2.4.1",
+    "jasmine-core": "2.4.1",
     "karma-junit-reporter": "0.3.8",
     "karma-phantomjs-launcher": "0.2.3",
-    "phantomjs": ">=1.9",
+    "phantomjs": "1.9.19",
     "karma-sinon": "1.0.4",
     "karma-spec-reporter": "0.0.23",
     "license-checker": "4.2",
@@ -90,9 +91,6 @@
   "repository": {
     "type": "git",
     "url": "http://nykredit.github.com/gulp-angular-sass-appbuilder"
-  },
-  "scripts": {
-    "postinstall": "bower install --config.interactive=false"
   },
   "readme": "readme.md",
   "devDependencies": {

@@ -18,7 +18,7 @@ gulp.task('get-sources', function () {
 });
 
 // Runs the unit tests
-gulp.task('test', ['get-sources'], function (done) {
+gulp.task('test', ['get-sources', 'bower'], function (done) {
     bowerDeps = wiredep({
         directory: 'app/bower_components',
         dependencies: true,

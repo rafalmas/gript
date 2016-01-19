@@ -4,6 +4,7 @@
 
 var gulp = require('gulp'),
     angularFilesort = require('gulp-angular-filesort'),
+    bower = require('gulp-bower'),
     csso = require('gulp-csso'),
     debug = require('gulp-debug'),
     filter = require('gulp-filter'),
@@ -22,7 +23,12 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     wiredep = require('wiredep').stream;
 
-gulp.task('bower', function () {
+gulp.task('bower-download', function () {
+    return bower()
+        .pipe(gulp.dest('app/bower_components'));
+});
+
+gulp.task('bower', ['bower-download'], function () {
     return gulp.src('app/index.html')
         .pipe(wiredep({
             directory: 'app/bower_components'
@@ -41,7 +47,7 @@ gulp.task('js', ['bower'], function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('build-styles', function () {
+gulp.task('build-styles', ['bower'], function () {
     return gulp.src(['app/app.scss'])
         .pipe(sass())
         .pipe(gulp.dest('target/tmp/styles'));
@@ -62,7 +68,7 @@ gulp.task('partials', function () {
         .pipe(size());
 });
 
-gulp.task('fonts', function () {
+gulp.task('fonts', ['bower'], function () {
     return gulp.src('app/bower_components/**/*')
         .pipe(filter('**/*.{eot,ttf,woff,woff2}'))
         .pipe(flatten())

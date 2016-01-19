@@ -22,9 +22,11 @@ which means:
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
+
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target` : contains generated files
 - `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
+- `bower.json` : contains bower dependencies
 
 ## Setup the builder in your project
 
@@ -51,6 +53,11 @@ The tool comes with a guide for the enabling of the build tool in your project.
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
 The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the root library of the module.
 You can find it in the `node_modules/gulp-angular-sass-appbuilder` folder, look for a `sample-gulpfile.js`.
+
+#### The sample Bower file
+
+The `gulp-angular-sass-appbuilder` includes a sample `bower.json` file, located in the root library of the module.
+You can find it in the `node_modules/gulp-angular-sass-appbuilder` folder, look for a `sample-bower.json`. Rename it to `bower.json` in your own project.
 
 #### Using the sample Gulp file
 This `sample-gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gulp-angular-sass-appbuilder` module and specify the tasks you want to run during the build process of your own application:
