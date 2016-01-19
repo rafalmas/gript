@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     filter = require('gulp-filter'),
     gulpIf = require('gulp-if'),
     gulpInject = require('gulp-inject'),
-    mainBowerFiles = require('main-bower-files'),
+    flatten = require('gulp-flatten'),
     htmlmin = require('gulp-htmlmin'),
     naturalSort = require('gulp-natural-sort'),
     ngAnnotate = require('gulp-ng-annotate'),
@@ -63,8 +63,9 @@ gulp.task('partials', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(mainBowerFiles())
-        .pipe(filter('**/*.{eot,svg,ttf,woff,woff2}'))
+    return gulp.src('app/bower_components/**/*')
+        .pipe(filter('**/*.{eot,ttf,woff,woff2}'))
+        .pipe(flatten())
         .pipe(gulp.dest('target/tmp/fonts'))
         .pipe(gulp.dest('target/dist/fonts'))
         .pipe(size());

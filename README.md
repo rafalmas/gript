@@ -1,13 +1,16 @@
 # A Gulp Build Setup Project
 
 This projects is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
-an AngularJS application using sass. The project includes a simple sample application to make it possible
-to test the build setup using the local sample application. The local sample application exemplifies the
-needed structure for applications supported by the npm package "gulp-angular-sass-appbuilder".
-The sample application resides in the `app` folder.
+an AngularJS application using sass.
 
-The aim of this module is to orchestrate a collection of gulp build functionality into a single npm dependency
-and to make it easier for developers to have and maintain the build setup for Angular projects.
+The goal of this tool is to provide the handy workflow for developing Angular based applications and ensure
+the profound checking of the code quality of the same time. 
+The module orchestrates a collection of gulp build functionality into a single npm dependency 
+and makes it easier for developers to have and maintain the build setup for own Angular projects.
+
+The project includes a sample application to make it possible to test the build setup.
+The local sample application exemplifies the needed structure for applications supported by the npm package "gulp-angular-sass-appbuilder".
+The sample application resides in the `app` folder.
 
 ## Structure requirements for applications supported
 
