@@ -24,8 +24,7 @@ var gulp = require('gulp'),
     wiredep = require('wiredep').stream;
 
 gulp.task('bower-download', function () {
-    return bower()
-        .pipe(gulp.dest('app/bower_components'));
+    return bower('app/bower_components');
 });
 
 gulp.task('bower', ['bower-download'], function () {
