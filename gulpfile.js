@@ -46,10 +46,13 @@ gulp.task('verify-package-foundation', ['build'], function () {
         .pipe(ex.real('target/dist/fonts/glyphicons-halflings-regular.*'));
 });
 
-
 gulp.task('create-package', ['dist'], function () {
     gulp.src(['tasks/*.js', '!tasks/karma.conf.js'])
         .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
+    gulp.src(['package/sample_configs/*'])
+        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/sample_configs'));
+    gulp.src(['package/sample_configs/.*'])
+        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/sample_configs'));
     gulp.src(['package/*'])
         .pipe(gulp.dest('target/gulp-angular-sass-appbuilder'));
     gulp.src(['package/karma.conf.js'])
@@ -62,8 +65,16 @@ gulp.task('verify-package', function () {
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/index.js'));
     gulp.src(['target/gulp-angular-sass-appbuilder/package.json'])
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/package.json'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample-gulpfile.js'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample-gulpfile.js'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/gulpfile.js'])
+        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/gulpfile.js'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'])
+        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.jslintrc'])
+        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.jslintrc'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'])
+        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'));
+    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/bower.json'])
+        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/bower.json'));
     gulp.src(['target/gulp-angular-sass-appbuilder/*.md'])
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/README.md'));
     gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'])

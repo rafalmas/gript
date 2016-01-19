@@ -48,19 +48,15 @@ will include `gulp-angular-sass-appbuilder` in your `node_modules` folder and ma
 
 The tool comes with a guide for the enabling of the build tool in your project.
 
-#### The sample Gulp file
+#### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the root library of the module.
-You can find it in the `node_modules/gulp-angular-sass-appbuilder` folder, look for a `sample-gulpfile.js`.
-
-#### The sample Bower file
-
-The `gulp-angular-sass-appbuilder` includes a sample `bower.json` file, located in the root library of the module.
-You can find it in the `node_modules/gulp-angular-sass-appbuilder` folder, look for a `sample-bower.json`. Rename it to `bower.json` in your own project.
+The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the `sample_configs` directory module.
+Also in the `sample_configs` directory there are sample configration files for Bower, es-lint, js-lint and scss-lint.
+Copy them to the root folder of your project.
 
 #### Using the sample Gulp file
-This `sample-gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gulp-angular-sass-appbuilder` module and specify the tasks you want to run during the build process of your own application:
+This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gulp-angular-sass-appbuilder` module and specify the tasks you want to run during the build process of your own application:
 
     var gulp = require('gulp-angular-sass-appbuilder');
 
@@ -76,7 +72,7 @@ This `sample-gulpfile.js` can be used as a starter for your project. This is whe
     gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
     gulp.task('dist:serve', ['dist', 'server:dist']);
 
-Be sure to set values for the configuration in your copy of the `sample-gulpfile.js`.
+Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
 These values are:
 
@@ -86,7 +82,7 @@ These values are:
 
 You may kickstart your project by copying
 
- - **sample-gulpfile.js** and rename that to `gulpfile.js` in your project.
+ - **sample_configs/gulpfile.js** to the root of your own project.
 
 This gives you to have a very simple build configuration as a starting scenario.
 
