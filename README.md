@@ -51,8 +51,8 @@ The tool comes with a guide for the enabling of the build tool in your project.
 #### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the `sample_configs` directory module.
-Also in the `sample_configs` directory there are sample configration files for Bower, es-lint, js-lint and scss-lint.
+The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the `sample_configs` directory.
+Also in the `sample_configs` directory there are configuration files for Bower, es-lint, js-lint and scss-lint.
 Copy them to the root folder of your project.
 
 #### Using the sample Gulp file
