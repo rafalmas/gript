@@ -27,7 +27,7 @@ gulp.task('bower-download', function () {
     return bower('app/bower_components');
 });
 
-gulp.task('bower', ['bower-download'], function () {
+gulp.task('bower', function () {
     return gulp.src('app/index.html')
         .pipe(wiredep({
             directory: 'app/bower_components'
@@ -35,7 +35,7 @@ gulp.task('bower', ['bower-download'], function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('js', ['bower'], function () {
+gulp.task('js', function () {
     return gulp.src('app/index.html')
         .pipe(gulpInject(
             gulp.src(['app/**/*.js', '!app/bower_components/**/*', '!**/*_test.js'])
@@ -46,7 +46,7 @@ gulp.task('js', ['bower'], function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('build-styles', ['bower'], function () {
+gulp.task('build-styles', function () {
     return gulp.src(['app/app.scss'])
         .pipe(sass())
         .pipe(gulp.dest('target/tmp/styles'));
@@ -67,7 +67,7 @@ gulp.task('partials', function () {
         .pipe(size());
 });
 
-gulp.task('fonts', ['bower'], function () {
+gulp.task('fonts', function () {
     return gulp.src('app/bower_components/**/*')
         .pipe(filter('**/*.{eot,ttf,woff,woff2}'))
         .pipe(flatten())

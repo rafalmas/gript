@@ -93,6 +93,9 @@
     "type": "git",
     "url": "http://nykredit.github.com/gulp-angular-sass-appbuilder"
   },
+  "scripts": {
+    "postinstall": "bower install --config.interactive=false --config.directory=app/bower-components"
+  },
   "readme": "readme.md",
   "devDependencies": {
     "gulp-expect-file": "0.0.7",
