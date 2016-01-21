@@ -1,4 +1,3 @@
-/*jslint node: true*/
 /*global release */
 
 'use strict';

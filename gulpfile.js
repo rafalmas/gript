@@ -1,15 +1,14 @@
-/*jslint node: true*/
-
 'use strict';
 
 var gulp = require('gulp'),
-    ex = require('gulp-expect-file');
+    ex = require('gulp-expect-file'),
+    replace = require('gulp-replace');
 
 // require the tasks for the setup as part of this project
 require('require-dir')('./tasks');
 
 // Register our default task
-gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'eslint', 'jslint', 'scsslint', 'test', 'watch']);
+gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'eslint', 'scsslint', 'test', 'watch']);
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 
@@ -48,7 +47,12 @@ gulp.task('verify-package-foundation', ['build'], function () {
 
 gulp.task('create-package', ['dist'], function () {
     gulp.src(['tasks/*.js', '!tasks/karma.conf.js'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
+        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'))
+        .on('finish', function () {
+            gulp.src(['target/gulp-angular-sass-appbuilder/tasks/test.gulp.js'])
+                .pipe(replace('node_modules/sinon', 'node_modules/gulp-angular-sass-appbuilder/node_modules/sinon'))
+                .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
+        });
     gulp.src(['package/sample_configs/*'])
         .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/sample_configs'));
     gulp.src(['package/sample_configs/.*'])
@@ -69,8 +73,6 @@ gulp.task('verify-package', function () {
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/gulpfile.js'));
     gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'])
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.jslintrc'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.jslintrc'));
     gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'])
         .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'));
     gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/bower.json'])

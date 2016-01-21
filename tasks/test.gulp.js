@@ -1,6 +1,3 @@
-/*jslint node: true, nomen: true */
-/*global __dirname*/
-
 'use strict';
 
 var gulp = require('gulp'),

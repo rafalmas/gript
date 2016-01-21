@@ -12,21 +12,53 @@ The project includes a sample application to make it possible to test the build 
 The local sample application exemplifies the needed structure for applications supported by the npm package "gulp-angular-sass-appbuilder".
 The sample application resides in the `app` folder.
 
+##Features
+
+- Javascript validation using es-lint.
+- SASS validation and compilation
+- unit tests performed using Karma and PhantomJS
+- unit testing coverage metered by Istanbul 
+- HTML partials pre-loading into the Angular template cache
+- full concatenation/minification for all production js and css files
+- Live-reload capability—web page is auto-refreshed on change
+- watch tasks
+
 ## Structure requirements for applications supported
 
 The use of the this Gulp build tool is based on applications code being structured according to Google's
- [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/mobilebasic?pli=1). The primary directories are:
+ [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/mobilebasic?pli=1). The primary directories and files are:
+
+    |---- /app
+    |     |
+    |     |---- bower_components
+    |     |---- components
+    |     |---- sections
+    |     |---- img
+    |     |---- styles
+    |     |---- index.html
+    |     |---- app.js
+    |     |---- .eslint.rc.yml
+    |---- /target
+    |     |---- dist
+    |---- gulpfile.js
+    |---- bower.json
+    |---- package.json
+    |---- .eslint.rc.yml
+    |---- .scsslint.rc.yml
+
 which means:
 
 - `app` : contains the application source code
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
-
+- `app/app.js` : the entry point of the Angular application
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target` : contains generated files
 - `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
 - `bower.json` : contains bower dependencies
+- `.eslint.rc.yml` : contains rules for es-linter (cascading rules configuration is possible)
+- `.scsslint.rc.yml` : contains rules for scss-linter
 
 ## Setup the builder in your project
 
@@ -52,8 +84,7 @@ The tool comes with a guide for the enabling of the build tool in your project.
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
 The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the `sample_configs` directory.
-Also in the `sample_configs` directory there are configuration files for Bower, es-lint, js-lint and scss-lint.
-Copy them to the root folder of your project.
+There are also example configuration files for Bower, es-lint, js-lint and scss-lint in the `sample_configs` directory. 
 
 #### Using the sample Gulp file
 This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gulp-angular-sass-appbuilder` module and specify the tasks you want to run during the build process of your own application:
@@ -80,21 +111,14 @@ These values are:
 - **hostHeader** name of your project
 - **url** url of your project
 
-You may kickstart your project by copying
-
- - **sample_configs/gulpfile.js** to the root of your own project.
-
+You may kickstart your project by copying **sample_configs/gulpfile.js** to the root of your own project.
 This gives you to have a very simple build configuration as a starting scenario.
 
 NOTE: If you have no tests the
 
     gulp test
 
-command will fail and you will not be able to successful run that,
-until you have created your first piece of logic and its corresponding test.
-
-This gives you to have a very simple  build configuration as a starting scenario, if you have no tests the test
-task will fail and you will not be able to run that until you have created your first piece of logic and its corresponding test.
+command will fail, until you create your first piece of logic and its corresponding test.
 
 ## Building your project
 
@@ -107,6 +131,10 @@ The primary tasks imported from `gulpfile.js` in your project from the `gulp-ang
 - **lint** : runs [ESLint](http://www.eslint.org) on the Angular JavaScript source
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - fails if no test are available
 - **clean** : deletes generated files
+
+You can list the available tasks by running the command:
+
+    gulp --tasks
 
 The **default** task runs everything that is necessary to build, start the development server and watch the source code. So just by running
 

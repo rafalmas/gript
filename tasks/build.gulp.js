@@ -1,5 +1,3 @@
-/*jslint node: true, regexp: true */
-
 'use strict';
 
 var gulp = require('gulp'),
@@ -82,7 +80,7 @@ gulp.task('images', function () {
         .pipe(size());
 });
 
-gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials', 'test', 'eslint', 'jslint', 'scsslint'], function () {
+gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials', 'test', 'eslint', 'scsslint'], function () {
     return gulp.src('app/index.html')
         .pipe(gulpInject(gulp.src('target/tmp/**/*.js'), {
             read: false,
