@@ -3,7 +3,7 @@
 var gulp = require('gulp'),
     angularFilesort = require('gulp-angular-filesort'),
     bower = require('gulp-bower'),
-    csso = require('gulp-csso'),
+    minifyCss = require('gulp-cssnano'),
     debug = require('gulp-debug'),
     filter = require('gulp-filter'),
     gulpIf = require('gulp-if'),
@@ -92,7 +92,7 @@ gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials'
         .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
         .pipe(gulpIf('*.js', ngAnnotate()))
         .pipe(gulpIf('*.js', uglify()))
-        .pipe(gulpIf('*.css', csso()))
+        .pipe(gulpIf('*.css', minifyCss()))
         .pipe(debug())
         .pipe(revReplace())
         .pipe(gulpIf('*.html', htmlmin({
