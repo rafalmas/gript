@@ -1,23 +1,45 @@
 'use strict';
 
 var gulp = require('gulp'),
+    gulpInject = require('gulp-inject'),
     ts = require('gulp-typescript'),
     tslint = require('gulp-tslint'),
-    es = require('event-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     del = require('del'),
     concat = require('gulp-concat');
 
-gulp.task('ts-compile', ['ts-lint'], function() {
-    var tsProject = ts.createProject('tsconfig.json');
-        var tsStream = gulp.src(['app/**/*.ts','!app/bower_components/**/*']).pipe(ts(tsProject));
+/**
+ * inject compiles ts into the index.html
+ */
+gulp.task('ts-inject', ['ts-compile'], function () {
+    return gulp.src('app/index.html')
+        .pipe(gulpInject(gulp.src('target/tmp/js/all.js'), {relative: true}))
+        .pipe(gulp.dest('app'));
+});
 
-    es.merge(
-        tsStream.dts.pipe(gulp.dest('target/tmp/js')),
-        tsStream.js
-            .pipe(concat('target/tmp/main.js'))
-            .pipe(gulp.dest('target/tmp/js'))
-    );
+/**
+ * compile all typescript files and sourcemaps from /app and output them to /target/tmp
+ */
+gulp.task('ts-compile', ['ts-lint'], function () {
+
+    var tsProject = ts.createProject({
+            "compilerOptions": {
+                "target": "es5",
+                "sourceMap": true,
+                "declarationFiles": true,
+                "noExternalResolve": false,
+                "sortOutput": true
+            }
+        }),
+
+        tsResult = gulp.src(['app/**/*.ts', '!app/bower_components/**/*'])
+            .pipe(sourcemaps.init())
+            .pipe(ts(tsProject));
+
+    return tsResult.js
+        .pipe(concat('all.js'))
+        .pipe(sourcemaps.write('../maps'))
+        .pipe(gulp.dest('target/tmp/js'));
 });
 
 /**
