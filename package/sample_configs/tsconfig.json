@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "sourceMap": true
+    "sourceMap": true,
+    "declarationFiles": true,
+    "noExternalResolve": false,
+    "sortOutput": true
   }
 }

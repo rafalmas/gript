@@ -1,50 +1,32 @@
 'use strict';
 
 var gulp = require('gulp'),
-    tsc = require('gulp-typescript'),
+    ts = require('gulp-typescript'),
     tslint = require('gulp-tslint'),
+    es = require('event-stream'),
     sourcemaps = require('gulp-sourcemaps'),
-    eventStream = require('event-stream'),
-    del = require('del');
+    del = require('del'),
+    concat = require('gulp-concat');
 
-function compileTS(opt) {
-    var tsResult = gulp.src(opt.inPath)
-        .pipe(sourcemaps.init()) // sourcemaps will be generated
-        .pipe(tsc(opt.tsProject, undefined, tsc.reporter.fullReporter(true)));
+gulp.task('ts-compile', ['ts-lint'], function() {
+    var tsProject = ts.createProject('tsconfig.json');
+        var tsStream = gulp.src(['app/**/*.ts','!app/bower_components/**/*']).pipe(ts(tsProject));
 
-    return eventStream.merge( // this task is finished when the IO of both operations are done
-        tsResult.dts.pipe(gulp.dest(opt.outDefPath)),
-        tsResult.js
-            .pipe(sourcemaps.write()) // sourcemaps are added to the .js file
-            .pipe(gulp.dest(opt.outJsPath))
+    es.merge(
+        tsStream.dts.pipe(gulp.dest('target/tmp/js')),
+        tsStream.js
+            .pipe(concat('target/tmp/main.js'))
+            .pipe(gulp.dest('target/tmp/js'))
     );
-}
-
-function compileAppScripts() {
-    var tsProject = tsc.createProject('tsconfig.json'),
-        opt = {
-            tsProject: tsProject,
-            inPath: 'app/**/*.ts',
-            outDefPath: 'target/tmp/definitions/app',
-            outJsPath: 'target/tmp/js/app',
-            outJsFile: 'output.js'
-        };
-
-    return compileTS(opt);
-}
+});
 
 /**
  * lint all TypeScript files.
  */
 gulp.task('ts-lint', function () {
-    return gulp.src(['app/**/*.ts', '!app/bower_components/**/*']).pipe(tslint()).pipe(tslint.report('prose'));
-});
-
-/**
- * compile TypeScript and include references to library and app .d.ts files.
- */
-gulp.task('ts-compile', ['ts-lint'], function () {
-    return compileAppScripts();
+    return gulp.src(['app/**/*.ts', '!app/bower_components/**/*'])
+        .pipe(tslint())
+        .pipe(tslint.report('prose'));
 });
 
 /**
