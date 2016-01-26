@@ -15,6 +15,7 @@
     <!-- endbuild -->
     <!-- build:css(target/tmp) styles/main.css -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="styles/app.css">
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -28,7 +29,7 @@
 
 <body class="no-select">
 
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavigationController as vm">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="navigationController as vm">
         <div class="container-fluid">
             <div class="navbar-header pull-left">
                 <button type="button" class="navbar-toggle" ng-click="vm.navbar = !vm.navbar">
@@ -58,12 +59,25 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <script src="bower_components/picturefill/dist/picturefill.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/main.js -->
     <!-- inject:js -->
+    <script src="js/all.js"></script>
     <!-- endinject -->
     <!-- partials:js -->
+    <script src="partials/welcome.js"></script>
+    <script src="partials/sections/portfolio/portfolio.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 </body>

@@ -16,12 +16,12 @@ The`index.html` in the `app` folder is especially important - it contains marker
 ##Features
 
 - Javascript validation using es-lint.
-- SASS validation and compilation
+- SASS validation and incremental compilation
 - unit tests performed using Karma and PhantomJS
 - unit testing coverage metered by Istanbul 
 - HTML partials pre-loading into the Angular template cache
 - full concatenation/minification for all production js and css files
-- Live-reload capability: web app is auto-refreshed if html, typescript or scss files change.
+- Live-reload capability: web app is auto-refreshed if html, TypeScript or Sass files change.
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
 
 ## Structure requirements for applications supported
@@ -56,7 +56,7 @@ which means:
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `app/app.js` : the entry point of the Angular application
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
-- `target/tmp` : contains generated files (compiled typescript, angular templates etc.)
+- `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
 - `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
 - `bower.json` : contains bower dependencies
@@ -125,7 +125,7 @@ command will fail, until you create your first piece of logic and its correspond
 
 ## Building your project
 
-The **default** task runs everything that is necessary to build application and then start the development server. Your source code (typescript, html, scss) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`. So just by running
+The **default** task runs everything that is necessary to build application and then start the development server. Your source code (TypeScript, HTML, Sass) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`. So just by running
 
     gulp
 
@@ -135,11 +135,11 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 
 - **build** : builds the application for development
 - **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
-- **ts** : compiles your app typescript files
+- **ts** : compiles your app TypeScript files
 - **partials** : compiles html partials into Angular cache javascript files
 - **styles** : compiles scss files
-- **inject** : injects bower dependencies, compiled partials, typescript and scss into your app's index.html
-- **lint** : runs [ESLint](http://www.eslint.org) on the scss, javascript and typescript source files
+- **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's index.html. Files will be injected according to the marking in the index.html file. Refer to the [Files injection](#injection) section of this readme for details.
+- **lint** : runs [ESLint](http://www.eslint.org) on the scss, javascript and TypeScript source files
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - fails if no test are available
 - **clean** : deletes generated files ('target' directory - generated files and distribution package)
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
@@ -149,6 +149,25 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 You can list all of the available tasks by running the command:
 
     gulp --tasks
+
+## Compiled files injection
+By default, all TypeScript, Sass and html files will be compiled and injected into your app's `index.html` file.
+The `target/tmp` directory is the place for the compilation output:
+- **target/tmp/js** : will contain compiled TypeScript files
+- **target/tmp/partials** : will contain all html partials from your angular app compiled into Angular $templateCache.
+- **target/tmp/styles** : will contain compiled sass files
+
+Compiled scripts and styles will then be injected into the app's `index.html` according to the injection markings:
+- **\<!-- bower:css -->\<!-- endbower -->** : bower css dependencies
+- **\<!-- inject:css -->\<!-- endinject -->** : compiled scss files
+- **\<!-- bower:js -->\<!-- endbower -->** : bower js dependencies
+- **\<!-- inject:js -->\<!-- endinject -->** : TypeScript files compiled into js
+- **\<!-- partials:js -->\<!-- endinject -->** : html partials compiled into Angular's $templateCache.
+
+You can refer to `app/index.html` for an example how to define these markings.
+
+After executing the `dist` task, all of the scripts and css styles will be concatenated and minified. Your `index.html` in the distribution package
+(`target/dist`).
 
 ## External dependencies
 
