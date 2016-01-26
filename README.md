@@ -55,7 +55,7 @@ which means:
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `app/app.js` : the entry point of the Angular application
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
-- `target/tmp` : contains generated files
+- `target/tmp` : contains generated files (compiled typescript, angular templates etc.)
 - `target/dist` : contains app distribution package
 - `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
 - `bower.json` : contains bower dependencies

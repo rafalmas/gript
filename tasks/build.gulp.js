@@ -81,7 +81,7 @@ gulp.task('images', function () {
 
 gulp.task('build', ['js', 'ts', 'images', 'fonts', 'styles', 'partials', 'eslint', 'scsslint'], function () {
     return gulp.src('app/index.html')
-        .pipe(useref({ searchPath: ['app', 'target/tmp'] }))
+        .pipe(useref({searchPath: ['app', 'target/tmp']}))
         .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
         .pipe(gulpIf('*.js', ngAnnotate()))
         .pipe(gulpIf('*.js', uglify()))
@@ -89,11 +89,11 @@ gulp.task('build', ['js', 'ts', 'images', 'fonts', 'styles', 'partials', 'eslint
         .pipe(debug())
         .pipe(revReplace())
         .pipe(gulpIf('*.html', htmlmin({
-         removeEmptyAttributes: true,
-         collapseBooleanAttributes: false,
-         collapseWhitespace: true,
-         caseSensitive: true
-         })))
+            removeEmptyAttributes: true,
+            collapseBooleanAttributes: false,
+            collapseWhitespace: true,
+            caseSensitive: true
+        })))
         .pipe(gulp.dest('target/dist'))
         .pipe(size());
 });
