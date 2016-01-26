@@ -1,11 +1,11 @@
 describe('portfolio module', function () {
     'use strict';
-    beforeEach(module('sample.portfolio.fusion'));
+    beforeEach(module('portfolio'));
 
-    describe('fusion portfolio controller', function () {
+    describe('portfolio controller', function () {
         it('should load portfolio', function ($controller) {
-            var FusionPortfolioController = $controller('FusionPortfolioController');
-            expect(FusionPortfolioController.portfolio).toBeDefined();
+            var portfolioController = $controller('portfolioController');
+            expect(portfolioController.portfolio).toBeDefined();
         });
 
     });

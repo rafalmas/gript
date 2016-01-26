@@ -40,6 +40,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- .eslint.rc.yml
     |---- /target
     |     |---- dist
+    |     |---- tmp
     |---- gulpfile.js
     |---- bower.json
     |---- package.json
@@ -54,7 +55,8 @@ which means:
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `app/app.js` : the entry point of the Angular application
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
-- `target` : contains generated files
+- `target/tmp` : contains generated files
+- `target/dist` : contains app distribution package
 - `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
 - `bower.json` : contains bower dependencies
 - `.eslint.rc.yml` : contains rules for es-linter (cascading rules configuration is possible)
@@ -100,7 +102,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
     };
 
     // Register default task
-    gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+    gulp.task('default', ['bower', 'js', 'styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
     gulp.task('dist:serve', ['dist', 'server:dist']);
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.

@@ -69,7 +69,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
     };
 
     // Register default task
-    gulp.task('default', ['bower', 'js', 'build-styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+    gulp.task('default', ['bower', 'js', 'styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
     gulp.task('dist:serve', ['dist', 'server:dist']);
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.

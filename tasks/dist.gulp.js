@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     replace = require('gulp-replace');
 
 // Creates HTML5 AppCache manifest
-gulp.task('appcache', ['build'], function () {
+gulp.task('dist', ['build'], function () {
     gulp.src(['target/dist/**/*'])
         .pipe(appcache({
             filename: 'app.manifest',
@@ -17,5 +17,3 @@ gulp.task('appcache', ['build'], function () {
         .pipe(replace(/<html /, '<html manifest="app.manifest" '))
         .pipe(gulp.dest('target/dist'));
 });
-
-gulp.task('dist', ['appcache']);

@@ -1,15 +1,15 @@
 'use strict';
 
-var gulp = require('gulp'),
-    angularFilesort = require('gulp-angular-filesort'),
+var angularFilesort = require('gulp-angular-filesort'),
     bower = require('gulp-bower'),
-    minifyCss = require('gulp-cssnano'),
     debug = require('gulp-debug'),
     filter = require('gulp-filter'),
+    flatten = require('gulp-flatten'),
+    gulp = require('gulp'),
     gulpIf = require('gulp-if'),
     gulpInject = require('gulp-inject'),
-    flatten = require('gulp-flatten'),
     htmlmin = require('gulp-htmlmin'),
+    minifyCss = require('gulp-cssnano'),
     naturalSort = require('gulp-natural-sort'),
     ngAnnotate = require('gulp-ng-annotate'),
     ngHtml2js = require('gulp-ng-html2js'),
@@ -17,7 +17,7 @@ var gulp = require('gulp'),
     revReplace = require('gulp-rev-replace'),
     sass = require('gulp-sass'),
     size = require('gulp-size'),
-    uglify = require('gulp-uglify'),
+    //uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     wiredep = require('wiredep').stream;
 
@@ -44,7 +44,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('build-styles', function () {
+gulp.task('styles', function () {
     return gulp.src(['app/app.scss'])
         .pipe(sass())
         .pipe(gulp.dest('target/tmp/styles'));
@@ -61,7 +61,7 @@ gulp.task('partials', function () {
         .pipe(ngHtml2js({
             moduleName: gulp.config.module
         }))
-        .pipe(gulp.dest('target/tmp'))
+        .pipe(gulp.dest('target/tmp/js/partials'))
         .pipe(size());
 });
 
@@ -80,7 +80,7 @@ gulp.task('images', function () {
         .pipe(size());
 });
 
-gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials', 'test', 'eslint', 'scsslint'], function () {
+gulp.task('build', ['bower', 'js', 'ts', 'images', 'fonts', 'styles', 'partials', 'eslint', 'scsslint'], function () {
     return gulp.src('app/index.html')
         .pipe(gulpInject(gulp.src('target/tmp/**/*.js'), {
             read: false,
@@ -91,17 +91,16 @@ gulp.task('build', ['bower', 'js', 'images', 'fonts', 'build-styles', 'partials'
         .pipe(useref())
         .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
         .pipe(gulpIf('*.js', ngAnnotate()))
-        .pipe(gulpIf('*.js', uglify()))
+        //.pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css', minifyCss()))
         .pipe(debug())
         .pipe(revReplace())
-        .pipe(gulpIf('*.html', htmlmin({
-            removeEmptyAttributes: true,
-            collapseBooleanAttributes: false,
-            collapseWhitespace: true,
-            caseSensitive: true
-        })))
+        /*.pipe(gulpIf('*.html', htmlmin({
+         removeEmptyAttributes: true,
+         collapseBooleanAttributes: false,
+         collapseWhitespace: true,
+         caseSensitive: true
+         })))*/
         .pipe(gulp.dest('target/dist'))
         .pipe(size());
 });
-
