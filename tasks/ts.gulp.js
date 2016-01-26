@@ -1,23 +1,13 @@
 'use strict';
 
 var gulp = require('gulp'),
-    gulpInject = require('gulp-inject'),
     ts = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps');
 
 /**
- * inject compiles ts into the index.html
- */
-gulp.task('ts', ['ts-compile'], function () {
-    return gulp.src('app/index.html')
-        .pipe(gulpInject(gulp.src('target/tmp/js/all.js'), {relative: true}))
-        .pipe(gulp.dest('app'));
-});
-
-/**
  * compile all typescript files and sourcemaps from /app and output them to /target/tmp
  */
-gulp.task('ts-compile', ['ts-lint'], function () {
+gulp.task('ts', ['ts-lint'], function () {
 
     var tsProject = ts.createProject({
             "compilerOptins": {
@@ -38,7 +28,7 @@ gulp.task('ts-compile', ['ts-lint'], function () {
             .pipe(ts(tsProject));
 
     return tsResult.js
-        .pipe(sourcemaps.write('../maps'))
+        .pipe(sourcemaps.write('maps'))
         .pipe(gulp.dest('target/tmp/js'));
 });
 

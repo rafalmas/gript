@@ -17,7 +17,7 @@ var angularFilesort = require('gulp-angular-filesort'),
     revReplace = require('gulp-rev-replace'),
     sass = require('gulp-sass'),
     size = require('gulp-size'),
-    //uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify'),
     useref = require('gulp-useref'),
     wiredep = require('wiredep').stream;
 
@@ -25,22 +25,21 @@ gulp.task('bower-download', function () {
     return bower('app/bower_components');
 });
 
-gulp.task('bower', function () {
-    return gulp.src('app/index.html')
-        .pipe(wiredep({
-            directory: 'app/bower_components'
-        }))
-        .pipe(gulp.dest('app'));
-});
-
 gulp.task('js', function () {
     return gulp.src('app/index.html')
         .pipe(gulpInject(
-            gulp.src(['app/**/*.js', '!app/bower_components/**/*', '!**/*_test.js'])
+            gulp.src(['app/**/*.js', 'target/tmp/**/*.js', '!app/bower_components/**/*', '!**/*_test.js'])
                 .pipe(naturalSort())
                 .pipe(angularFilesort()),
-            {relative: true}
+            {
+                relative: false,
+                ignorePath: "target/tmp",
+                addRootSlash: false
+            }
         ))
+        .pipe(wiredep({
+            directory: 'app/bower_components'
+        }))
         .pipe(gulp.dest('app'));
 });
 
@@ -80,27 +79,21 @@ gulp.task('images', function () {
         .pipe(size());
 });
 
-gulp.task('build', ['bower', 'js', 'ts', 'images', 'fonts', 'styles', 'partials', 'eslint', 'scsslint'], function () {
+gulp.task('build', ['js', 'ts', 'images', 'fonts', 'styles', 'partials', 'eslint', 'scsslint'], function () {
     return gulp.src('app/index.html')
-        .pipe(gulpInject(gulp.src('target/tmp/**/*.js'), {
-            read: false,
-            starttag: '<!-- inject:partials -->',
-            addRootSlash: false,
-            addPrefix: '..'
-        }))
-        .pipe(useref())
+        .pipe(useref({ searchPath: ['app', 'target/tmp'] }))
         .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
         .pipe(gulpIf('*.js', ngAnnotate()))
-        //.pipe(gulpIf('*.js', uglify()))
+        .pipe(gulpIf('*.js', uglify()))
         .pipe(gulpIf('*.css', minifyCss()))
         .pipe(debug())
         .pipe(revReplace())
-        /*.pipe(gulpIf('*.html', htmlmin({
+        .pipe(gulpIf('*.html', htmlmin({
          removeEmptyAttributes: true,
          collapseBooleanAttributes: false,
          collapseWhitespace: true,
          caseSensitive: true
-         })))*/
+         })))
         .pipe(gulp.dest('target/dist'))
         .pipe(size());
 });
