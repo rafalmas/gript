@@ -137,7 +137,7 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 - **build** : builds the application for development
 - **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular cache javascript files
+- **partials** : compiles HTML partials into Angular $templateCache Javascript files.
 - **styles** : compiles Sass files
 - **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
