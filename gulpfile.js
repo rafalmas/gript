@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 require('require-dir')('./tasks');
 
 // Register our default task
-gulp.task('default', ['js', 'ts', 'styles', 'fonts', 'server', 'proxy', 'eslint', 'scsslint', 'test', 'watch']);
+gulp.task('default', ['build', 'server', 'proxy', 'eslint', 'watch']);
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 

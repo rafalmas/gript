@@ -10,7 +10,8 @@ and makes it easier for developers to have and maintain the build setup for own 
 
 The project includes a sample application to make it possible to test the build setup.
 The local sample application exemplifies the needed structure for applications supported by the npm package "gulp-angular-sass-appbuilder".
-The sample application resides in the `app` folder.
+The sample application resides in the `app` folder. 
+The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included. 
 
 ##Features
 
@@ -20,8 +21,8 @@ The sample application resides in the `app` folder.
 - unit testing coverage metered by Istanbul 
 - HTML partials pre-loading into the Angular template cache
 - full concatenation/minification for all production js and css files
-- Live-reload capability—web page is auto-refreshed on change
-- watch tasks
+- Live-reload capability: web app is auto-refreshed if html, typescript or scss files change.
+- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
 
 ## Structure requirements for applications supported
 
@@ -124,26 +125,30 @@ command will fail, until you create your first piece of logic and its correspond
 
 ## Building your project
 
-The primary tasks imported from `gulpfile.js` in your project from the `gulp-angular-sass-appbuilder` package dependency are:
-
-- **build** : builds the application for development
-- **dist** : builds the application for deployment
-- **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
-- **server** : starts a development server
-- **lint** : runs [ESLint](http://www.eslint.org) on the Angular JavaScript source
-- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - fails if no test are available
-- **clean** : deletes generated files
-
-You can list the available tasks by running the command:
-
-    gulp --tasks
-
-The **default** task runs everything that is necessary to build, start the development server and watch the source code. So just by running
+The **default** task runs everything that is necessary to build application and then start the development server. Your source code (typescript, html, scss) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`. So just by running
 
     gulp
 
 you are ready to start using gulp for your project.
 
+The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these specific tasks:
+
+- **build** : builds the application for development
+- **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
+- **ts** : compiles your app typescript files
+- **partials** : compiles html partials into Angular cache javascript files
+- **styles** : compiles scss files
+- **inject** : injects bower dependencies, compiled partials, typescript and scss into your app's index.html
+- **lint** : runs [ESLint](http://www.eslint.org) on the scss, javascript and typescript source files
+- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - fails if no test are available
+- **clean** : deletes generated files ('target' directory - generated files and distribution package)
+- **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
+- **server** : starts a development server
+- **server:dist** : starts a server using the deployment directory (`target/dist`)
+
+You can list all of the available tasks by running the command:
+
+    gulp --tasks
 
 ## External dependencies
 

@@ -8,9 +8,10 @@ gulp.task('watch', function () {
     livereload.listen();
     gulp.watch(['*.js', 'gulp/*.js'], ['eslint']);
     gulp.watch(['app/**/*.js', '!app/bower_components/**/*'], ['eslint', 'test']);
-    gulp.watch(['app/**/*.ts', '!app/bower_components/**/*'], ['ts']);
-    gulp.watch(['app/**/*.scss', '!app/bower_components/**/*'], ['scsslint', 'styles']);
-    gulp.watch(['bower.json'], ['bower-download']);
+    gulp.watch(['app/**/*.ts', '!app/bower_components/**/*'], ['inject-js']);
+    gulp.watch(['app/**/*.scss', '!app/bower_components/**/*'], ['inject-styles']);
+    gulp.watch(['app/**/*.html', '!app/bower_components/**/*', '!app/index.html'], ['inject-partials']);
+    gulp.watch(['bower.json'], ['inject-bower']);
     gulp.watch(['app/**/*.js', '!app/bower_components/**/*'], livereload.changed);
     gulp.watch(['app/**/*.ts', '!app/bower_components/**/*'], livereload.changed);
     gulp.watch(['app/**/*.html', '!app/bower_components/**/*'], livereload.changed);
