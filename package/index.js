@@ -14,7 +14,7 @@ gulp.config = {
 require('require-dir')('./tasks');
 
 // Register our default task
-gulp.task('default', ['bower', 'js', 'styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+gulp.task('default', ['build', 'server', 'proxy', 'test', 'watch']);
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 module.exports = gulp;
