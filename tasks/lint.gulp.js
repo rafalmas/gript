@@ -5,12 +5,14 @@ var gulp = require('gulp'),
     fs = require('fs'),
     scsslint = require('gulp-scss-lint'),
     tslint = require('gulp-tslint'),
+    util = require('gulp-util'),
     srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/bower_components/**/*', '!node_modules/**/*', '!app/patch/**/*'],
     scssFiles = ['app/*.scss', 'app/sections/**/*.scss', 'app/components/**/*.scss'],
     tsFiles = ['app/**/*.ts', '!app/bower_components/**/*'];
 
 gulp.task('eslint', function () {
     var out;
+    util.log(util.colors.blue.bold('Validating JavaScript...'));
     if (!fs.existsSync('target')) {
         fs.mkdirSync('target');
     }
@@ -23,6 +25,7 @@ gulp.task('eslint', function () {
 });
 
 gulp.task('scsslint', function () {
+    util.log(util.colors.blue.bold('Validating Sass files...'));
     return gulp.src(scssFiles)
         .pipe(scsslint({
             'filePipeOutput': 'scss-lint-result.xml'
@@ -34,6 +37,7 @@ gulp.task('scsslint', function () {
  * lint all TypeScript files.
  */
 gulp.task('ts-lint', function () {
+    util.log(util.colors.blue.bold('Validating TypeScript files...'));
     return gulp.src(tsFiles)
         .pipe(tslint())
         .pipe(tslint.report('prose'));

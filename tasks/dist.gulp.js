@@ -10,13 +10,19 @@ var appcache = require('gulp-appcache'),
     replace = require('gulp-replace'),
     rev = require('gulp-rev'),
     revReplace = require('gulp-rev-replace'),
+    sequence = require('run-sequence'),
     size = require('gulp-size'),
     uglify = require('gulp-uglify'),
-    useref = require('gulp-useref');
+    useref = require('gulp-useref'),
+    util = require('gulp-util');
 
-gulp.task('dist', ['appcache']);
+gulp.task('dist', function (callback) {
+    util.log(util.colors.blue.bold('Generating dist package...'));
+    sequence('clean', 'appcache', callback);
+});
 
 gulp.task('appcache', ['minify'], function () {
+    util.log(util.colors.blue.bold('Generating appcache...'));
     gulp.src(['target/dist/**/*'])
         .pipe(appcache({
             filename: 'app.manifest',
@@ -30,6 +36,7 @@ gulp.task('appcache', ['minify'], function () {
 });
 
 gulp.task('minify', ['build'], function () {
+    util.log(util.colors.blue.bold('Minifying...'));
     return gulp.src('app/index.html')
         .pipe(useref({searchPath: ['app', 'target/tmp']}))
         .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))

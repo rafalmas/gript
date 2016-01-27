@@ -137,12 +137,17 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 - **build** : builds the application for development
 - **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular $templateCache Javascript files.
+- **partials** : compiles HTML partials into Angular's $templateCache Javascript files.
 - **styles** : compiles Sass files
 - **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available
-- **clean** : deletes generated files (`target` directory - generated files and distribution package)
+- **clean** : removes the whole `target` directory (temporary generated files and distribution package)
+- **clean-dist** : removes the `target/dist` directory (the distribution package)
+- **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
+- **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
+- **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
+- **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
