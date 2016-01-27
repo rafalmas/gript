@@ -122,11 +122,10 @@ gulp.task('build', ['inject', 'images', 'fonts', 'eslint'], function (callback) 
     callback();
 });
 
-gulp.task('version', function (callback) {
+gulp.task('version', function () {
     var json = JSON.parse(fs.readFileSync('./package.json'));
     util.log(util.colors.blue.bold("| \\| \\ \\ / / |/ / _ \\ __|   \\_ _|_   _|"));
     util.log(util.colors.blue.bold("| .` |\\ V /| ' <|   / _|| |) | |  | |"));
     util.log(util.colors.blue.bold("|_|\\_| |_| |_|\\_\\_|_\\___|___/___| |_|"));
-
     util.log(util.colors.blue.bold(json.name + " " + json.version));
 });
