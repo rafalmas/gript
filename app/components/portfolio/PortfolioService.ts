@@ -1,9 +1,14 @@
 module Portfolio {
-    export class PortfolioService {
-        'use strict';
+    export interface IPortfolioService {
+        getPortfolio(): Array<any>;
+    }
 
-        static getPortfolio(): Array<any> {
-            return [
+    export class PortfolioService implements IPortfolioService {
+        'use strict';
+        private data:Array<any>;
+
+        constructor() {
+            this.data = [
                 {name: 'Daily', balance: 2034.75, type: 'da', remark: 'A daily Account'},
                 {name: 'Budget', balance: 9876.65, type: 'ba', remark: 'The Budgets Account'},
                 {name: 'Kids', balance: 200348.76, type: 'ca', remark: 'Closed saving Account for kids'},
@@ -13,6 +18,9 @@ module Portfolio {
                 {name: 'Bike', balance: -98.56, type: 'la', remark: 'Financing of Norton 850'},
                 {name: 'Savings', balance: 220454.54, type: 'sa', remark: 'Family Savings'}
             ];
+        }
+        getPortfolio():Array<any> {
+            return this.data;
         }
     }
 }

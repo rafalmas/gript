@@ -6,8 +6,8 @@ module Portfolio {
 
         private portfolio:Array<any>;
 
-        constructor() {
-            this.portfolio = PortfolioService.getPortfolio();
+        constructor(public portfolioService:IPortfolioService) {
+            this.portfolio = portfolioService.getPortfolio();
         }
     }
 }

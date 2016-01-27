@@ -5,7 +5,11 @@
 
 module Portfolio {
     angular.module('portfolio', []);
-    angular.module('portfolio').factory('portfolioService', Portfolio.PortfolioService);
+
+    angular.module('portfolio').factory('portfolioService', [():PortfolioService => {
+        return new PortfolioService();
+    }]);
+
     angular.module('portfolio').controller('portfolioController', Portfolio.PortfolioController);
     angular.module('portfolio').controller('navigationController', Portfolio.NavigationController);
 }
