@@ -88,13 +88,21 @@ gulp.task('inject-js', ['ts'], function () {
     util.log(util.colors.blue.bold('Injecting JavaScript files...'));
     return gulp.src('app/index.html')
         .pipe(gulpInject(
-            gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', '!app/bower_components/**/*', '!app/**/*Test.js',
-                '!app/**/*.test.js', '!target/tmp/js/**/*test.js'])
+            gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*test.js'])
                 .pipe(naturalSort())
                 .pipe(angularFilesort()),
             {
                 relative: false,
                 ignorePath: "target/tmp",
+                addRootSlash: false
+            }
+        ))
+        .pipe(gulpInject(
+            gulp.src(['app/**/*.js', '!app/bower_components/**/*', '!app/**/*Test.js', '!app/**/*test.js'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort()),
+            {
+                relative: true,
                 addRootSlash: false
             }
         ))

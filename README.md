@@ -1,10 +1,11 @@
 # A Gulp Build Setup Project
 
 This projects is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
-an AngularJS application using sass.
+an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
+If it's TypeScript, it will be validated and then compiled to JavaScript.
 
-The goal of this tool is to provide the handy workflow for developing Angular based applications and ensure
-the profound checking of the code quality of the same time. 
+The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript) 
+and ensure the profound checking of the code quality of the same time. 
 The module orchestrates a collection of gulp build functionality into a single npm dependency 
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
@@ -55,7 +56,7 @@ which means:
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
-- `app/app.js` : the entry point of the Angular application
+- `app/app.js` or `app/App.ts` : the entry point of the Angular application
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
