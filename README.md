@@ -141,7 +141,7 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 - **styles** : compiles Sass files
 - **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
-- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests filenames must end in `test.ts` or `Test.ts` (for example `PortfolioServiceTest.ts` or `PortfolioService_test.ts`).
+- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
 - **clean** : removes the whole `target` directory (temporary generated files and distribution package)
 - **clean-dist** : removes the `target/dist` directory (the distribution package)
 - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)

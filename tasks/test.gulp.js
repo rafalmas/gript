@@ -45,7 +45,7 @@ gulp.task('compile-tests', function () {
                 "removeComments": false,
                 "preserveConstEnums": true
             },
-            out: 'all_tests.js'
+            out: 'all_test.js'
         }),
         tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts', '!app/bower_components/**/*'])
             .pipe(ts(tsProject));
