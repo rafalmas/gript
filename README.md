@@ -195,7 +195,10 @@ To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some extern
 - python (v2.7 recommended, v3.x.x is not supported). It's already installed by default on Mac OS X.
 - [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - You also need to install the Command Line Tools via Xcode. You can find this under the menu _Xcode -> Preferences -> Downloads_. (This step will install gcc and the related toolchain containing make)
-
+- for scss-lint to work properly, you need `scss-lint` Ruby gem installed:
+    
+        $ gem install scss_lint
+ 
 **Windows**
 
 - Python (v2.7.10 recommended, v3.x.x is not supported). Make sure that you have a `PYTHON` environment variable, and it is set to drive:\path\to\python.exe not to a folder
