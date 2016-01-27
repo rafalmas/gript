@@ -4,6 +4,7 @@ var angularFilesort = require('gulp-angular-filesort'),
     bower = require('gulp-bower'),
     filter = require('gulp-filter'),
     flatten = require('gulp-flatten'),
+    fs = require('fs'),
     gulp = require('gulp'),
     gulpInject = require('gulp-inject'),
     htmlmin = require('gulp-htmlmin'),
@@ -16,7 +17,7 @@ var angularFilesort = require('gulp-angular-filesort'),
     wiredep = require('wiredep').stream;
 
 gulp.task('inject', function (callback) {
-    sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
+    sequence('version', 'inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
 });
 
 gulp.task('inject-bower', ['bower-download'], function () {
@@ -119,4 +120,13 @@ gulp.task('images', function () {
 gulp.task('build', ['inject', 'images', 'fonts', 'eslint'], function (callback) {
     util.log(util.colors.blue.bold('Starting build...'));
     callback();
+});
+
+gulp.task('version', function (callback) {
+    var json = JSON.parse(fs.readFileSync('./package.json'));
+    util.log(util.colors.blue.bold("| \\| \\ \\ / / |/ / _ \\ __|   \\_ _|_   _|"));
+    util.log(util.colors.blue.bold("| .` |\\ V /| ' <|   / _|| |) | |  | |"));
+    util.log(util.colors.blue.bold("|_|\\_| |_| |_|\\_\\_|_\\___|___/___| |_|"));
+
+    util.log(util.colors.blue.bold(json.name + " " + json.version));
 });
