@@ -18,7 +18,7 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - Javascript validation using es-lint.
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
-- unit tests performed using Karma and PhantomJS
+- unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
 - unit testing coverage metered by Istanbul 
 - HTML partials pre-loading into the Angular template cache
 - full concatenation/minification for all production JS and CSS files
@@ -104,7 +104,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
     };
 
     // Register default task
-    gulp.task('default', ['bower', 'js', 'styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+    gulp.task('default', ['build', 'server', 'proxy', 'watch']);
     gulp.task('dist:serve', ['dist', 'server:dist']);
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
@@ -137,12 +137,17 @@ The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these sp
 - **build** : builds the application for development
 - **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular cache javascript files
+- **partials** : compiles HTML partials into Angular's $templateCache Javascript files.
 - **styles** : compiles Sass files
 - **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
-- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available
-- **clean** : deletes generated files (`target` directory - generated files and distribution package)
+- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
+- **clean** : removes the whole `target` directory (temporary generated files and distribution package)
+- **clean-dist** : removes the `target/dist` directory (the distribution package)
+- **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
+- **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
+- **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
+- **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
@@ -167,7 +172,7 @@ Compiled scripts and styles will then be injected into the app's `index.html` ac
 - **\<!-- inject:css -->\<!-- endinject -->** : compiled Sass files
 - **\<!-- bower:js -->\<!-- endbower -->** : Bower JS dependencies
 - **\<!-- inject:js -->\<!-- endinject -->** : TypeScript files compiled into JS
-- **\<!-- partials:js -->\<!-- endinject -->** : HTML partials compiled into Angular's $templateCache.
+- **\<!-- inject:partials -->\<!-- endinject -->** : HTML partials compiled into Angular's $templateCache.
 
 Refer to `app/index.html` for an example how to define these markings.
 
@@ -190,7 +195,10 @@ To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some extern
 - python (v2.7 recommended, v3.x.x is not supported). It's already installed by default on Mac OS X.
 - [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - You also need to install the Command Line Tools via Xcode. You can find this under the menu _Xcode -> Preferences -> Downloads_. (This step will install gcc and the related toolchain containing make)
-
+- for scss-lint to work properly, you need `scss-lint` Ruby gem installed:
+    
+        $ gem install scss_lint
+ 
 **Windows**
 
 - Python (v2.7.10 recommended, v3.x.x is not supported). Make sure that you have a `PYTHON` environment variable, and it is set to drive:\path\to\python.exe not to a folder

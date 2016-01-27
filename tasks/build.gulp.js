@@ -59,7 +59,7 @@ gulp.task('inject-partials', ['partials'], function () {
         .pipe(gulpInject(
             gulp.src('target/tmp/partials/**/*.js', {read: false}),
             {
-                name: "partials",
+                starttag: '<!-- inject:partials -->',
                 relative: false,
                 ignorePath: "target/tmp",
                 addRootSlash: false

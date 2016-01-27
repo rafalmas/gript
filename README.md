@@ -172,7 +172,7 @@ Compiled scripts and styles will then be injected into the app's `index.html` ac
 - **\<!-- inject:css -->\<!-- endinject -->** : compiled Sass files
 - **\<!-- bower:js -->\<!-- endbower -->** : Bower JS dependencies
 - **\<!-- inject:js -->\<!-- endinject -->** : TypeScript files compiled into JS
-- **\<!-- partials:js -->\<!-- endinject -->** : HTML partials compiled into Angular's $templateCache.
+- **\<!-- inject:partials -->\<!-- endinject -->** : HTML partials compiled into Angular's $templateCache.
 
 Refer to `app/index.html` for an example how to define these markings.
 
