@@ -18,7 +18,7 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - Javascript validation using es-lint.
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
-- unit tests performed using Karma and PhantomJS
+- unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
 - unit testing coverage metered by Istanbul 
 - HTML partials pre-loading into the Angular template cache
 - full concatenation/minification for all production JS and CSS files
@@ -104,7 +104,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
     };
 
     // Register default task
-    gulp.task('default', ['bower', 'js', 'styles', 'fonts', 'server', 'proxy', 'test', 'watch']);
+    gulp.task('default', ['build', 'server', 'proxy', 'watch']);
     gulp.task('dist:serve', ['dist', 'server:dist']);
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
