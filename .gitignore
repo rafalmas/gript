@@ -9,3 +9,4 @@ env.properties
 .DS_Store
 npm-debug.log
 /nbproject
+PhantomJS_*
