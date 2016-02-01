@@ -9,6 +9,8 @@ module Portfolio {
     export class NavigationController implements INavigationController {
         'use strict';
 
+        static $inject = ['$location'];
+
         location: ng.ILocationService;
 
         constructor(private $location: ng.ILocationService) {

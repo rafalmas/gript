@@ -6,6 +6,6 @@
 module App {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'picardy.fontawesome', 'portfolio']);
-    app.config(App.Routes.configureRoutes);
+    var app = angular.module('gript', ['ngRoute', 'ui.bootstrap', 'picardy.fontawesome', 'portfolio']);
+    app.config(['$routeProvider', App.Routes.configureRoutes]);
 }
