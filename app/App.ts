@@ -1,10 +1,11 @@
-/// <reference path="../app/bower_components/DefinitelyTyped/angularjs/angular.d.ts" />
-/// <reference path="State.ts" />
+/// <reference path="bower_components/DefinitelyTyped/angularjs/angular.d.ts" />
+/// <reference path="bower_components/DefinitelyTyped/angularjs/angular-route.d.ts" />
+/// <reference path="Routes.ts" />
 /// <reference path='sections/portfolio/PortfolioModule.ts'/>
 
 module App {
     'use strict';
 
-    angular.module('app', ['ui.router', 'portfolio']);
-    angular.module('app').config(State);
+    var app = angular.module('app', ['ngRoute', 'picardy.fontawesome', 'portfolio']);
+    app.config(App.Routes.configureRoutes);
 }

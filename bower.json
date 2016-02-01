@@ -10,7 +10,7 @@
     "angular-bootstrap": "~0.13",
     "angular-fontawesome": "~0.4",
     "angular-resource": "~1.4",
-    "angular-ui-router": "0.2.17",
+    "angular-route": "~1.4",
     "angular-sanitize": "~1.4",
     "angular-touch": "~1.4",
     "bootstrap-sass-official": "~3.3",

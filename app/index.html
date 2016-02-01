@@ -2,7 +2,7 @@
 <html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <title>Gulp Build Setup Sample Angular 1.4.x Application</title>
+    <title>GRIPT Sample Angular 1.4.x Application</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -15,6 +15,7 @@
     <!-- endbuild -->
     <!-- build:css(target/tmp) styles/main.css -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="styles/app.css">
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -40,9 +41,9 @@
             </div>
             <div class="collapse navbar-collapse" data-collapse="vm.navbar">
                 <ul class="nav navbar-nav">
-                    <li><a tabindex="1" href="#!/welcome" title="Home"><fa name="home"></a></li>
-                    <li><a href="#!/portfolio" tabindex="2">Portfolio</a></li>
-                    <li><a href="#!/empty-menu-item" tabindex="3">Empty</a></li>
+                    <li><a tabindex="1" href="#welcome" title="Home"><fa name="home"></a></li>
+                    <li><a href="#portfolio" tabindex="2">Portfolio</a></li>
+                    <li><a href="#empty-menu-item" tabindex="3">Empty</a></li>
                 </ul>
             </div>
         </div>
@@ -52,7 +53,7 @@
 
     <div id="footer">
         <div class="container">
-            <p class="text-muted text-center"><small><a href="#!/about"><fa name="info-circle"></a> | Gulp Build System 2015</small></p>
+            <p class="text-muted text-center"><img src="img/buildWithGript.gif"></p>
         </div>
     </div>
 

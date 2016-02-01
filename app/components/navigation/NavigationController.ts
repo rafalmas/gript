@@ -4,10 +4,10 @@ module Portfolio {
     export class NavigationController {
         'use strict';
 
-        private portfolio:Array<any>;
+        navbar: boolean;
 
-        constructor(public portfolioService:IPortfolioService) {
-            this.portfolio = portfolioService.getPortfolio();
+        constructor() {
+            this.navbar = false;
         }
     }
 }
