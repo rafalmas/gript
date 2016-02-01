@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="entry in vm.portfolio">
-                    <td><fa name="{{ {ba: 'barcode', ca: 'lock', da: 'euro', la: 'bar-chart', sa: 'signal'}[entry.type] }}"
+                    <td><fa name="{{ {ba: 'barcode', kids: 'child', car: 'car', bike: 'bicycle', ca: 'lock', da: 'euro', la: 'bar-chart', sa: 'signal'}[entry.type] }}"
                             title="{{ {ba: 'Budget Account', ca: 'Equalizer Account', da: 'Debit Account', la: 'Loan', sa: 'Savings Account'}[entry.type] }}"></fa></td>
                     <td>{{entry.name}}</td>
                     <td ng-class="{{entry.balance < 0}} ? 'red' : 'normal'">{{entry.balance}}</td>
