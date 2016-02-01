@@ -13,6 +13,9 @@ module App {
             $routeProvider.when('/welcome', {
                 templateUrl: 'sections/welcome/welcome.html',
             });
+            $routeProvider.when('/empty', {
+                templateUrl: 'sections/empty/empty.html',
+            });
             $routeProvider.otherwise({redirectTo: '/welcome'});
         }
     }

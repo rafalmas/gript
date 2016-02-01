@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "components-font-awesome":"4.5.0",
     "angular": "~1.4",
     "angular-bootstrap": "~0.13",
     "angular-fontawesome": "~0.4",

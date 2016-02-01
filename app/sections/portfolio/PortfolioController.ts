@@ -4,6 +4,7 @@ module Portfolio {
     export class PortfolioController {
         'use strict';
 
+
         private portfolio:Array<any>;
 
         constructor(public portfolioService:IPortfolioService) {

@@ -1,13 +1,22 @@
-/// <reference path='../portfolio/PortfolioService.ts' />
+/// <reference path='../../bower_components/DefinitelyTyped/angularjs/angular.d.ts' />
 
 module Portfolio {
-    export class NavigationController {
+
+    interface INavigationController {
+        isActive(path: String) : boolean;
+    }
+
+    export class NavigationController implements INavigationController {
         'use strict';
 
-        navbar: boolean;
+        location: ng.ILocationService;
 
-        constructor() {
-            this.navbar = false;
+        constructor(private $location: ng.ILocationService) {
+            this.location = $location;
+        }
+
+        isActive(path: String):boolean {
+            return path === this.location.path();
         }
     }
 }

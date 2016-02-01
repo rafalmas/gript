@@ -6,6 +6,6 @@
 module App {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'picardy.fontawesome', 'portfolio']);
+    var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'picardy.fontawesome', 'portfolio']);
     app.config(App.Routes.configureRoutes);
 }
