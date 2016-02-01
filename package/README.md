@@ -1,18 +1,18 @@
-# A Gulp Build Setup Project
+# GRIPT - Angular Gulp Sass Typescript application builder
 
 This projects is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
 an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
-The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript) 
-and ensure the profound checking of the code quality of the same time. 
-The module orchestrates a collection of gulp build functionality into a single npm dependency 
+The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript)
+and ensure the profound checking of the code quality of the same time.
+The module orchestrates a collection of gulp build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
 The project includes a sample application to make it possible to test the build setup.
-The local sample application exemplifies the needed structure for applications supported by the npm package "gulp-angular-sass-appbuilder".
-The sample application resides in the `app` folder. 
-The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included. 
+The local sample application exemplifies the needed structure for applications supported by the `gript` npm package.
+The sample application resides in the `app` folder.
+The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included.
 
 ##Features
 
@@ -20,11 +20,11 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
 - unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
-- unit testing coverage metered by Istanbul 
+- unit testing coverage metered by Istanbul
 - HTML partials pre-loading into the Angular template cache
 - full concatenation/minification for all production JS and CSS files
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change.
-- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
+- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application.
 
 ## Structure requirements for applications supported
 
@@ -60,17 +60,17 @@ which means:
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
-- `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gulp-angular-sass-appbuilder`
+- `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gript`
 - `bower.json` : contains bower dependencies
 - `.eslint.rc.yml` : contains rules for es-linter (cascading rules configuration is possible)
 - `.scsslint.rc.yml` : contains rules for Sass linter (scss-linter)
 
-## Setup the builder in your project
+## Setup GRIPT in your project
 
-To make use of the `gulp-angular-sass-appbuilder` npm module define the dependency to `gulp-angular-sass-appbuilder` in the `package.json` file in your own application:
+To make use of the `gript` npm module define the dependency to `gript` in the `package.json` file in your own application:
 
       "dependencies": {
-        "gulp-angular-sass-appbuilder": "~0.0.1",
+        "gript": "~0.0.1",
         ....
 
 together with your other npm dependencies.
@@ -79,7 +79,7 @@ Running the command
 
     `npm install --save-dev`
 
-will include `gulp-angular-sass-appbuilder` in your `node_modules` folder and make it available for development.
+will include `gript` in your `node_modules` folder and make it available for development.
 
 ### Configure your project
 
@@ -88,13 +88,13 @@ The tool comes with a guide for the enabling of the build tool in your project.
 #### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-The `gulp-angular-sass-appbuilder` includes a sample gulp file, located in the `sample_configs` directory.
-There are also example configuration files for Bower, es-lint, js-lint and scss-lint in the `sample_configs` directory. 
+`GRIPT` includes a sample gulp file, located in the `sample_configs` directory.
+There are also example configuration files for Bower, es-lint, js-lint and scss-lint in the `sample_configs` directory.
 
 #### Using the sample Gulp file
-This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gulp-angular-sass-appbuilder` module and specify the tasks you want to run during the build process of your own application:
+This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
 
-    var gulp = require('gulp-angular-sass-appbuilder');
+    var gulp = require('gript');
 
     // Set the config to use across the gulp build
     gulp.config = {
@@ -133,7 +133,7 @@ The **default** task runs everything that is necessary to build application and 
 
 you are ready to start using gulp for your project.
 
-The `gulpfile.js` from the `gulp-angular-sass-appbuilder` contains also these specific tasks:
+The `gulpfile.js` from `gript` contains also these specific tasks:
 
 - **build** : builds the application for development
 - **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
@@ -182,7 +182,7 @@ After executing the `dist` task, all of the scripts and CSS styles will be conca
 
 ## External dependencies
 
-`gulp-angular-sass-appbuilder` makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
+`gript` makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
 To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some external dependencies, depending on your platform:
 
 **On Unix**
@@ -197,9 +197,9 @@ To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some extern
 - [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - You also need to install the Command Line Tools via Xcode. You can find this under the menu _Xcode -> Preferences -> Downloads_. (This step will install gcc and the related toolchain containing make)
 - for scss-lint to work properly, you need `scss-lint` Ruby gem installed:
-    
+
         $ gem install scss_lint
- 
+
 **Windows**
 
 - Python (v2.7.10 recommended, v3.x.x is not supported). Make sure that you have a `PYTHON` environment variable, and it is set to drive:\path\to\python.exe not to a folder

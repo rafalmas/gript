@@ -2,7 +2,7 @@
   "name": "gulp-angular-saas-buider-sample-application",
   "description": "A sample project used for testing the build tool during development of the build tool",
   "version": "0.0.1",
-  "homepage": "https://github.com/Nykredit/gulp-angular-sass-appbuilder",
+  "homepage": "https://github.com/Nykredit/gript",
   "license": "MIT",
   "private": true,
   "dependencies": {

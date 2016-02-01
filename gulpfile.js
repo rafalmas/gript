@@ -14,10 +14,10 @@ gulp.task('dist:serve', ['dist', 'server:dist']);
 
 // Set the config to use across the gulp build
 gulp.config = {
-    module: 'gulp-angular-sass-appbuilder',
-    hostHeader: 'gulp-angular-sass-appbuilder',
-    url: 'http://gulp-angular-sass-appbuilder',
-    repository: 'http://nykredit.github.com/gulp-angular-sass-appbuilder.git'
+    module: 'gript',
+    hostHeader: 'gript',
+    url: 'http://gript',
+    repository: 'http://nykredit.github.com/gript.git'
 };
 
 // verify that the build setup can produce the expected artifacts
@@ -47,40 +47,40 @@ gulp.task('verify-package-foundation', ['build'], function () {
 
 gulp.task('create-package', ['dist'], function () {
     gulp.src(['tasks/*.js', '!tasks/karma.conf.js'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'))
+        .pipe(gulp.dest('target/gript/tasks'))
         .on('finish', function () {
-            gulp.src(['target/gulp-angular-sass-appbuilder/tasks/test.gulp.js'])
-                .pipe(replace('node_modules/sinon', 'node_modules/gulp-angular-sass-appbuilder/node_modules/sinon'))
-                .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
+            gulp.src(['target/gript/tasks/test.gulp.js'])
+                .pipe(replace('node_modules/sinon', 'node_modules/gript/node_modules/sinon'))
+                .pipe(gulp.dest('target/gript/tasks'));
         });
     gulp.src(['package/sample_configs/*'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/sample_configs'));
+        .pipe(gulp.dest('target/gript/sample_configs'));
     gulp.src(['package/sample_configs/.*'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/sample_configs'));
+        .pipe(gulp.dest('target/gript/sample_configs'));
     gulp.src(['package/*'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder'));
+        .pipe(gulp.dest('target/gript'));
     gulp.src(['package/karma.conf.js'])
-        .pipe(gulp.dest('target/gulp-angular-sass-appbuilder/tasks'));
+        .pipe(gulp.dest('target/gript/tasks'));
 });
 
 // verify that the npm package contains the files it should
 gulp.task('verify-package', function () {
-    gulp.src(['target/gulp-angular-sass-appbuilder/index.js'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/index.js'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/package.json'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/package.json'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/gulpfile.js'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/gulpfile.js'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.eslintrc.yml'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/.scss-lint.yml'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/sample_configs/bower.json'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/sample_configs/bower.json'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/*.md'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/README.md'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/tasks/*.gulp.js'));
-    gulp.src(['target/gulp-angular-sass-appbuilder/tasks/*.conf.js'])
-        .pipe(ex.real('target/gulp-angular-sass-appbuilder/tasks/karma.conf.js'));
+    gulp.src(['target/gript/index.js'])
+        .pipe(ex.real('target/gript/index.js'));
+    gulp.src(['target/gript/package.json'])
+        .pipe(ex.real('target/gript/package.json'));
+    gulp.src(['target/gript/sample_configs/gulpfile.js'])
+        .pipe(ex.real('target/gript/sample_configs/gulpfile.js'));
+    gulp.src(['target/gript/sample_configs/.eslintrc.yml'])
+        .pipe(ex.real('target/gript/sample_configs/.eslintrc.yml'));
+    gulp.src(['target/gript/sample_configs/.scss-lint.yml'])
+        .pipe(ex.real('target/gript/sample_configs/.scss-lint.yml'));
+    gulp.src(['target/gript/sample_configs/bower.json'])
+        .pipe(ex.real('target/gript/sample_configs/bower.json'));
+    gulp.src(['target/gript/*.md'])
+        .pipe(ex.real('target/gript/README.md'));
+    gulp.src(['target/gript/tasks/*.gulp.js'])
+        .pipe(ex.real('target/gript/tasks/*.gulp.js'));
+    gulp.src(['target/gript/tasks/*.conf.js'])
+        .pipe(ex.real('target/gript/tasks/karma.conf.js'));
 });

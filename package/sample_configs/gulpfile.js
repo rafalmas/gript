@@ -2,7 +2,7 @@
 
 'use strict';
 
-var gulp = require('gulp-angular-sass-appbuilder');
+var gulp = require('gript');
 
 // Set the config to use across the gulp build
 gulp.config = {

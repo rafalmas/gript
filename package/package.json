@@ -1,5 +1,5 @@
 {
-  "name": "gulp-angular-sass-appbuilder",
+  "name": "gript",
   "version": "0.0.1",
   "description": "Gulp Build Setup",
   "dependencies": {
@@ -15,8 +15,8 @@
     "gulp-angular-filesort": "1.1.1",
     "gulp-appcache": "0.0.4",
     "gulp-bower": "0.0.11",
-    "gulp-concat": "2.6.0",
     "gulp-connect": "2.3.1",
+    "gulp-concat": "2.6.0",
     "gulp-cssnano": "2.1.0",
     "gulp-debug": "2.1.2",
     "gulp-eslint": "1.1.1",
@@ -40,13 +40,13 @@
     "gulp-sass": "2.1.1",
     "gulp-scss-lint": "0.3.9",
     "gulp-size": "2.0.0",
-    "gulp-tslint": "4.3.1",
-    "tslint": "3.2.2",
     "gulp-sourcemaps": "1.6.0",
+    "gulp-tslint": "4.3.1",
+    "gulp-util": "3.0.7",
+    "tslint": "3.2.2",
     "gulp-typescript": "2.10.0",
     "gulp-uglify": "1.5.1",
     "gulp-useref": "3.0.4",
-    "gulp-util": "3.0.7",
     "http": "0.0.0",
     "http-proxy": "1.12.0",
     "karma": "0.13.19",
@@ -92,11 +92,11 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://nykredit.github.com/gulp-angular-sass-appbuilder/issues"
+    "url": "https://nykredit.github.com/gript/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://nykredit.github.com/gulp-angular-sass-appbuilder"
+    "url": "http://nykredit.github.com/gript"
   },
   "readme": "readme.md"
 }

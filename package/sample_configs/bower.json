@@ -1,6 +1,6 @@
 {
   "name": "sample-application",
-  "description": "A sample project built by gulp-angular-sass-appbuilder",
+  "description": "A sample project built by gript",
   "version": "0.0.1",
   "dependencies": {
     "angular": "~1.4",

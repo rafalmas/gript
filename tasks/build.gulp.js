@@ -17,7 +17,7 @@ var angularFilesort = require('gulp-angular-filesort'),
     wiredep = require('wiredep').stream;
 
 gulp.task('inject', function (callback) {
-    sequence('version', 'inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
+    sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
 });
 
 gulp.task('inject-bower', ['bower-download'], function () {
@@ -126,15 +126,12 @@ gulp.task('images', function () {
         .pipe(size());
 });
 
-gulp.task('build', ['inject', 'images', 'fonts', 'eslint'], function (callback) {
+gulp.task('build', ['version', 'inject', 'images', 'fonts', 'eslint'], function (callback) {
     util.log(util.colors.blue.bold('Starting build...'));
     callback();
 });
 
 gulp.task('version', function () {
     var json = JSON.parse(fs.readFileSync('./package.json'));
-    util.log(util.colors.blue.bold("| \\| \\ \\ / / |/ / _ \\ __|   \\_ _|_   _|"));
-    util.log(util.colors.blue.bold("| .` |\\ V /| ' <|   / _|| |) | |  | |"));
-    util.log(util.colors.blue.bold("|_|\\_| |_| |_|\\_\\_|_\\___|___/___| |_|"));
-    util.log(util.colors.blue.bold(json.name + " " + json.version));
+    util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
 });
