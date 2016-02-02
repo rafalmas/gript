@@ -16,7 +16,7 @@ The`index.html` in the `app` folder is especially important - it contains marker
 
 ##Features
 
-- Javascript validation using es-lint.
+- Javascript validation using `es-lint`.
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
 - unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
@@ -90,7 +90,7 @@ The tool comes with a guide for the enabling of the build tool in your project.
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
 `Gript` includes a sample gulp file, located in the `sample_configs` directory.
-There are also example configuration files for Bower, es-lint, and scss-lint in the `sample_configs` directory.
+There are also example configuration files for `Bower`, `es-lint`, and `scss-lint` in the `sample_configs` directory.
 
 #### Using the sample Gulp file
 This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
@@ -128,11 +128,12 @@ command will fail, until you create your first piece of logic and its correspond
 
 ## Building your project
 
-The **default** task runs everything that is necessary to build application and then start the development server. Your source code (TypeScript, HTML, Sass) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`. So just by running
+The **default** task builds an application and then starts the development server. Your source code (TypeScript, HTML, Sass) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`.
+Just by running
 
     gulp
 
-you are ready to start using gulp for your project.
+you are ready to start developing your project.
 
 The `gulpfile.js` from `gript` contains also these specific tasks:
 
