@@ -25,6 +25,7 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - full concatenation/minification for all production JS and CSS files
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change.
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
+ Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time.
 - contains the locked set of specific `npm` dependencies, to minimize "the dependency hell".
 
 ## Structure requirements for applications supported
