@@ -14,7 +14,7 @@ The local sample application exemplifies the needed structure for applications s
 The sample application resides in the `app` folder. 
 The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included. 
 
-##Features
+## Features
 
 - Javascript validation using `es-lint`.
 - TypeScript validation and incremental compilation
