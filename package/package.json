@@ -43,6 +43,7 @@
     "gulp-sourcemaps": "1.6.0",
     "gulp-tslint": "4.3.1",
     "gulp-util": "3.0.7",
+    "gulp-watch": "4.3.5",
     "tslint": "3.2.2",
     "gulp-typescript": "2.10.0",
     "gulp-uglify": "1.5.1",
@@ -88,6 +89,22 @@
     {
       "name": "Thor Lange",
       "email": "tal@nykredit.dk"
+    },
+    {
+      "name": "Jarek Krochmalski",
+      "email": "q1wk@nykredit.dk"
+    },
+    {
+      "name": "Olaf Matyja",
+      "email": "q1mt@nykredit.dk"
+    },
+    {
+      "name": "Lukasz Kobalczyk",
+      "email": "1qzy@nykredit.dk"
+    },
+    {
+      "name": "Radoslaw Panowek",
+      "email": "q1rp@nykredit.dk"
     }
   ],
   "license": "MIT",

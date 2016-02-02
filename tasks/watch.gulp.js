@@ -1,20 +1,51 @@
 'use strict';
 
 var gulp = require('gulp'),
+    watch = require('gulp-watch'),
     livereload = require('gulp-livereload');
 
 // Watches the source tree for changes
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch(['*.js', 'gulp/*.js'], ['eslint']);
-    gulp.watch(['app/**/*.js', '!app/bower_components/**/*'], ['eslint', 'test']);
-    gulp.watch(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*.*test.ts', '!app/bower_components/**/*'], ['inject-js']);
-    gulp.watch(['app/**/*Test.ts', '!app/bower_components/**/*', 'app/**/*.*test.ts'], ['test']);
-    gulp.watch(['app/**/*.scss', '!app/bower_components/**/*'], ['inject-styles']);
-    gulp.watch(['app/**/*.html', '!app/bower_components/**/*', '!app/index.html'], ['inject-partials']);
-    gulp.watch(['bower.json'], ['inject-bower']);
-    gulp.watch(['app/**/*.js', '!app/bower_components/**/*'], livereload.changed);
-    gulp.watch(['app/**/*.ts', '!app/bower_components/**/*'], livereload.changed);
-    gulp.watch(['app/**/*.html', '!app/bower_components/**/*'], livereload.changed);
-    gulp.watch(['target/tmp/**/*.css'], livereload.changed);
+
+    watch('*.js', function () {
+        gulp.start('eslint', function () {
+            livereload.reload();
+        });
+    });
+    watch(['!app/bower_components/**/*', 'app/**/*.js'], function () {
+        gulp.start(['eslint', 'test'], function () {
+            livereload.reload();
+        });
+    });
+    watch(['!app/bower_components/**/*', 'app/**/*.ts', '!app/**/*Test.ts', '!app/**/*.*test.ts'], function () {
+        gulp.start('inject-js', function () {
+            livereload.reload();
+        });
+    });
+    watch(['!app/bower_components/**/*', 'app/**/*Test.ts', 'app/**/*.*test.ts'], function () {
+        gulp.start('test', function () {
+            livereload.reload();
+        });
+    });
+    watch('app/**/*.scss', function () {
+        gulp.start('inject-styles', function () {
+            livereload.reload();
+        });
+    });
+    watch(['!app/bower_components/**/*', 'app/**/*.html', '!app/index.html'], function () {
+        gulp.start('inject-partials', function () {
+            livereload.reload();
+        });
+    });
+    watch(['!app/bower_components/**/*', 'app/**/*.html', '!app/index.html'], function () {
+        gulp.start('inject-partials', function () {
+            livereload.reload();
+        });
+    });
+    watch('bower.json', function () {
+        gulp.start('inject-bower', function () {
+            livereload.reload();
+        });
+    });
 });
