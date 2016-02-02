@@ -14,7 +14,7 @@ gulp.task('ts', function (callback) {
 
 gulp.task('compile', ['ts-lint'], function () {
     var tsProject = ts.createProject({
-            "compilerOptins": {
+            "compilerOptions": {
                 "noImplicitAny": true,
                 "target": "es5",
                 "sourceMap": true,
