@@ -21,10 +21,11 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - SASS validation and compilation
 - unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
 - unit testing coverage metered by Istanbul 
-- HTML partials pre-loading into the Angular template cache
+- HTML partials pre-loading into the Angular $templateCache
 - full concatenation/minification for all production JS and CSS files
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change.
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
+- contains the locked set of specific `npm` dependencies, to minimize "the dependency hell".
 
 ## Structure requirements for applications supported
 
@@ -88,8 +89,8 @@ The tool comes with a guide for the enabling of the build tool in your project.
 #### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-`GRIPT` includes a sample gulp file, located in the `sample_configs` directory.
-There are also example configuration files for Bower, es-lint, js-lint and scss-lint in the `sample_configs` directory. 
+`Gript` includes a sample gulp file, located in the `sample_configs` directory.
+There are also example configuration files for Bower, es-lint, and scss-lint in the `sample_configs` directory.
 
 #### Using the sample Gulp file
 This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
@@ -112,9 +113,9 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 
 These values are:
 
-- **module** : name of the project
-- **hostHeader** name of your project
-- **url** url of your project
+- **module** : the name of the project
+- **hostHeader** host header
+- **url** the url of your project
 
 You may kickstart your project by copying **sample_configs/gulpfile.js** to the root of your own project.
 This gives you to have a very simple build configuration as a starting scenario.
