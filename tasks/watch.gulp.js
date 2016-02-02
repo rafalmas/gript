@@ -18,7 +18,7 @@ gulp.task('watch', function () {
             livereload.reload();
         });
     });
-    watch(['!app/bower_components/**/*', 'app/**/*.ts', '!app/**/*Test.ts', '!app/**/*.*test.ts'], function () {
+    watch(['!app/bower_components/**/*', '!app/**/*Test.ts', '!app/**/*.*test.ts', 'app/**/*.ts'], function () {
         gulp.start('inject-js', function () {
             livereload.reload();
         });
@@ -33,12 +33,12 @@ gulp.task('watch', function () {
             livereload.reload();
         });
     });
-    watch(['!app/bower_components/**/*', 'app/**/*.html', '!app/index.html'], function () {
+    watch(['!app/bower_components/**/*', '!app/index.html', 'app/**/*.html'], function () {
         gulp.start('inject-partials', function () {
             livereload.reload();
         });
     });
-    watch(['!app/bower_components/**/*', 'app/**/*.html', '!app/index.html'], function () {
+    watch(['!app/bower_components/**/*', '!app/index.html', 'app/**/*.html'], function () {
         gulp.start('inject-partials', function () {
             livereload.reload();
         });

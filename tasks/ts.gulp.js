@@ -26,7 +26,7 @@ gulp.task('compile', ['ts-lint'], function () {
             },
             out: 'all.js'
         }),
-        tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', 'app/**/*test.ts', '!app/bower_components/**/*'])
+        tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*test.ts', '!app/bower_components/**/*'])
             .pipe(sourcemaps.init())
             .pipe(ts(tsProject));
 

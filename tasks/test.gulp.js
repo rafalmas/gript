@@ -36,7 +36,7 @@ gulp.task('get-sources', ['compile-tests'], function () {
  */
 gulp.task('compile-tests', function () {
     var tsProject = ts.createProject({
-            "compilerOptins": {
+            "compilerOptions": {
                 "noImplicitAny": true,
                 "target": "es5",
                 "declarationFiles": true,
