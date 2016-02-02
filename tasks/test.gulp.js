@@ -47,7 +47,7 @@ gulp.task('compile-tests', function () {
             },
             out: 'all_test.js'
         }),
-        tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts', '!app/bower_components/**/*'])
+        tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts', '!app/**/*.ts', '!app/bower_components/**/*'])
             .pipe(ts(tsProject));
 
     return tsResult.js
