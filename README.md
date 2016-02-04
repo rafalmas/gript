@@ -258,4 +258,4 @@ After that the npm module is ready to be published to the `npm` repository.
 The Gript logo contains modified version of the [Link icon](https://commons.wikimedia.org/wiki/File:Chain_link_icon.png) licensed under 
 [Creative Commons](https://en.wikipedia.org/wiki/en:Creative_Commons) license.
 
-<img align="center" src="img/gript_logo_mini.png">
+<img align="center" src="package/img/gript_logo_mini.png">
