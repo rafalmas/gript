@@ -1,4 +1,5 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
+<img align="right" src="package/img/gript_logo_big.png">
 
 This projects is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
 an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
@@ -138,20 +139,26 @@ you are ready to start developing your project.
 
 The `gulpfile.js` from `gript` contains also these specific tasks:
 
-- **build** : builds the application for development
-- **dist** : builds the application for deployment. The application will be copied to `target/dist` directory.
+- **build** : builds the application for the development
+- **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
 - **partials** : compiles HTML partials into Angular's $templateCache Javascript files.
 - **styles** : compiles Sass files
-- **inject** : injects bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
+- **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
+    - **inject-bower** : downloads and injects Bower dependencies
+    - **inject-styles** : compiles and injects Sass styles
+    - **inject-partials** : compiles HTML partials into Angular's $templateCache and then injects 
+    - **inject-js** : complies the TypesScript and then injects all JavaScript files
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
 - **clean** : removes the whole `target` directory (temporary generated files and distribution package)
-- **clean-dist** : removes the `target/dist` directory (the distribution package)
-- **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
-- **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
-- **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
-- **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
+    - **clean-dist** : removes the `target/dist` directory (the distribution package)
+    - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
+    - **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
+    - **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
+    - **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
+- **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
+- **images** : copies all image files into the `dist` directory
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
@@ -159,6 +166,12 @@ The `gulpfile.js` from `gript` contains also these specific tasks:
 You can list all of the available tasks by running the command:
 
     gulp --tasks
+
+## TypeScript compilation
+If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
+ to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/). 
+ We assume that they will be downloaded to `app/bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting. 
+ The resulting JavaScript files will be placed in the `target/tmp/js` directory.
 
 <a name="injection"></a>
 ## Compiled files injection
@@ -241,3 +254,6 @@ The `gulpfile.js` for the `gript` npm module is located in the root of the proje
 - **verify-package**    verifies its contents
 
 After that the npm module is ready to be published to the `npm` repository.
+
+The Gript logo contains modified version of the [Link icon](https://commons.wikimedia.org/wiki/File:Chain_link_icon.png) licensed under 
+[Creative Commons](https://en.wikipedia.org/wiki/en:Creative_Commons) license.
