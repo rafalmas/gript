@@ -1,16 +1,26 @@
+/*jslint node: true*/
+/*jscs: disable requireCamelCaseOrUpperCaseIdentifiers*/
+
 'use strict';
 
-var gulp = require('gulp'),
-    protractor = require("gulp-protractor").protractor;
+var gulp       = require('gulp'),
+    protractor = require('gulp-protractor').protractor,
+    update     = require('gulp-protractor').webdriver_update;
 
-// Runs end 2 end tests in browser
-gulp.task('e2e-test', function () {
-    return gulp.src(["./e2e-tests/**/*_e2e-test.js"])
+// Downloads the selenium webdriver
+gulp.task('webdriver_update', update);
+
+gulp.task('protractor', ['webdriver_update', 'build'], function () {
+    gulp.src(["./e2e-tests/**/*_e2e-test.js"])
         .pipe(protractor({
-            configFile: "e2e-tests/protractor-config.js",
-            args: ['--baseUrl', 'http://127.0.0.1:8080']
+            configFile: 'e2e-tests/protractor-config.js',
+            args: ['--baseUrl', 'http://localhost:8080']
         }))
-        .on('error', function (e) {
-            throw e;
+        .on('error', function (error) {
+            console.error(String(error));
+            this.emit('end');
+        })
+        .on('end', function () {
+            process.exit(0);
         });
 });
