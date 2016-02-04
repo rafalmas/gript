@@ -10,7 +10,7 @@ var gulp       = require('gulp'),
 // Downloads the selenium webdriver
 gulp.task('webdriver_update', update);
 
-gulp.task('protractor', ['webdriver_update', 'build'], function () {
+gulp.task('protractor', ['webdriver_update', 'build', 'server'], function () {
     gulp.src(["./e2e-tests/**/*_e2e-test.js"])
         .pipe(protractor({
             configFile: 'e2e-tests/protractor-config.js',
