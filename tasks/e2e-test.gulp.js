@@ -3,9 +3,9 @@
 
 'use strict';
 
-var gulp       = require('gulp'),
+var gulp = require('gulp'),
     protractor = require('gulp-protractor').protractor,
-    update     = require('gulp-protractor').webdriver_update;
+    update = require('gulp-protractor').webdriver_update;
 
 // Downloads the selenium webdriver
 gulp.task('webdriver_update', update);

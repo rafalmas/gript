@@ -2,13 +2,17 @@
 
 var gulp = require('gulp'),
     ex = require('gulp-expect-file'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    sequence = require('run-sequence');
 
 // require the tasks for the setup as part of this project
 require('require-dir')('./tasks');
 
-// Register our default task
-gulp.task('default', ['build', 'server', 'proxy', 'eslint', 'watch']);
+// Register the default task
+gulp.task('default', function () {
+    sequence('build', ['server', 'proxy'], 'watch');
+});
+
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 

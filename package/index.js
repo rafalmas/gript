@@ -2,7 +2,8 @@
 
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    sequence = require('run-sequence');
 
 gulp.config = {
     module: 'no-module-specified',
@@ -13,8 +14,11 @@ gulp.config = {
 // Require all our gulp files, which each register their tasks when called
 require('require-dir')('./tasks');
 
-// Register our default task
-gulp.task('default', ['build', 'server', 'proxy', 'test', 'watch']);
+// Register the default task
+gulp.task('default', function () {
+    sequence('build', ['server', 'proxy'], 'watch');
+});
+
 gulp.task('dist:serve', ['dist', 'server:dist']);
 
 module.exports = gulp;
