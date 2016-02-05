@@ -73,8 +73,9 @@ which means:
 To make use of the `gript` npm module define the dependency to `gript` in the `package.json` file in your own application:
 
       "dependencies": {
-        "gript": "~0.0.9",
-        ....
+          "gulp": "3.9.0",
+          "gript": "~0.0.9",
+          ....
 
 together with your other npm dependencies.
 
