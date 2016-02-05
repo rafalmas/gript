@@ -1,7 +1,7 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
 <img align="right" src="package/img/gript_logo_big.png">
 
-This projects is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
+This project is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
 an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
