@@ -1,24 +1,25 @@
-/*jslint node: true */
-
 'use strict';
 
-var gulp = require('gulp'),
-    sequence = require('run-sequence');
+module.exports = function (gulp) {
 
-gulp.config = {
-    module: 'no-module-specified',
-    hostHeader: 'no-hostHeader-sepcified',
-    url: 'no-url-specified'
+    var sequence = require('run-sequence').use(gulp);
+
+    gulp.config = {
+        module: 'no-module-specified',
+        hostHeader: 'no-hostHeader-sepcified',
+        url: 'no-url-specified'
+    };
+
+    require("fs").readdirSync(__dirname + "/tasks").forEach(function(file) {
+        if (file.indexOf("gulp") > -1) {
+            require(__dirname + "/tasks" + "/" + file)(gulp);
+        }
+    });
+
+    gulp.task('default', function () {
+        sequence('build', ['server', 'proxy'], 'watch');
+    });
+
+    gulp.task('dist:serve', ['dist', 'server:dist']);
+
 };
-
-// Require all our gulp files, which each register their tasks when called
-require('require-dir')('./tasks');
-
-// Register the default task
-gulp.task('default', function () {
-    sequence('build', ['server', 'proxy'], 'watch');
-});
-
-gulp.task('dist:serve', ['dist', 'server:dist']);
-
-module.exports = gulp;

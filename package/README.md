@@ -73,7 +73,7 @@ which means:
 To make use of the `gript` npm module define the dependency to `gript` in the `package.json` file in your own application:
 
       "dependencies": {
-        "gript": "~0.0.1",
+        "gript": "~0.0.9",
         ....
 
 together with your other npm dependencies.
@@ -97,19 +97,17 @@ There are also example configuration files for `Bower`, `es-lint`, and `scss-lin
 #### Using the sample Gulp file
 This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
 
-    var gulp = require('gript');
-
+    var gulp = require('gulp');
+    
+    require('gript')(gulp);
+    
     // Set the config to use across the gulp build
     gulp.config = {
-        module: 'no-specified-module-name',
+        module: 'yourApp',
         hostHeader: 'no-specified-hostHeader',
         url: 'http://no-specified-project-url',
         repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git'
     };
-
-    // Register default task
-    gulp.task('default', ['build', 'server', 'proxy', 'watch']);
-    gulp.task('dist:serve', ['dist', 'server:dist']);
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 

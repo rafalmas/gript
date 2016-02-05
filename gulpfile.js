@@ -3,10 +3,13 @@
 var gulp = require('gulp'),
     ex = require('gulp-expect-file'),
     replace = require('gulp-replace'),
-    sequence = require('run-sequence');
+    sequence = require('run-sequence').use(gulp);
 
-// require the tasks for the setup as part of this project
-require('require-dir')('./tasks');
+require("fs").readdirSync(__dirname + "/tasks").forEach(function (file) {
+    if (file.indexOf("gulp") > -1) {
+        require(__dirname + "/tasks" + "/" + file)(gulp);
+    }
+});
 
 // Register the default task
 gulp.task('default', function () {
