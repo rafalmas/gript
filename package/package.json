@@ -109,11 +109,11 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://nykredit.github.com/gript/issues"
+    "url": "https://github.com/Nykredit/gript/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://nykredit.github.com/gript"
+    "url": "https://github.com/Nykredit/gript"
   },
-  "readme": "readme.md"
+  "readme": "README.md"
 }

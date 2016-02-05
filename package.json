@@ -110,16 +110,16 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://nykredit.github.com/gript/issues"
+    "url": "https://github.com/Nykredit/gript/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://nykredit.github.com/gript"
+    "url": "https://github.com/Nykredit/gript"
   },
   "scripts": {
     "postinstall": "bower install --config.interactive=false --config.directory=app/bower_components"
   },
-  "readme": "readme.md",
+  "readme": "README.md",
   "devDependencies": {
     "gulp-expect-file": "0.0.7",
     "npm-check-updates": "2.5.6"
