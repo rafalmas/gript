@@ -6,9 +6,9 @@ module.exports = function (gulp) {
         fs = require('fs'),
         scsslint = require('gulp-scss-lint'),
         tslint = require('gulp-tslint'),
-        srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/bower_components/**/*', '!node_modules/**/*', '!app/patch/**/*'],
-        scssFiles = ['app/*.scss', 'app/sections/**/*.scss', 'app/components/**/*.scss'],
-        tsFiles = ['app/**/*.ts', '!app/bower_components/**/*'];
+        srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/patch/**/*'],
+        scssFiles = 'app/**/*.scss',
+        tsFiles = 'app/**/*.ts';
 
     gulp.task('eslint', function () {
         var out;

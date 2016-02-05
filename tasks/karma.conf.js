@@ -7,7 +7,7 @@ module.exports = function (config) {
         files: ['**/*/*_test.js'],
         exclude: ['**/*/bower_components'],
         preprocessors: {
-            'app/!(bower_components)/!(patch)/**/!(*_test).js': ['coverage']
+            '!(patch)/**/!(*_test).js': ['coverage']
         },
         reporters: ['progress', 'junit', 'coverage'],
         junitReporter: {

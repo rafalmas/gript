@@ -27,7 +27,7 @@ module.exports = function (gulp) {
                 },
                 out: 'all.js'
             }),
-            tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*test.ts', '!app/bower_components/**/*'])
+            tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*test.ts'])
                 .pipe(sourcemaps.init())
                 .pipe(ts(tsProject));
 

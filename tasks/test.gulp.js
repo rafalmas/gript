@@ -12,7 +12,7 @@ module.exports = function (gulp) {
     // Runs the unit tests
     gulp.task('test', ['get-sources'], function (done) {
         bowerDeps = wiredep({
-            directory: 'app/bower_components',
+            directory: 'bower_components',
             dependencies: true,
             devDependencies: true
         });
@@ -26,7 +26,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('get-sources', ['compile-tests'], function () {
-        return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js', '!app/bower_components/**/*'], {base: '.'})
+        return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
             .pipe(angularFilesort())
             .pipe(filenames('js'));
     });
@@ -47,7 +47,7 @@ module.exports = function (gulp) {
                 },
                 out: 'all_test.js'
             }),
-            tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts', '!app/bower_components/**/*'])
+            tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts'])
                 .pipe(ts(tsProject));
 
         return tsResult.js

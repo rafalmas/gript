@@ -36,7 +36,6 @@ The use of the this Gulp build tool is based on applications code being structur
 
     |---- /app
     |     |
-    |     |---- bower_components
     |     |---- components
     |     |---- sections
     |     |---- img
@@ -44,6 +43,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
+    |---- /bower_components
     |---- /target
     |     |---- dist
     |     |---- tmp
@@ -58,8 +58,8 @@ which means:
 - `app` : contains the application source code
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
-- `app/bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `app/app.js` or `app/App.ts` : the entry point of the Angular application
+- `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package

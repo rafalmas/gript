@@ -24,13 +24,13 @@ module.exports = function (gulp) {
     gulp.task('inject-bower', ['bower-download'], function () {
         return gulp.src('app/index.html')
             .pipe(wiredep({
-                directory: 'app/bower_components'
+                directory: 'bower_components'
             }))
             .pipe(gulp.dest('app'));
     });
 
     gulp.task('bower-download', function () {
-        return bower('app/bower_components');
+        return bower('bower_components');
     });
 
     gulp.task('inject-styles', ['styles'], function () {
@@ -65,7 +65,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('partials', function () {
-        return gulp.src(['app/**/*.html', '!app/index.html', '!app/bower_components/**/*'])
+        return gulp.src(['app/**/*.html', '!app/index.html'])
             .pipe(htmlmin({
                 removeEmptyAttributes: true,
                 collapseBooleanAttributes: false,
@@ -92,7 +92,7 @@ module.exports = function (gulp) {
                 }
             ))
             .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/bower_components/**/*', '!app/**/*Test.js', '!app/**/*test.js'])
+                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js'])
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
@@ -104,7 +104,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('fonts', function () {
-        return gulp.src('app/bower_components/**/*')
+        return gulp.src('bower_components/**/*')
             .pipe(filter('**/*.{eot,ttf,woff,woff2}'))
             .pipe(flatten())
             .pipe(gulp.dest('target/tmp/fonts'))
@@ -113,7 +113,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('images', function () {
-        return gulp.src(['app/**/img/**/*', '!app/bower_components/**/*'])
+        return gulp.src('app/**/img/**/*')
             .pipe(gulp.dest('target/dist'))
             .pipe(size());
     });

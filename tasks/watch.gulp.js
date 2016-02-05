@@ -13,17 +13,17 @@ module.exports = function (gulp) {
                 livereload.reload();
             });
         });
-        watch(['!app/bower_components/**/*', 'app/**/*.js'], function () {
+        watch(['app/**/*.js'], function () {
             gulp.start(['eslint', 'test'], function () {
                 livereload.reload();
             });
         });
-        watch(['!app/bower_components/**/*', '!app/**/*Test.ts', '!app/**/*.*test.ts', 'app/**/*.ts'], function () {
+        watch(['!app/**/*Test.ts', '!app/**/*.*test.ts', 'app/**/*.ts'], function () {
             gulp.start('inject-js', function () {
                 livereload.reload();
             });
         });
-        watch(['!app/bower_components/**/*', 'app/**/*Test.ts', 'app/**/*.*test.ts'], function () {
+        watch(['app/**/*Test.ts', 'app/**/*.*test.ts'], function () {
             gulp.start('test', function () {
                 livereload.reload();
             });
@@ -33,12 +33,12 @@ module.exports = function (gulp) {
                 livereload.reload();
             });
         });
-        watch(['!app/bower_components/**/*', '!app/index.html', 'app/**/*.html'], function () {
+        watch(['!app/index.html', 'app/**/*.html'], function () {
             gulp.start('inject-partials', function () {
                 livereload.reload();
             });
         });
-        watch(['!app/bower_components/**/*', '!app/index.html', 'app/**/*.html'], function () {
+        watch(['!app/index.html', 'app/**/*.html'], function () {
             gulp.start('inject-partials', function () {
                 livereload.reload();
             });
