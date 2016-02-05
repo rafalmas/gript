@@ -178,22 +178,26 @@ If you develop your app in the TypeScript, files will be compiled and then injec
 By default, all TypeScript, Sass and HTML files will be compiled and injected into your app's `index.html` file.
 The `target/tmp` directory is the place for the compilation output:
 
-- **target/tmp/js** : will contain compiled TypeScript files
-- **target/tmp/partials** : will contain all HTML partials from your Angular app compiled into Angular $templateCache.
-- **target/tmp/styles** : will contain compiled Sass files
+- `target/tmp/js` : will contain compiled TypeScript files
+- `target/tmp/partials` : will contain all HTML partials from your Angular app compiled into Angular $templateCache.
+- `target/tmp/styles` : will contain compiled Sass files
 
 Compiled scripts and styles will then be injected into the app's `index.html` according to the injection markings:
 
-- **\<!-- bower:css -->\<!-- endbower -->** : Bower CSS dependencies
-- **\<!-- inject:css -->\<!-- endinject -->** : compiled Sass files
-- **\<!-- bower:js -->\<!-- endbower -->** : Bower JS dependencies
-- **\<!-- inject:js -->\<!-- endinject -->** : TypeScript files compiled into JS
-- **\<!-- inject:partials -->\<!-- endinject -->** : HTML partials compiled into Angular's $templateCache.
+- `\<!-- bower:css -->\<!-- endbower -->` : Bower CSS dependencies
+- `\<!-- inject:css -->\<!-- endinject -->` : compiled Sass files
+- `\<!-- bower:js -->\<!-- endbower -->` : Bower JS dependencies
+- `\<!-- inject:js -->\<!-- endinject -->` : TypeScript files compiled into JS
+- `\<!-- inject:partials -->\<!-- endinject -->` : HTML partials compiled into Angular's $templateCache.
 
-Refer to `app/index.html` for an example how to define these markings.
+After executing the `dist` task, all the stylesheets and JavaScripts will be minimized and concatenated.
+The result will be injected into `target/dist/index.html` according to these injection markings:
+- `\<!-- build:css styles/vendor.css -->\<!-- endbuild -->`: vendor stylesheets (from `bower_components`)
+- `\<!-- build:css styles/main.css -->\<!-- endbuild -->`: your own stylesheets
+- `\<!-- build:js scripts/vendor.js -->\<!-- endbuild -->`: vendor scripts (from `bower_components`)
+- `\<!-- build:js scripts/main.js -->\<!-- endbuild -->`: your own scripts
 
-After executing the `dist` task, all of the scripts and CSS styles will be concatenated and minified. Your `index.html` in the distribution package
-(`target/dist`) will contain references to concatenated and minified scripts and CSS stylesheets.
+Refer to `app/index.html` or `sample_configs/index.html` for an example how to define these markings.
 
 ## External dependencies
 

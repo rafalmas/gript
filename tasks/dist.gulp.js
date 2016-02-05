@@ -35,7 +35,7 @@ module.exports = function (gulp) {
 
     gulp.task('minify', ['build'], function () {
         return gulp.src('app/index.html')
-            .pipe(useref({searchPath: ['app', 'target/tmp']}))
+            .pipe(useref({ searchPath: ['app', 'bower_components', 'target/tmp']}))
             .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
             .pipe(gulpIf('*.js', ngAnnotate()))
             .pipe(gulpIf('*.js', uglify()))
