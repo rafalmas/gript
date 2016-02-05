@@ -184,18 +184,18 @@ The `target/tmp` directory is the place for the compilation output:
 
 Compiled scripts and styles will then be injected into the app's `index.html` according to the injection markings:
 
-- `\<!-- bower:css -->\<!-- endbower -->` : Bower CSS dependencies
-- `\<!-- inject:css -->\<!-- endinject -->` : compiled Sass files
-- `\<!-- bower:js -->\<!-- endbower -->` : Bower JS dependencies
-- `\<!-- inject:js -->\<!-- endinject -->` : TypeScript files compiled into JS
-- `\<!-- inject:partials -->\<!-- endinject -->` : HTML partials compiled into Angular's $templateCache.
+- `<!-- bower:css --><!-- endbower -->` : Bower CSS dependencies
+- `<!-- inject:css --><!-- endinject -->` : compiled Sass files
+- `<!-- bower:js --><!-- endbower -->` : Bower JS dependencies
+- `<!-- inject:js --><!-- endinject -->` : TypeScript files compiled into JS
+- `<!-- inject:partials --><!-- endinject -->` : HTML partials compiled into Angular's $templateCache.
 
 After executing the `dist` task, all the stylesheets and JavaScripts will be minimized and concatenated.
 The result will be injected into `target/dist/index.html` according to these injection markings:
-- `\<!-- build:css styles/vendor.css -->\<!-- endbuild -->`: vendor stylesheets (from `bower_components`)
-- `\<!-- build:css styles/main.css -->\<!-- endbuild -->`: your own stylesheets
-- `\<!-- build:js scripts/vendor.js -->\<!-- endbuild -->`: vendor scripts (from `bower_components`)
-- `\<!-- build:js scripts/main.js -->\<!-- endbuild -->`: your own scripts
+- `<!-- build:css styles/vendor.css --><!-- endbuild -->`: vendor stylesheets (from `bower_components`)
+- `<!-- build:css styles/main.css --><!-- endbuild -->`: your own stylesheets
+- `<!-- build:js scripts/vendor.js --><!-- endbuild -->`: vendor scripts (from `bower_components`)
+- `<!-- build:js scripts/main.js --><!-- endbuild -->`: your own scripts
 
 Refer to `app/index.html` or `sample_configs/index.html` for an example how to define these markings.
 
