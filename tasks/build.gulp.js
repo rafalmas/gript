@@ -37,9 +37,7 @@ module.exports = function (gulp) {
         return gulp.src('app/index.html')
             .pipe(gulpInject(gulp.src('target/tmp/styles/**/*.css', {read: false}),
                 {
-                    relative: false,
-                    ignorePath: "target/tmp",
-                    addRootSlash: false
+                    relative: true
                 }))
             .pipe(gulp.dest('app'));
     });
@@ -56,9 +54,7 @@ module.exports = function (gulp) {
                 gulp.src('target/tmp/partials/**/*.js', {read: false}),
                 {
                     starttag: '<!-- inject:partials -->',
-                    relative: false,
-                    ignorePath: "target/tmp",
-                    addRootSlash: false
+                    relative: true
                 }
             ))
             .pipe(gulp.dest('app'));
@@ -86,9 +82,7 @@ module.exports = function (gulp) {
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
-                    relative: false,
-                    ignorePath: "target/tmp",
-                    addRootSlash: false
+                    relative: true
                 }
             ))
             .pipe(gulpInject(
@@ -96,8 +90,7 @@ module.exports = function (gulp) {
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
-                    relative: true,
-                    addRootSlash: false
+                    relative: true
                 }
             ))
             .pipe(gulp.dest('app'));

@@ -6,7 +6,7 @@ module.exports = function (gulp) {
 
     gulp.task('server', function () {
         connect.server({
-            root: ['app', 'target/tmp', '.'],
+            root: ['app', process.cwd()],
             livereload: true
         });
     });
