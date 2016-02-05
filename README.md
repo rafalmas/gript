@@ -6,7 +6,7 @@ an AngularJS application using Sass. Your application source and test files can 
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
 The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript) 
-and ensure the profound checking of the code quality of the same time. 
+and ensure the profound checking of the code quality at the same time.
 The module orchestrates a collection of gulp build functionality into a single npm dependency 
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
