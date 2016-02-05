@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "description": "Gulp Build Setup",
   "dependencies": {
     "bower": "1.7.2",
@@ -114,6 +114,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Nykredit/gript"
-  },
-  "readme": "README.md"
+  }
 }
