@@ -30,7 +30,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('bower-download', function () {
-        return bower('bower_components');
+        return bower(process.cwd() + "/" + 'bower_components');
     });
 
     gulp.task('inject-styles', ['styles'], function () {
