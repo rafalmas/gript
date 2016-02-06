@@ -36,4 +36,8 @@ module.exports = function (gulp) {
     gulp.task('clean-styles', function (done) {
         clean('target/tmp/styles', done);
     });
+
+    gulp.task('clean-bower', function (done) {
+        clean('bower_components', done);
+    });
 };

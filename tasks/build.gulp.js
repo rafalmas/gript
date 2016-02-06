@@ -11,11 +11,13 @@ module.exports = function (gulp) {
         htmlmin = require('gulp-htmlmin'),
         naturalSort = require('gulp-natural-sort'),
         ngHtml2js = require('gulp-ng-html2js'),
+        path = require('path'),
         sass = require('gulp-sass'),
         sequence = require('run-sequence').use(gulp),
         size = require('gulp-size'),
         util = require('gulp-util'),
-        wiredep = require('wiredep').stream;
+        wiredep = require('wiredep').stream,
+        projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
         sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
@@ -30,7 +32,8 @@ module.exports = function (gulp) {
     });
 
     gulp.task('bower-download', function () {
-        return bower(process.cwd() + "/" + 'bower_components');
+        console.log(path.join(projectRoot, 'bower_components'));
+        return bower(path.join(projectRoot, 'bower_components'));
     });
 
     gulp.task('inject-styles', ['styles'], function () {

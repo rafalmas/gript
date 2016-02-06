@@ -156,6 +156,7 @@ The `gulpfile.js` from `gript` contains also these specific tasks:
     - **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
     - **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
     - **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
+    - **clean-bower** : removes the `bower_components` directory
 - **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
 - **images** : copies all image files into the `dist` directory
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes

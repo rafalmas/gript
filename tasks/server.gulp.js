@@ -2,11 +2,12 @@
 
 module.exports = function (gulp) {
 
-    var connect = require('gulp-connect');
+    var connect = require('gulp-connect'),
+        projectRoot = process.cwd();
 
     gulp.task('server', function () {
         connect.server({
-            root: ['app', process.cwd()],
+            root: ['app', projectRoot],
             livereload: true
         });
     });
