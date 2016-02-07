@@ -32,7 +32,6 @@ module.exports = function (gulp) {
     });
 
     gulp.task('bower-download', function () {
-        console.log(path.join(projectRoot, 'bower_components'));
         return bower(path.join(projectRoot, 'bower_components'));
     });
 
@@ -122,5 +121,7 @@ module.exports = function (gulp) {
         var json = JSON.parse(fs.readFileSync('./package.json'));
         util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
     });
+
+
 };
 

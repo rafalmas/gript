@@ -1,35 +1,31 @@
 {
-  "name": "sample-application",
-  "description": "A sample project built by gript",
+  "name": "gript-sample-application",
+  "description": "A sample project used for testing the build tool during development of Gript",
   "version": "0.0.1",
+  "homepage": "https://github.com/Nykredit/gript",
+  "license": "MIT",
+  "private": true,
   "dependencies": {
+    "components-font-awesome":"4.5.0",
     "angular": "~1.4",
     "angular-bootstrap": "~0.13",
     "angular-fontawesome": "~0.4",
     "angular-resource": "~1.4",
     "angular-route": "~1.4",
     "angular-sanitize": "~1.4",
-    "angular-touch": "~1.4",
-    "bootstrap-sass-official": "~3.3",
-    "jquery": "~2.1.4",
-    "modernizr": "https://github.com/Modernizr/Modernizr.git#~2.8.3",
-    "picturefill": "~3.0"
+    "bootstrap-sass-official": "~3.3"
   },
   "overrides": {
     "bootstrap-sass-official": {
       "main": [
         "**/*.{eot,svg,ttf,woff,woff2}"
       ]
-    },
-    "modernizr": {
-      "main": [
-        "modernizr.js"
-      ]
     }
   },
   "devDependencies": {
     "angular-mocks": "~1.4",
-    "jasmine-jquery": "1.3.1"
+    "jasmine-jquery": "1.3.1",
+    "DefinitelyTyped": "*"
   },
   "resolutions": {
     "angular": "~1.4"

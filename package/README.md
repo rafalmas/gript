@@ -1,7 +1,7 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
 <img align="right" src="https://github.com/Nykredit/gript/raw/master/package/img/gript_logo_big.png">
 
-This project is the basis for the creation of an npm module containing a "complete" Gulp Build Setup for
+This project is the basis for the creation of an [npm module](https://www.npmjs.com/package/gript) containing a "complete" Gulp build setup for
 an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
@@ -77,7 +77,7 @@ To make use of the `gript` npm module define the dependency to `gript` in the `p
         "gript": "~0.0.9",
         ....
 
-together with your other npm dependencies.
+together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
 
 Running the command
 
