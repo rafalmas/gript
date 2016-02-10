@@ -39,7 +39,13 @@ module.exports = function (gulp) {
             .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
             .pipe(gulpIf('*.js', ngAnnotate()))
             .pipe(gulpIf('*.js', uglify()))
-            .pipe(gulpIf('*.css', minifyCss()))
+            .pipe(gulpIf('*.css', minifyCss({
+                safe: true,
+                autoprefixer: false,
+                discardUnused: false,
+                reduceIdents: false,
+                mergeIdents: false
+            })))
             .pipe(debug())
             .pipe(revReplace())
             .pipe(gulpIf('*.html', htmlmin({
