@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Gulp Build Setup",
   "dependencies": {
     "bower": "1.7.7",
@@ -21,6 +21,7 @@
     "gulp-filenames": "2.0.0",
     "gulp-filter": "3.0.1",
     "gulp-flatten": "0.2.0",
+    "gulp-git-release": "1.0.5",
     "gulp-if": "2.0.0",
     "gulp-inject": "3.0.0",
     "gulp-livereload": "3.8.1",

@@ -2,9 +2,7 @@
 
 module.exports = function (gulp) {
 
-    var release = function () {
-
-    };
+    var release = require('gulp-git-release');
 
     gulp.task('prerelease', ['dist'], function () {
         gulp.src('target/dist/**').pipe(release({
