@@ -40,6 +40,11 @@ module.exports = function (gulp) {
                 livereload.reload();
             });
         });
+        watch(['!app/index.html', 'app/**/*.html'], function () {
+            gulp.start('inject-partials', function () {
+                livereload.reload();
+            });
+        });
         watch('bower.json', function () {
             gulp.start('inject-bower', function () {
                 livereload.reload();
