@@ -17,17 +17,17 @@ The `index.html` in the `app` folder is especially important - it contains marke
 
 ## Features
 
-- Javascript validation using `es-lint`.
-- TypeScript validation and incremental compilation
-- SASS validation and compilation
-- HTML linting using [htmllint](https://github.com/htmllint/)
-- unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
-- unit testing coverage metered by Istanbul 
-- HTML partials pre-loading into the Angular $templateCache
-- full concatenation/minification for all production JS and CSS files
-- Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change.
-- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
- Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time.
+- JavaScript validation using [ESLint](http://eslint.org),
+- TypeScript validation ([TSLint](http://palantir.github.io/tslint/)) and incremental compilation,
+- SASS validation ([scss-lint](https://github.com/brigade/scss-lint)) and compilation,
+- HTML validation using [htmllint](https://github.com/htmllint/),
+- unit tests performed using [Karma](https://karma-runner.github.io) and [PhantomJS](http://phantomjs.org) (tests can be written in JavaScript or TypeScript),
+- unit testing coverage metered by [Istanbul](https://github.com/gotwarlost/istanbul),
+- HTML partials pre-loading into the Angular `$templateCache`,
+- full concatenation/minification for all production JS and CSS files,
+- Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change,
+- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application,
+ Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time,
 - contains the locked set of specific `npm` dependencies, to minimize "the dependency hell".
 
 ## Structure requirements for applications supported
@@ -151,12 +151,12 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular's $templateCache Javascript files.
+- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files.
 - **styles** : compiles Sass files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects Bower dependencies
     - **inject-styles** : compiles and injects Sass styles
-    - **inject-partials** : compiles HTML partials into Angular's $templateCache and then injects 
+    - **inject-partials** : compiles HTML partials into Angular's `$templateCache` and then injects them into the `index.html`
     - **inject-js** : complies the TypesScript and then injects all JavaScript files
 - **lint** : runs linters on the HTML, Sass, Javascript and TypeScript source files. Refer to the [Linting](#linting) section for possible options.
 	- **lint-js**
@@ -168,7 +168,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
     - **clean-dist** : removes the `target/dist` directory (the distribution package)
     - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
     - **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
-    - **clean-partials** : removes the `target/tmp/partials` directory (Angular's $templateCache Javascript files)
+    - **clean-partials** : removes the `target/tmp/partials` directory (Angular's `$templateCache` Javascript files)
     - **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
     - **clean-bower** : removes the `bower_components` directory
 - **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
@@ -207,7 +207,7 @@ By default, all TypeScript, Sass and HTML files will be compiled and injected in
 The `target/tmp` directory is the place for the compilation output:
 
 - `target/tmp/js` : will contain compiled TypeScript files
-- `target/tmp/partials` : will contain all HTML partials from your Angular app compiled into Angular $templateCache.
+- `target/tmp/partials` : will contain all HTML partials from your Angular app compiled into Angular `$templateCache`.
 - `target/tmp/styles` : will contain compiled Sass files
 
 Compiled scripts and styles will then be injected into the app's `index.html` according to the injection markings:
@@ -216,7 +216,7 @@ Compiled scripts and styles will then be injected into the app's `index.html` ac
 - `<!-- inject:css --><!-- endinject -->` : compiled Sass files
 - `<!-- bower:js --><!-- endbower -->` : Bower JS dependencies
 - `<!-- inject:js --><!-- endinject -->` : TypeScript files compiled into JS
-- `<!-- inject:partials --><!-- endinject -->` : HTML partials compiled into Angular's $templateCache.
+- `<!-- inject:partials --><!-- endinject -->` : HTML partials compiled into Angular's `$templateCache`.
 
 After executing the `dist` task, all the stylesheets and JavaScripts will be minimized and concatenated.
 The result will be injected into `target/dist/index.html` according to these injection markings:
