@@ -193,6 +193,18 @@ You can list all of the available tasks by running the command:
 
     gulp --tasks
 
+<a name="linting"></a>
+## Linting
+To ensure the profound checking of the code quality of your application, Gript will check all your HTML, Sass, TypeScript and JavaScript files.
+The linting process is executed during the build, and is also included in the `watch` task, to re-lint the file on the fly, after you change it.
+The number of configuration files are being used to customize the linting options:
+
+- `.eslint.yml` contains configuration for the powerful JavaScript linter, the [ESLint](http://eslint.org). Refer to the [Options](http://eslint.org/docs/user-guide/configuring) section for avaialable options.
+- `.scss-lint.yml` contains configuration for Sass linter, the [scss-lint](https://github.com/brigade/scss-lint). Referer to the [Configuration](https://github.com/brigade/scss-lint#configuration) for options.
+- `tslint.json` contains options for [TSLint](http://palantir.github.io/tslint/). Refer [here](http://palantir.github.io/tslint/rules/) for the description of rules.
+- `.htmllintrc` contains setup for [htmllint](https://github.com/htmllint). Refer to the [options](https://github.com/htmllint/htmllint/wiki/Options) for possible settings.
+
+For your convenience, Gript contains sample configuration files for all linters in the `sample_configs` directory.
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
@@ -201,13 +213,6 @@ If you develop your app in the TypeScript, files will be compiled and then injec
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
 You can customize your TypeScript compile options using the `typeScript` section in the `gulpfile.js`.
 Refer to the [Compiler-Options](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options) section in the TypeScript documentation for available options.
-
-- `.eslint.yml` contains configuration for the powerful JavaScript linter, the [ESLint](http://eslint.org). Refer to the [Options](http://eslint.org/docs/user-guide/configuring) section for avaialable options.
-- `.scss-lint.yml` contains configuration for Sass linter, the [scss-lint](https://github.com/brigade/scss-lint). Referer to the [Configuration](https://github.com/brigade/scss-lint#configuration) for options.
-- `tslint.json` contains options for [TSLint](http://palantir.github.io/tslint/). Refer [here](http://palantir.github.io/tslint/rules/) for the description of rules.
-- `.htmllintrc` contains setup for [htmllint](https://github.com/htmllint). Refer to the [options](https://github.com/htmllint/htmllint/wiki/Options) for possible settings.
-
-For your convenience, Gript contains sample configuration files for all linters in the `sample_configs` directory.
 
 <a name="injection"></a>
 ## Compiled files injection
