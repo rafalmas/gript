@@ -13,7 +13,7 @@ module.exports = function (gulp) {
         sequence('compile', 'test', callback);
     });
 
-    gulp.task('compile', ['ts-lint'], function () {
+    gulp.task('compile', ['lint-ts'], function () {
         var tsProject = ts.createProject({
                 "compilerOptions": {
                     "noImplicitAny": true,

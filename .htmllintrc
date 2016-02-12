@@ -1,0 +1,18 @@
+{
+  "attr-quote-style": "double",
+  "doctype-first": true,
+  "doctype-html5": true,
+  "html-req-lang": true,
+  "indent-style": "spaces",
+  "indent-width": 4,
+  "tag-name-lowercase": true,
+  "tag-name-match": true,
+  "title-no-dup": true,
+  "img-req-src": false,
+  "attr-name-style": false,
+  "id-class-style": false,
+  "class-style": false,
+  "img-req-alt": false,
+  "attr-req-value": false,
+  "attr-no-unsafe-char": true
+}

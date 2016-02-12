@@ -20,6 +20,7 @@ The `index.html` in the `app` folder is especially important - it contains marke
 - Javascript validation using `es-lint`.
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
+- HTML linting using [htmllint](https://github.com/htmllint/)
 - unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
 - unit testing coverage metered by Istanbul 
 - HTML partials pre-loading into the Angular $templateCache
@@ -157,7 +158,11 @@ The `gulpfile.js` from Gript contains also these specific tasks:
     - **inject-styles** : compiles and injects Sass styles
     - **inject-partials** : compiles HTML partials into Angular's $templateCache and then injects 
     - **inject-js** : complies the TypesScript and then injects all JavaScript files
-- **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
+- **lint** : runs linters on the HTML, Sass, Javascript and TypeScript source files. Refer to the [Linting](#linting) section for possible options.
+	- **lint-js**
+	- **lint-scss**
+	- **lint-ts**
+	- **lint-html**
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
 - **clean** : removes the whole `target` directory (temporary generated files and distribution package)
     - **clean-dist** : removes the `target/dist` directory (the distribution package)
@@ -181,6 +186,19 @@ If you develop your app in the TypeScript, files will be compiled and then injec
  to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/). 
  We assume that they will be downloaded to `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
+
+<a name="linting"></a>
+## Linting
+To ensure the profound checking of the code quality of your application, Gript will check all your HTML, Sass, TypeScript and JavaScript files.
+The linting process is executed during the build, and is also included in the `watch` task, to re-lint the file on the fly, after you change it.
+The number of configuration files are being used to customize the linting options:
+
+- `.eslint.yml` contains configuration for the powerful JavaScript linter, the [ESLint](http://eslint.org). Refer to the [Options](http://eslint.org/docs/user-guide/configuring) section for avaialable options.
+- `.scss-lint.yml` contains configuration for Sass linter, the [scss-lint](https://github.com/brigade/scss-lint). Referer to the [Configuration](https://github.com/brigade/scss-lint#configuration) for options.
+- `tslint.json` contains options for [TSLint](http://palantir.github.io/tslint/). Refer [here](http://palantir.github.io/tslint/rules/) for the description of rules.
+- `.htmllintrc` contains setup for [htmllint](https://github.com/htmllint). Refer to the [options](https://github.com/htmllint/htmllint/wiki/Options) for possible settings.
+
+For your convenience, Gript contains sample configuration files for all linters in the `sample_configs` directory.
 
 <a name="injection"></a>
 ## Compiled files injection

@@ -71,6 +71,8 @@ gulp.task('create-package', ['dist'], function () {
         .pipe(gulp.dest('target/gript/sample_configs'));
     gulp.src(['package/sample_configs/.*'])
         .pipe(gulp.dest('target/gript/sample_configs'));
+    gulp.src(['package/img/*.*'])
+        .pipe(gulp.dest('target/gript/img'));
     gulp.src(['package/*'])
         .pipe(gulp.dest('target/gript'));
     gulp.src(['package/karma.conf.js'])

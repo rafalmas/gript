@@ -16,12 +16,12 @@ module.exports = function (gulp) {
         livereload.listen(options.livereload.port);
 
         watch('*.js', function () {
-            gulp.start('eslint', function () {
+            gulp.start('lint-js', function () {
                 livereload.reload();
             });
         });
         watch(['app/**/*.js'], function () {
-            gulp.start(['eslint', 'test'], function () {
+            gulp.start(['lint-js', 'test'], function () {
                 livereload.reload();
             });
         });
@@ -37,16 +37,6 @@ module.exports = function (gulp) {
         });
         watch('app/**/*.scss', function () {
             gulp.start('inject-styles', function () {
-                livereload.reload();
-            });
-        });
-        watch(['!app/index.html', 'app/**/*.html'], function () {
-            gulp.start('inject-partials', function () {
-                livereload.reload();
-            });
-        });
-        watch(['!app/index.html', 'app/**/*.html'], function () {
-            gulp.start('inject-partials', function () {
                 livereload.reload();
             });
         });

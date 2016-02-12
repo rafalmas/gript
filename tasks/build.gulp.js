@@ -44,7 +44,7 @@ module.exports = function (gulp) {
             .pipe(gulp.dest('app'));
     });
 
-    gulp.task('styles', ['scsslint'], function () {
+    gulp.task('styles', ['lint-scss'], function () {
         return gulp.src(['app/app.scss'])
             .pipe(sass())
             .pipe(gulp.dest('target/tmp/styles'));
@@ -62,7 +62,7 @@ module.exports = function (gulp) {
             .pipe(gulp.dest('app'));
     });
 
-    gulp.task('partials', function () {
+    gulp.task('partials', ['lint-html'], function () {
         return gulp.src(['app/**/*.html', '!app/index.html'])
             .pipe(htmlmin({
                 removeEmptyAttributes: true,
@@ -113,7 +113,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'eslint'], function (callback) {
+    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
         callback();
     });
 
@@ -121,7 +121,5 @@ module.exports = function (gulp) {
         var json = JSON.parse(fs.readFileSync('./package.json'));
         util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
     });
-
-
 };
 
