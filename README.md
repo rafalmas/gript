@@ -13,7 +13,7 @@ and makes it easier for developers to have and maintain the build setup for own 
 The project includes a sample application to make it possible to test the build setup.
 The local sample application exemplifies the needed structure for applications supported by the `gript` npm package.
 The sample application resides in the `app` folder. 
-The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included. 
+The `index.html` in the `app` folder is especially important - it contains markers where generated files will be included.
 
 ## Features
 
@@ -85,18 +85,18 @@ Running the command
 
 will include `gript` in your `node_modules` folder and make it available for development.
 
-### Configure your project
+## Configure your project
 
 The tool comes with a guide for the enabling of the build tool in your project.
 
 #### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-`Gript` includes a sample gulp file, located in the `sample_configs` directory.
+Gript includes a sample Gulp file, located in the `sample_configs` directory.
 There are also example configuration files for `Bower`, `es-lint`, and `scss-lint` in the `sample_configs` directory.
 
 #### Using the sample Gulp file
-This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
+This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the options for the build process of your own application:
 
        var gulp = require('gulp');
        
@@ -107,18 +107,27 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
            module: 'yourApp',
            hostHeader: 'no-specified-hostHeader',
            url: 'http://no-specified-project-url',
-           repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git'
+           repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
+           server: {
+			   port: 8080,
+			   host: 'localhost',
+			   livereload: {
+				   port: 35729
+			   }
+		   }
        };
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
 These values are:
 
-- **module** : the name of the project
-- **hostHeader** host header
-- **url** the url of your project
+- `module` : the name of the project
+- `hostHeader` host header
+- `url` the url of your project
+- `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
+- `server` configuration options for the web server like port number, live reload port number, host name etc.
 
-You may kickstart your project by copying **sample_configs/gulpfile.js** to the root of your own project.
+You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you to have a very simple build configuration as a starting scenario.
 
 NOTE: If you have no tests the
@@ -136,7 +145,7 @@ Just by running
 
 you are ready to start developing your project.
 
-The `gulpfile.js` from `gript` contains also these specific tasks:
+The `gulpfile.js` from Gript contains also these specific tasks:
 
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
@@ -170,7 +179,7 @@ You can list all of the available tasks by running the command:
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
  to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/). 
- We assume that they will be downloaded to `app/bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting. 
+ We assume that they will be downloaded to `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
 
 <a name="injection"></a>
@@ -202,7 +211,7 @@ Refer to `app/index.html` or `sample_configs/index.html` for an example how to d
 
 ## External dependencies
 
-`gript` makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
+Gript makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
 To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some external dependencies, depending on your platform:
 
 **On Unix**

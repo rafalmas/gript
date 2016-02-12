@@ -3,10 +3,17 @@
 module.exports = function (gulp) {
 
     var watch = require('gulp-watch'),
-        livereload = require('gulp-livereload');
+        livereload = require('gulp-livereload'),
+        _ = require('lodash'),
+        defaults = {
+            livereload: {
+                port: 35729
+            }
+        };
 
     gulp.task('watch', function () {
-        livereload.listen();
+        var options = _.merge({}, defaults, gulp.config.server);
+        livereload.listen(options.livereload.port);
 
         watch('*.js', function () {
             gulp.start('eslint', function () {

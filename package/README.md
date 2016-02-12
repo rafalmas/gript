@@ -5,15 +5,15 @@ This project is the basis for the creation of an [npm module](https://www.npmjs.
 an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
-The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript) 
+The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript)
 and ensure the profound checking of the code quality at the same time.
-The module orchestrates a collection of gulp build functionality into a single npm dependency 
+The module orchestrates a collection of gulp build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
 The project includes a sample application to make it possible to test the build setup.
 The local sample application exemplifies the needed structure for applications supported by the `gript` npm package.
-The sample application resides in the `app` folder. 
-The`index.html` in the `app` folder is especially important - it contains markers where generated files will be included. 
+The sample application resides in the `app` folder.
+The `index.html` in the `app` folder is especially important - it contains markers where generated files will be included.
 
 ## Features
 
@@ -21,11 +21,11 @@ The`index.html` in the `app` folder is especially important - it contains marker
 - TypeScript validation and incremental compilation
 - SASS validation and compilation
 - unit tests performed using Karma and PhantomJS (tests can be written in JavaScript or TypeScript)
-- unit testing coverage metered by Istanbul 
+- unit testing coverage metered by Istanbul
 - HTML partials pre-loading into the Angular $templateCache
 - full concatenation/minification for all production JS and CSS files
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change.
-- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application. 
+- watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application.
  Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time.
 - contains the locked set of specific `npm` dependencies, to minimize "the dependency hell".
 
@@ -73,9 +73,9 @@ which means:
 To make use of the `gript` npm module define the dependency to `gript` in the `package.json` file in your own application:
 
       "dependencies": {
-        "gulp": "3.9.0",
-        "gript": "~0.0.9",
-        ....
+          "gulp": "3.9.0",
+          "gript": "~0.0.9",
+          ....
 
 together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
 
@@ -85,40 +85,49 @@ Running the command
 
 will include `gript` in your `node_modules` folder and make it available for development.
 
-### Configure your project
+## Configure your project
 
 The tool comes with a guide for the enabling of the build tool in your project.
 
 #### The sample Gulp file and configuration files
 
 The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
-`Gript` includes a sample gulp file, located in the `sample_configs` directory.
+Gript includes a sample Gulp file, located in the `sample_configs` directory.
 There are also example configuration files for `Bower`, `es-lint`, and `scss-lint` in the `sample_configs` directory.
 
 #### Using the sample Gulp file
-This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the tasks you want to run during the build process of your own application:
+This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the options for the build process of your own application:
 
-    var gulp = require('gulp');
-    
-    require('gript')(gulp);
-    
-    // Set the config to use across the gulp build
-    gulp.config = {
-        module: 'yourApp',
-        hostHeader: 'no-specified-hostHeader',
-        url: 'http://no-specified-project-url',
-        repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git'
-    };
+       var gulp = require('gulp');
+
+       require('gript')(gulp);
+
+       // Set the config to use across the gulp build
+       gulp.config = {
+           module: 'yourApp',
+           hostHeader: 'no-specified-hostHeader',
+           url: 'http://no-specified-project-url',
+           repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
+           server: {
+			   port: 8080,
+			   host: 'localhost',
+			   livereload: {
+				   port: 35729
+			   }
+		   }
+       };
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
 These values are:
 
-- **module** : the name of the project
-- **hostHeader** host header
-- **url** the url of your project
+- `module` : the name of the project
+- `hostHeader` host header
+- `url` the url of your project
+- `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
+- `server` configuration options for the web server like port number, live reload port number, host name etc.
 
-You may kickstart your project by copying **sample_configs/gulpfile.js** to the root of your own project.
+You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you to have a very simple build configuration as a starting scenario.
 
 NOTE: If you have no tests the
@@ -136,7 +145,7 @@ Just by running
 
 you are ready to start developing your project.
 
-The `gulpfile.js` from `gript` contains also these specific tasks:
+The `gulpfile.js` from Gript contains also these specific tasks:
 
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
@@ -146,7 +155,7 @@ The `gulpfile.js` from `gript` contains also these specific tasks:
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects Bower dependencies
     - **inject-styles** : compiles and injects Sass styles
-    - **inject-partials** : compiles HTML partials into Angular's $templateCache and then injects 
+    - **inject-partials** : compiles HTML partials into Angular's $templateCache and then injects
     - **inject-js** : complies the TypesScript and then injects all JavaScript files
 - **lint** : runs [ESLint](http://www.eslint.org) on the Sass, Javascript and TypeScript source files
 - **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
@@ -169,8 +178,8 @@ You can list all of the available tasks by running the command:
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
- to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/). 
- We assume that they will be downloaded to `app/bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting. 
+ to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/).
+ We assume that they will be downloaded to `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
 
 <a name="injection"></a>
@@ -202,7 +211,7 @@ Refer to `app/index.html` or `sample_configs/index.html` for an example how to d
 
 ## External dependencies
 
-`gript` makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
+Gript makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
 To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some external dependencies, depending on your platform:
 
 **On Unix**
@@ -217,9 +226,9 @@ To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some extern
 - [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - You also need to install the Command Line Tools via Xcode. You can find this under the menu _Xcode -> Preferences -> Downloads_. (This step will install gcc and the related toolchain containing make)
 - for scss-lint to work properly, you need `scss-lint` Ruby gem installed:
-    
+
         $ gem install scss_lint
- 
+
 **Windows**
 
 - Python (v2.7.10 recommended, v3.x.x is not supported). Make sure that you have a `PYTHON` environment variable, and it is set to drive:\path\to\python.exe not to a folder
@@ -250,7 +259,7 @@ If the above steps have not worked or you are unsure please visit http://www.ser
         call "C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd" /Release /x86
         call "C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd" /Release /x64
 
-The Gript logo contains modified version of the [Link icon](https://commons.wikimedia.org/wiki/File:Chain_link_icon.png) licensed under 
+The Gript logo contains modified version of the [Link icon](https://commons.wikimedia.org/wiki/File:Chain_link_icon.png) licensed under
 [Creative Commons](https://en.wikipedia.org/wiki/en:Creative_Commons) license.
 
-<img align="center" src="https://github.com/Nykredit/gript/raw/master/package/img/gript_logo_mini.png">
+<img align="center" src="package/img/gript_logo_mini.png">

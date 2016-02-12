@@ -24,7 +24,14 @@ gulp.config = {
     module: 'gript',
     hostHeader: 'gript',
     url: 'http://gript',
-    repository: 'http://nykredit.github.com/gript.git'
+    repository: 'http://nykredit.github.com/gript.git',
+    server: {
+        port: 8080,
+        host: 'localhost',
+        livereload: {
+            port: 35729
+        }
+    }
 };
 
 // verify that the build setup can produce the expected artifacts
