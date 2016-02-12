@@ -6,7 +6,6 @@ module.exports = function (gulp) {
         angularFilesort = require('gulp-angular-filesort'),
         filenames = require("gulp-filenames"),
         Server = require('karma').Server,
-        ts = require('gulp-typescript'),
         wiredep = require('wiredep');
 
     // Runs the unit tests
@@ -29,29 +28,6 @@ module.exports = function (gulp) {
         return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
             .pipe(angularFilesort())
             .pipe(filenames('js'));
-    });
-
-    /**
-     * compile all typescript files and sourcemaps from /app and output them to /target/tmp
-     */
-    gulp.task('compile-tests', function () {
-        var tsProject = ts.createProject({
-                "compilerOptions": {
-                    "noImplicitAny": true,
-                    "target": "es5",
-                    "declarationFiles": true,
-                    "noExternalResolve": false,
-                    "sortOutput": true,
-                    "removeComments": false,
-                    "preserveConstEnums": true
-                },
-                out: 'all_test.js'
-            }),
-            tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts'])
-                .pipe(ts(tsProject));
-
-        return tsResult.js
-            .pipe(gulp.dest('target/tmp/js'));
     });
 };
 
