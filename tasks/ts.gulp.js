@@ -8,14 +8,14 @@ module.exports = function (gulp) {
         _ = require('lodash'),
         defaults = {
             compilerOptions: {
-                "noImplicitAny": true,
-                "target": "es5",
-                "sourceMap": true,
-                "declarationFiles": true,
-                "noExternalResolve": false,
-                "sortOutput": true,
-                "removeComments": false,
-                "preserveConstEnums": true
+                noImplicitAny: true,
+                target: "es5",
+                sourceMap: true,
+                declarationFiles: true,
+                noExternalResolve: false,
+                sortOutput: true,
+                removeComments: false,
+                preserveConstEnums: true
             }
         };
 

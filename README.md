@@ -117,15 +117,15 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
 			   }
 		   },
 		   typeScript: {
-			   "compilerOptions": {
-				   "noImplicitAny": true,
-				   "target": "es5",
-				   "sourceMap": true,
-				   "declarationFiles": true,
-				   "noExternalResolve": false,
-				   "sortOutput": true,
-				   "removeComments": false,
-				   "preserveConstEnums": true
+			   compilerOptions: {
+				   noImplicitAny: true,
+				   target: "es5",
+				   sourceMap: true,
+				   declarationFiles: true,
+				   noExternalResolve: false,
+				   sortOutput: true,
+				   removeComments: false,
+				   preserveConstEnums: true
 			   }
 		   }
        };

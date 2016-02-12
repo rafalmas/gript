@@ -20,15 +20,15 @@ gulp.config = {
         }
     },
     typeScript: {
-        "compilerOptions": {
-            "noImplicitAny": true,
-            "target": "es5",
-            "sourceMap": true,
-            "declarationFiles": true,
-            "noExternalResolve": false,
-            "sortOutput": true,
-            "removeComments": false,
-            "preserveConstEnums": true
+        compilerOptions: {
+            noImplicitAny: true,
+            target: "es5",
+            sourceMap: true,
+            declarationFiles: true,
+            noExternalResolve: false,
+            sortOutput: true,
+            removeComments: false,
+            preserveConstEnums: true
         }
     }
 };
