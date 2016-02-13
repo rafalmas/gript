@@ -14,7 +14,27 @@ module.exports = function (gulp) {
         sequence = require('run-sequence').use(gulp),
         size = require('gulp-size'),
         uglify = require('gulp-uglify'),
-        useref = require('gulp-useref');
+        useref = require('gulp-useref'),
+        _ = require('lodash'),
+        minifyDefaults = {
+            html: {
+                removeEmptyAttributes: true,
+                collapseBooleanAttributes: false,
+                collapseWhitespace: true,
+                caseSensitive: true
+            },
+            css: {
+                safe: true,
+                autoprefixer: false,
+                discardUnused: false,
+                reduceIdents: false,
+                mergeIdents: false
+            },
+            javascript: {
+                mangle: false,
+                preserveComments: false
+            }
+        };
 
     gulp.task('dist', function (callback) {
         sequence('clean', 'appcache', callback);
@@ -34,26 +54,17 @@ module.exports = function (gulp) {
     });
 
     gulp.task('minify', ['build'], function () {
+        var minificationOptions = _.merge({}, minifyDefaults, gulp.config.minification);
+
         return gulp.src('app/index.html')
             .pipe(useref({ searchPath: ['app', 'bower_components', 'target/tmp']}))
             .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
             .pipe(gulpIf('*.js', ngAnnotate()))
-            .pipe(gulpIf('*.js', uglify()))
-            .pipe(gulpIf('*.css', minifyCss({
-                safe: true,
-                autoprefixer: false,
-                discardUnused: false,
-                reduceIdents: false,
-                mergeIdents: false
-            })))
+            .pipe(gulpIf('*.js', uglify(minificationOptions.javascript)))
+            .pipe(gulpIf('*.css', minifyCss(minificationOptions.css)))
             .pipe(debug())
             .pipe(revReplace())
-            .pipe(gulpIf('*.html', htmlmin({
-                removeEmptyAttributes: true,
-                collapseBooleanAttributes: false,
-                collapseWhitespace: true,
-                caseSensitive: true
-            })))
+            .pipe(gulpIf('*.html', htmlmin(minificationOptions.html)))
             .pipe(gulp.dest('target/dist'))
             .pipe(size());
     });

@@ -43,6 +43,25 @@ gulp.config = {
             removeComments: false,
             preserveConstEnums: true
         }
+    },
+    minification: {
+        html: {
+            removeEmptyAttributes: false,
+            collapseBooleanAttributes: false,
+            collapseWhitespace: true,
+            caseSensitive: true
+        },
+        css: {
+            safe: true,
+            autoprefixer: false,
+            discardUnused: false,
+            reduceIdents: false,
+            mergeIdents: false
+        },
+        javascript: {
+            mangle: true,
+            preserveComments: false
+        }
     }
 };
 

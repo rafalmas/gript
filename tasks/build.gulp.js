@@ -17,6 +17,15 @@ module.exports = function (gulp) {
         size = require('gulp-size'),
         util = require('gulp-util'),
         wiredep = require('wiredep').stream,
+        _ = require('lodash'),
+        partialsMinifyDefaults = {
+            html: {
+                removeEmptyAttributes: true,
+                collapseBooleanAttributes: false,
+                collapseWhitespace: true,
+                caseSensitive: true
+            }
+        },
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
@@ -63,13 +72,10 @@ module.exports = function (gulp) {
     });
 
     gulp.task('partials', ['lint-html'], function () {
+        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
+
         return gulp.src(['app/**/*.html', '!app/index.html'])
-            .pipe(htmlmin({
-                removeEmptyAttributes: true,
-                collapseBooleanAttributes: false,
-                collapseWhitespace: true,
-                caseSensitive: true
-            }))
+            .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
                 moduleName: gulp.config.module
             }))

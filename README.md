@@ -1,13 +1,13 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
 <img align="right" src="package/img/gript_logo_big.png">
 
-This project is the basis for the creation of an [npm module](https://www.npmjs.com/package/gript) containing a "complete" Gulp build setup for
-an AngularJS application using Sass. Your application source and test files can be written in JavaScript or TypeScript.
+This project is the basis for the creation of an [npm module](https://www.npmjs.com/package/gript) containing a "complete" [Gulp](http://gulpjs.com) build setup for
+an [AngularJS](https://angularjs.org) application using [Sass](http://sass-lang.com). Your application source and test files can be written in JavaScript or [TypeScript](http://www.typescriptlang.org/).
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
-The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript) 
+The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript)
 and ensure the profound checking of the code quality at the same time.
-The module orchestrates a collection of gulp build functionality into a single npm dependency 
+The module orchestrates a collection of [Gulp](http://gulpjs.com) build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
 The project includes a sample application to make it possible to test the build setup.
@@ -53,21 +53,25 @@ The use of the this Gulp build tool is based on applications code being structur
     |---- package.json
     |---- .eslint.rc.yml
     |---- .scsslint.rc.yml
+    |---- tslint.json
+    |---- .htmllint.rc
 
 which means:
 
 - `app` : contains the application source code
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
-- `app/app.js` or `app/App.ts` : the entry point of the Angular application
+- `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
-- `gulpfile.js` : the build files importing the gulp tasks defined in the `node_modules/gript`
-- `bower.json` : contains bower dependencies
-- `.eslint.rc.yml` : contains rules for es-linter (cascading rules configuration is possible)
-- `.scsslint.rc.yml` : contains rules for Sass linter (scss-linter)
+- `gulpfile.js` : the build files importing the [Gulp](http://gulpjs.com) tasks defined in the `node_modules/gript`
+- `bower.json` : contains [Bower](http://bower.io) dependencies
+- `.eslint.rc.yml` : contains rules for es-linter ([ESLint](http://eslint.org)). Cascading rules configuration is possible.
+- `.scsslint.rc.yml` : contains rules for Sass linter ([scss-lint](https://github.com/brigade/scss-lint))
+- `tslint.json` : rules for the TypeScript linter ([TSLint](http://palantir.github.io/tslint/))
+- `.htmllint.rc` : rules for the HTML linter ([htmllint](https://github.com/htmllint))
 
 ## Setup GRIPT in your project
 
@@ -92,7 +96,7 @@ The tool comes with a guide for the enabling of the build tool in your project.
 
 #### The sample Gulp file and configuration files
 
-The supported Angular application is built by [gulp.js](http://gulpjs.com), which is controlled by `gulpfile.js`.
+The supported Angular application is built by [Gulp](http://gulpjs.com), which is controlled by the `gulpfile.js`.
 Gript includes a sample Gulp file, located in the `sample_configs` directory.
 There are also example configuration files for `Bower`, `es-lint`, and `scss-lint` in the `sample_configs` directory.
 
@@ -110,25 +114,44 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
            url: 'http://no-specified-project-url',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            server: {
-			   port: 8080,
-			   host: 'localhost',
-			   livereload: {
-				   port: 35729
-			   }
-		   },
-		   typeScript: {
-			   compilerOptions: {
-				   noImplicitAny: true,
-				   target: "es5",
-				   sourceMap: true,
-				   declarationFiles: true,
-				   noExternalResolve: false,
-				   sortOutput: true,
-				   removeComments: false,
-				   preserveConstEnums: true
-			   }
-		   }
-       };
+               port: 8080,
+               host: 'localhost',
+               livereload: {
+                   port: 35729
+               }
+           },
+           typeScript: {
+               compilerOptions: {
+                   noImplicitAny: true,
+                   target: "es5",
+                   sourceMap: true,
+                   declarationFiles: true,
+                   noExternalResolve: false,
+                   sortOutput: true,
+                   removeComments: false,
+                   preserveConstEnums: true
+               }
+           },
+           minification: {
+               html: {
+                   removeEmptyAttributes: false,
+                   collapseBooleanAttributes: false,
+                   collapseWhitespace: true,
+                   caseSensitive: true
+               },
+               css: {
+                   safe: true,
+                   autoprefixer: false,
+                   discardUnused: false,
+                   reduceIdents: false,
+                   mergeIdents: false
+               },
+               javascript: {
+                   mangle: true,
+                   preserveComments: false
+               }
+           }
+	   };
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
@@ -166,7 +189,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files.
 - **styles** : compiles Sass files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
-    - **inject-bower** : downloads and injects Bower dependencies
+    - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies
     - **inject-styles** : compiles and injects Sass styles
     - **inject-partials** : compiles HTML partials into Angular's `$templateCache` and then injects them into the `index.html`
     - **inject-js** : complies the TypesScript and then injects all JavaScript files
@@ -208,11 +231,21 @@ For your convenience, Gript contains sample configuration files for all linters 
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
- to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/). 
- We assume that they will be downloaded to `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
+ to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/) into the `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
  You can customize your TypeScript compile options using the `typeScript` section in the `gulpfile.js`.
  Refer to the [Compiler-Options](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options) section in the TypeScript documentation for available options.
+
+<a name="minification"></a>
+## Minification
+After executing a `dist` task, all resulting HTML, CSS and JavaScript files will be concatenated and minified.
+You can customize the minification options by modyfying the `minification` section in your `gulpfile.js`.
+
+- HTML files will be minified using [html-minifer](https://github.com/kangax/html-minifier). See the [html-minifier docs](https://github.com/kangax/html-minifier) for available options.
+- CSS files will be minified with [cssnano](https://github.com/ben-eb/cssnano). Refer to the [documentation](http://cssnano.co/optimisations/) for possible optimisations.
+- JavaScript will be compressed with [UglifyJS](http://lisperator.net/uglifyjs/). Refere to the [gulp-uglify](https://www.npmjs.com/package/gulp-uglify) module docs for help how to set options.
+
+Note: too agressive optimisations will break your build or make your app useless. Gript includes the default set of options, which are pretty safe.
 
 <a name="injection"></a>
 ## Compiled files injection
