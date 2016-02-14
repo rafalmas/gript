@@ -1,8 +1,8 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
 
-[![npm](https://img.shields.io/npm/v/gript.svg)]()
-[![npm](https://img.shields.io/npm/dm/gript.svg)]()
-[![npm](https://img.shields.io/npm/dt/gript.svg)]()
+[![npm](https://img.shields.io/npm/v/gript.svg)](http://npmjs.com/package/gript)
+[![npm](https://img.shields.io/npm/dm/gript.svg)](http://npmjs.com/package/gript)
+[![npm](https://img.shields.io/npm/dt/gript.svg)](http://npmjs.com/package/gript)
 
 <img align="right" src="package/img/gript_logo_big.png">
 
