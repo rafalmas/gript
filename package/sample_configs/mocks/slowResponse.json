@@ -1,0 +1,23 @@
+{
+  "request": {
+    "url": "^/slowResponse",
+    "method": "GET"
+  },
+  "response": {
+    "latency": 5000,
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "body": [
+        {
+          "name": "John",
+          "email": "john@example.com"
+        },
+        {
+          "name": "Jane",
+          "email": "jane@example.com"
+        }
+      ]
+    }
+  }
+}

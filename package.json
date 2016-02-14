@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Gulp Build Setup",
   "dependencies": {
     "bower": "1.7.7",
@@ -40,6 +40,7 @@
     "gulp-scss-lint": "0.3.9",
     "gulp-size": "2.0.0",
     "gulp-sourcemaps": "1.6.0",
+    "gulp-stubby-server": "0.1.6",
     "gulp-tslint": "4.3.1",
     "gulp-util": "3.0.7",
     "tslint": "3.3.0",

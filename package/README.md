@@ -5,9 +5,9 @@ This project is the basis for the creation of an [npm module](https://www.npmjs.
 an [AngularJS](https://angularjs.org) application using [Sass](http://sass-lang.com). Your application source and test files can be written in JavaScript or [TypeScript](http://www.typescriptlang.org/).
 If it's TypeScript, it will be validated and then compiled to JavaScript.
 
-The goal of this tool is to provide the handy workflow for developing [Angular](https://angularjs.org) based applications (no matter what language you use - JavaScript or TypeScript)
+The goal of this tool is to provide the handy workflow for developing Angular based applications (no matter what language you use - JavaScript or TypeScript)
 and ensure the profound checking of the code quality at the same time.
-The module orchestrates a collection of Gulp build functionality into a single npm dependency
+The module orchestrates a collection of [Gulp](http://gulpjs.com) build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
 The project includes a sample application to make it possible to test the build setup.
@@ -28,6 +28,7 @@ The `index.html` in the `app` folder is especially important - it contains marke
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change,
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application,
  Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time,
+- contains the mock server based on `YAML/JSON/JS` configuration files. Refer to the [Mock Server](#mocks) section for usage guidelines.
 - contains the locked set of specific `npm` dependencies, to minimize "the dependency hell".
 
 ## Structure requirements for applications supported
@@ -46,6 +47,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- .eslint.rc.yml
     |---- /bower_components
     |---- /target
+    |---- /mocks
     |     |---- dist
     |     |---- tmp
     |---- gulpfile.js
@@ -54,7 +56,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |---- .eslint.rc.yml
     |---- .scsslint.rc.yml
     |---- tslint.json
-	|---- .htmllint.rc`
+    |---- .htmllint.rc
 
 which means:
 
@@ -66,6 +68,7 @@ which means:
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
+- `mocks` : contains your mock services definitions.
 - `gulpfile.js` : the build files importing the [Gulp](http://gulpjs.com) tasks defined in the `node_modules/gript`
 - `bower.json` : contains [Bower](http://bower.io) dependencies
 - `.eslint.rc.yml` : contains rules for es-linter ([ESLint](http://eslint.org)). Cascading rules configuration is possible.
@@ -120,6 +123,16 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                    port: 35729
                }
            },
+           mocks: {
+			   location: 'localhost',
+			   stubs: 8050,
+			   tls: 8443,
+			   admin: 8051,
+			   relativeFilesPath: true,
+			   files: [
+				   'mocks/*.{json,yaml,js}'
+			   ]
+		   },
            typeScript: {
                compilerOptions: {
                    noImplicitAny: true,
@@ -151,7 +164,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                    preserveComments: false
                }
            }
-       };
+	   };
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
@@ -211,6 +224,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
+- **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
 
 You can list all of the available tasks by running the command:
 
@@ -233,8 +247,8 @@ For your convenience, Gript contains sample configuration files for all linters 
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
  to get the TypeScript types definitions. They are being downloaded by [Bower](http://bower.io/) into the `bower_components/DefinitelyTyped` directory, which is excluded from the TypeScript linting.
  The resulting JavaScript files will be placed in the `target/tmp/js` directory.
-You can customize your TypeScript compile options using the `typeScript` section in the `gulpfile.js`.
-Refer to the [Compiler-Options](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options) section in the TypeScript documentation for available options.
+ You can customize your TypeScript compile options using the `typeScript` section in the `gulpfile.js`.
+ Refer to the [Compiler-Options](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options) section in the TypeScript documentation for available options.
 
 <a name="minification"></a>
 ## Minification
@@ -273,6 +287,19 @@ The result will be injected into `target/dist/index.html` according to these inj
 - `<!-- build:js scripts/main.js --><!-- endbuild -->`: your own scripts
 
 Refer to `app/index.html` or `sample_configs/index.html` for an example how to define these markings.
+
+<a name="mocks"></a>
+## Mock server
+The mock server implementation in Gript is using [stubby4node](https://github.com/mrak/stubby4node).
+It's a highly configurable server for mocking/stubbing external systems during development.
+Gript takes endpoint descriptors in the form of a YAML or JSON files that tell it how to respond to incoming requests.
+For each incoming request, configured endpoints are checked in-order until a match is found.
+The endpoints can contain regular expressions, any of HTTP methods, queries, headers, dynamic token interpolation, defined fake response latency and so on.
+The response can be parametrized or served from a file - the possiblities are endless.
+Refer to the Stubby [endpoint configuration](https://github.com/mrak/stubby4node#endpoint-configuration) section for assistance how to define your own endpoints.
+By default, the `mocks` Gulp task will start together with the `server` and `server:dist` tasks.
+Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get your started.
+You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
 
 ## External dependencies
 
