@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "^/account/(\\d{5})/category/([a-zA-Z]+)",
+    "query": {
+      "date": "([a-zA-Z]+)"
+    },
+    "headers": {
+      "custom-header": "[0-9]+"
+    },
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "body": "Returned invoice number# <% url[1] %> in category '<% url[2] %>' on the date '<% query.date[1] %>', using header custom-header <% headers.custom-header[0] %>"
+  }
+}

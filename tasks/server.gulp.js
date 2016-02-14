@@ -14,12 +14,12 @@ module.exports = function (gulp) {
             }
         };
 
-    gulp.task('server', function () {
+    gulp.task('server', ['mocks'], function () {
         var options = _.merge({}, defaults, gulp.config.server);
         connect.server(options);
     });
 
-    gulp.task('server:dist', function () {
+    gulp.task('server:dist', ['mocks'], function () {
         connect.server({
             root: 'target/dist'
         });

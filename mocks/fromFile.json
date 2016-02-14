@@ -1,0 +1,11 @@
+{
+  "request": {
+    "url": "^/fromFile",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "content-type": "application/json",
+    "file": "data/example.json"
+  }
+}
