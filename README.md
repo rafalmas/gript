@@ -1,4 +1,9 @@
 # GRIPT - Angular Gulp Sass Typescript application builder
+
+[![npm](https://img.shields.io/npm/v/gript.svg)]()
+[![npm](https://img.shields.io/npm/dm/gript.svg)]()
+[![npm](https://img.shields.io/npm/dt/gript.svg)]()
+
 <img align="right" src="package/img/gript_logo_big.png">
 
 This project is the basis for the creation of an [npm module](https://www.npmjs.com/package/gript) containing a "complete" [Gulp](http://gulpjs.com) build setup for
@@ -298,14 +303,14 @@ The endpoints can contain regular expressions, any of HTTP methods, queries, hea
 The response can be parametrized or served from a file - the possiblities are endless.
 Refer to the Stubby [endpoint configuration](https://github.com/mrak/stubby4node#endpoint-configuration) section for assistance how to define your own endpoints.
 By default, the `mocks` Gulp task will start together with the `server` and `server:dist` tasks.
-Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get your started.
+Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get you started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
-To create new mocked service, simply put the new definition of the endpoint in the `mocks` folder.
+To create new mocked service, simply put the new definition of the endpoint into the `mocks` folder.
 
 ## External dependencies
 
-Gript makes use of [node-gyp] (https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
-To use [node-gyp] (https://github.com/nodejs/node-gyp) you will need some external dependencies, depending on your platform:
+Gript makes use of [node-gyp](https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.
+To use [node-gyp](https://github.com/nodejs/node-gyp) you will need some external dependencies, depending on your platform:
 
 **On Unix**
 
