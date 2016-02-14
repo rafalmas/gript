@@ -111,6 +111,7 @@ There are also example configuration files for `Bower`, `es-lint`, and `scss-lin
 #### Using the sample Gulp file
 This `sample_configs/gulpfile.js` can be used as a starter for your project. This is where you define the dependency to `gript` module and specify the options for the build process of your own application:
 
+```javascript
        var gulp = require('gulp');
        
        require('gript')(gulp);
@@ -170,6 +171,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            }
 	   };
+```
 
 Be sure to set values for the configuration in your copy of the `sample_configs/gulpfile.js`.
 
@@ -182,7 +184,7 @@ These values are:
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
 
 You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
-This gives you to have a very simple build configuration as a starting scenario.
+This gives you a very simple build configuration as a starting scenario.
 
 NOTE: If you have no tests the
 
@@ -264,7 +266,7 @@ You can customize the minification options by modyfying the `minification` secti
 - CSS files will be minified with [cssnano](https://github.com/ben-eb/cssnano). Refer to the [documentation](http://cssnano.co/optimisations/) for possible optimisations.
 - JavaScript will be compressed with [UglifyJS](http://lisperator.net/uglifyjs/). Refere to the [gulp-uglify](https://www.npmjs.com/package/gulp-uglify) module docs for help how to set options.
 
-Note: too agressive optimisations will break your build or make your app useless. Gript includes the default set of options, which are pretty safe.
+:warning: Note: too agressive optimisations will break your build or make your app useless. Gript includes the default set of options, which are pretty safe.
 
 <a name="injection"></a>
 ## Compiled files injection
