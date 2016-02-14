@@ -47,9 +47,9 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- .eslint.rc.yml
     |---- /bower_components
     |---- /target
-    |---- /mocks
     |     |---- dist
     |     |---- tmp
+    |---- /mocks
     |---- gulpfile.js
     |---- bower.json
     |---- package.json
@@ -300,6 +300,7 @@ Refer to the Stubby [endpoint configuration](https://github.com/mrak/stubby4node
 By default, the `mocks` Gulp task will start together with the `server` and `server:dist` tasks.
 Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get your started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
+To create new mocked service, simply put the new definition of the endpoint in the `mocks` folder.
 
 ## External dependencies
 
