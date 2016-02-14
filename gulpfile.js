@@ -108,7 +108,7 @@ gulp.task('create-package', ['dist'], function () {
                 .pipe(replace('node_modules/sinon', 'node_modules/gript/node_modules/sinon'))
                 .pipe(gulp.dest('target/gript/tasks'));
         });
-    gulp.src(['package/sample_configs/*'])
+    gulp.src(['package/sample_configs/**/*'])
         .pipe(gulp.dest('target/gript/sample_configs'));
     gulp.src(['package/sample_configs/.*'])
         .pipe(gulp.dest('target/gript/sample_configs'));
