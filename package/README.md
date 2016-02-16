@@ -266,7 +266,7 @@ You can customize the minification options by modyfying the `minification` secti
 - CSS files will be minified with [cssnano](https://github.com/ben-eb/cssnano). Refer to the [documentation](http://cssnano.co/optimisations/) for possible optimisations.
 - JavaScript will be compressed with [UglifyJS](http://lisperator.net/uglifyjs/). Refere to the [gulp-uglify](https://www.npmjs.com/package/gulp-uglify) module docs for help how to set options.
 
-Note: too agressive optimisations will break your build or make your app useless. Gript includes the default set of options, which are pretty safe.
+:warning: Note: too agressive optimisations will break your build or make your app useless. Gript includes the default set of options, which are pretty safe.
 
 <a name="injection"></a>
 ## Compiled files injection
@@ -325,9 +325,10 @@ To use [node-gyp](https://github.com/nodejs/node-gyp) you will need some externa
 - python (v2.7 recommended, v3.x.x is not supported). It's already installed by default on Mac OS X.
 - [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12)
 - You also need to install the Command Line Tools via Xcode. You can find this under the menu _Xcode -> Preferences -> Downloads_. (This step will install gcc and the related toolchain containing make)
-- for scss-lint to work properly, you need `scss-lint` Ruby gem installed:
+- for scss-lint to work properly, you need `scss-lint` and `scss_lint_reporter_checkstyle` Ruby gem installed:
 
         $ gem install scss_lint
+        $ gem install scss_lint_reporter_checkstyle
 
 **Windows**
 

@@ -31,6 +31,7 @@ module.exports = function (gulp) {
     gulp.task('lint-scss', function () {
         return gulp.src(scssFiles)
             .pipe(scsslint({
+                'reporterOutputFormat': 'Checkstyle',
                 'filePipeOutput': 'scss-lint-result.xml'
             }))
             .pipe(gulp.dest('target'));
