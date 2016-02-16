@@ -116,6 +116,7 @@ module.exports = function (gulp) {
     gulp.task('images', function () {
         return gulp.src('app/**/img/**/*')
             .pipe(gulp.dest('target/dist'))
+            .pipe(gulp.dest('target/tmp'))
             .pipe(size());
     });
 
