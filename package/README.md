@@ -256,7 +256,7 @@ During the linting process, Gript generates Checkstyle-like XML reports in the `
 - `scss-lint-result.xml`
 - `ts-lint-result.xml`
 
-You can make use of them in you continous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
+You can make use of them in your continous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
