@@ -249,6 +249,14 @@ The number of configuration files are being used to customize the linting option
 - `.htmllintrc` contains setup for [htmllint](https://github.com/htmllint). Refer to the [options](https://github.com/htmllint/htmllint/wiki/Options) for possible settings.
 
 For your convenience, Gript contains sample configuration files for all linters in the `sample_configs` directory.
+During the linting process, Gript generates Checkstyle-like XML reports in the `target` directory:
+
+- `es-lint-result.xml`
+- `html-lint-result.xml`
+- `scss-lint-result.xml`
+- `ts-lint-result.xml`
+
+You can make use of them in you continous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)

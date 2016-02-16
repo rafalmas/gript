@@ -1,17 +1,48 @@
 'use strict';
 
 module.exports = function (gulp) {
-
     var eslint = require('gulp-eslint'),
         fs = require('fs'),
+        xml = require('xmlbuilder'),
         util = require('gulp-util'),
         scsslint = require('gulp-scss-lint'),
         tslint = require('gulp-tslint'),
         htmlLint = require('gulp-htmllint'),
+        _ = require('lodash'),
         srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/patch/**/*'],
         scssFiles = 'app/**/*.scss',
         tsFiles = 'app/**/*.ts',
-        htmlFiles = 'app/**/*.html';
+        htmlFiles = 'app/**/*.html',
+        tsReportFilename = 'target/ts-lint-result.xml',
+        htmlReportFilename = 'target/html-lint-result.xml',
+        tsLintReportFile,
+        htmlLintReportFile,
+        htmlReport,
+        tsReport,
+        reportIssues = function (filename, issues, report, msgProperty, lineProperty, columnProperty) {
+            var fileElement;
+            if (issues.length > 0) {
+                fileElement = report.ele('file');
+                issues.forEach(function (issue) {
+                    var msg = _.get(issue, msgProperty),
+                        line = _.get(issue, lineProperty),
+                        column = _.get(issue, columnProperty);
+                    util.log(filename + ": " + util.colors.red(msg) + " line " + line + " col. " + column);
+                    fileElement.ele('error', {
+                        'message': msg,
+                        'line': line,
+                        'severity': 'error'
+                    });
+                });
+                fileElement.att('name', filename);
+            }
+        },
+        reportTypeScriptIssues = function (issues, file) {
+            reportIssues(file.path, issues, tsReport, 'failure', 'startPosition.line', 'startPosition.position');
+        },
+        reportHtmlIssues = function (filepath, issues) {
+            reportIssues(filepath, issues, htmlReport, 'msg', 'line', 'column');
+        };
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
 
@@ -31,37 +62,45 @@ module.exports = function (gulp) {
     gulp.task('lint-scss', function () {
         return gulp.src(scssFiles)
             .pipe(scsslint({
+                'reporterOutputFormat': 'Checkstyle',
                 'filePipeOutput': 'scss-lint-result.xml'
             }))
             .pipe(gulp.dest('target'));
     });
 
     gulp.task('lint-ts', function () {
-        return gulp.src(tsFiles)
-            .pipe(tslint())
-            .pipe(tslint.report('prose'));
+        fs.unlink(tsReportFilename, function () {
+            tsLintReportFile = fs.createWriteStream(tsReportFilename);
+            tsReport = xml.create('checkstyle');
+            gulp.src(tsFiles)
+                .on('end', function () {
+                    tsLintReportFile.write(tsReport.doc().end({pretty: true}));
+                    tsLintReportFile.end();
+                })
+                .pipe(tslint())
+                .pipe(tslint.report(reportTypeScriptIssues, {
+                    summarizeFailureOutput: true,
+                    emitError: false
+                }));
+        });
     });
 
-    function htmllintReporter(filepath, issues) {
-        if (issues.length > 0) {
-            issues.forEach(function (issue) {
-                util.log(
-                    util.colors.red('[html-lint] ') +
-                    util.colors.white(filepath + ' [' + issue.line + ',' + issue.column + ']: ') +
-                    util.colors.red('(' + issue.code + ') ' + issue.msg)
-                );
-            });
-        }
-    }
-
     gulp.task('lint-html', function () {
-        return gulp.src(htmlFiles)
-            .pipe(htmlLint({}, htmllintReporter));
+        fs.unlink(htmlReportFilename, function () {
+            htmlLintReportFile = fs.createWriteStream(htmlReportFilename);
+            htmlReport = xml.create('checkstyle');
+            gulp.src(htmlFiles)
+                .on('end', function () {
+                    htmlLintReportFile.write(htmlReport.doc().end({pretty: true}));
+                    htmlLintReportFile.end();
+                })
+                .pipe(htmlLint({failOnError: false}, reportHtmlIssues));
+        });
     });
 
     gulp.task('lint-html-index', function () {
         return gulp.src("app/index.html")
-            .pipe(htmlLint({}, htmllintReporter));
+            .pipe(htmlLint({failOnError: false}));
     });
 };
 
