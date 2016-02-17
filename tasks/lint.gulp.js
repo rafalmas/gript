@@ -5,6 +5,7 @@ module.exports = function (gulp) {
         fs = require('fs'),
         xml = require('xmlbuilder'),
         util = require('gulp-util'),
+        path = require('path'),
         scsslint = require('gulp-scss-lint'),
         tslint = require('gulp-tslint'),
         htmlLint = require('gulp-htmllint'),
@@ -19,6 +20,7 @@ module.exports = function (gulp) {
         htmlLintReportFile,
         htmlReport,
         tsReport,
+        projectRoot = process.cwd(),
         reportIssues = function (filename, issues, report, msgProperty, lineProperty, columnProperty) {
             var fileElement;
             if (issues.length > 0) {
@@ -62,8 +64,9 @@ module.exports = function (gulp) {
     gulp.task('lint-scss', function () {
         return gulp.src(scssFiles)
             .pipe(scsslint({
-                'reporterOutputFormat': 'Checkstyle',
-                'filePipeOutput': 'scss-lint-result.xml'
+                config: path.join(projectRoot, '.scss-lint.yml'),
+                reporterOutputFormat: 'Checkstyle',
+                filePipeOutput: 'scss-lint-result.xml'
             }))
             .pipe(gulp.dest('target'));
     });
@@ -94,13 +97,19 @@ module.exports = function (gulp) {
                     htmlLintReportFile.write(htmlReport.doc().end({pretty: true}));
                     htmlLintReportFile.end();
                 })
-                .pipe(htmlLint({failOnError: false}, reportHtmlIssues));
+                .pipe(htmlLint({
+                    config: path.join(projectRoot, '.htmllintrc'),
+                    failOnError: false
+                }, reportHtmlIssues));
         });
     });
 
     gulp.task('lint-html-index', function () {
         return gulp.src("app/index.html")
-            .pipe(htmlLint({failOnError: false}));
+            .pipe(htmlLint({
+                config: path.join(projectRoot, '.htmllintrc'),
+                failOnError: false
+            }));
     });
 };
 
