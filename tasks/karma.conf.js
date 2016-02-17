@@ -11,11 +11,16 @@ module.exports = function (config) {
         },
         reporters: ['progress', 'junit', 'coverage'],
         junitReporter: {
-            outputFile: 'target/test-results.xml'
+            outputDir: 'target',
+            outputFile: 'test-results.xml',
+            suite: '',
+            useBrowserName: false
         },
         coverageReporter: {
             type: 'cobertura',
-            dir: 'target/coverage/'
+            dir: 'target',
+            file: 'coverage-results.xml',
+            subdir: '.'
         },
         port: 9876,
         colors: true,
