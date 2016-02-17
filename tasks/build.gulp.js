@@ -9,6 +9,7 @@ module.exports = function (gulp) {
         fs = require('fs'),
         gulpInject = require('gulp-inject'),
         htmlmin = require('gulp-htmlmin'),
+        modernizr = require('gulp-modernizr'),
         naturalSort = require('gulp-natural-sort'),
         ngHtml2js = require('gulp-ng-html2js'),
         path = require('path'),
@@ -120,7 +121,15 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
+    gulp.task('modernizr', function () {
+        gulp.src(['app/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
+            .pipe(modernizr('js/modernizr.js'))
+            .pipe(gulp.dest('target/dist'))
+            .pipe(gulp.dest('target/tmp'))
+            .pipe(size());
+    });
+
+    gulp.task('build', ['version', 'modernizr', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
         callback();
     });
 
