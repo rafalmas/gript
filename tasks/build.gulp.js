@@ -30,7 +30,7 @@ module.exports = function (gulp) {
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
-        sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js', callback);
+        sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js-and-modernizr', callback);
     });
 
     gulp.task('inject-bower', ['bower-download'], function () {
@@ -84,7 +84,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('inject-js', ['ts', 'modernizr'], function () {
+    gulp.task('inject-js', ['ts'], function () {
         return gulp.src('app/index.html')
             .pipe(gulpInject(
                 gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*test.js'])
@@ -121,8 +121,8 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('modernizr', function () {
-        gulp.src(['app/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
+    gulp.task('inject-js-and-modernizr', ['inject-js'], function () {
+        gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
             .pipe(modernizr('js/modernizr.js', {options: ['addTest', 'html5printshiv', 'testProp', 'fnBind', 'setClasses']}))
             .pipe(gulp.dest('target/dist'))
             .pipe(gulp.dest('target/tmp'))
