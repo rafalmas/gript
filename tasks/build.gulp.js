@@ -122,7 +122,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('inject-js-and-modernizr', ['inject-js'], function () {
-        gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
+        return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
             .pipe(modernizr('js/modernizr.js', {options: ['addTest', 'html5printshiv', 'testProp', 'fnBind', 'setClasses']}))
             .pipe(gulp.dest('target/dist'))
             .pipe(gulp.dest('target/tmp'))
