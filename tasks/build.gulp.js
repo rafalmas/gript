@@ -9,7 +9,6 @@ module.exports = function (gulp) {
         fs = require('fs'),
         gulpInject = require('gulp-inject'),
         htmlmin = require('gulp-htmlmin'),
-        modernizr = require('gulp-modernizr'),
         naturalSort = require('gulp-natural-sort'),
         ngHtml2js = require('gulp-ng-html2js'),
         path = require('path'),
@@ -116,14 +115,6 @@ module.exports = function (gulp) {
 
     gulp.task('images', function () {
         return gulp.src('app/**/img/**/*')
-            .pipe(gulp.dest('target/dist'))
-            .pipe(gulp.dest('target/tmp'))
-            .pipe(size());
-    });
-
-    gulp.task('modernizr', function () {
-        return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
-            .pipe(modernizr('js/modernizr.js', {options: ['addTest', 'html5printshiv', 'testProp', 'fnBind', 'setClasses']}))
             .pipe(gulp.dest('target/dist'))
             .pipe(gulp.dest('target/tmp'))
             .pipe(size());

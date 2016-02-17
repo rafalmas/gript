@@ -59,5 +59,16 @@ gulp.config = {
             mangle: true,
             preserveComments: false
         }
+    },
+    modernizr: {
+        classPrefix: 'has-',
+        options: [
+            'addTest',
+            'html5printshiv',
+            'testProp',
+            'fnBind',
+            'setClasses'
+        ],
+        'feature-detects': []
     }
 };

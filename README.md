@@ -170,7 +170,17 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                    mangle: true,
                    preserveComments: false
                }
-           }
+           },
+           modernizr: {
+			   options: [
+				   'addTest',
+				   'html5printshiv',
+				   'testProp',
+				   'fnBind',
+				   'setClasses'
+			   ],
+			   'feature-detects': []
+		   }
 	   };
 ```
 
@@ -233,6 +243,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
+- **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`  
 
 You can list all of the available tasks by running the command:
 
@@ -259,6 +270,11 @@ During the linting process, Gript generates Checkstyle-like XML reports in the `
 
 You can make use of them in your continuous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
 
+## Modernizr
+During the build process, Gript will analyse your JavaScript and CSS files and generate custom [Modernizr](http://modernizr.com).
+The custom script will be injected into the `index.html`.
+You can customize the script generation by changing options in the `modernizr` section of the `gulpfile.js`.
+Refer to the [Modernizr build options](https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json) for possible values.
 
 ## TypeScript compilation
 If you develop your app in the TypeScript, files will be compiled and then injected. The example setup uses [DefinitelyTyped](http://definitelytyped.org/)
