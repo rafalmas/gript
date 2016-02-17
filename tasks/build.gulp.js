@@ -84,7 +84,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('inject-js', ['ts'], function () {
+    gulp.task('inject-js', ['ts', 'modernizr'], function () {
         return gulp.src('app/index.html')
             .pipe(gulpInject(
                 gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*test.js'])
@@ -129,7 +129,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'modernizr', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
+    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
         callback();
     });
 
