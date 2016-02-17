@@ -123,7 +123,7 @@ module.exports = function (gulp) {
 
     gulp.task('modernizr', function () {
         gulp.src(['app/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
-            .pipe(modernizr('js/modernizr.js'))
+            .pipe(modernizr('js/modernizr.js', {options: ['addTest', 'html5printshiv', 'testProp', 'fnBind', 'setClasses']}))
             .pipe(gulp.dest('target/dist'))
             .pipe(gulp.dest('target/tmp'))
             .pipe(size());
