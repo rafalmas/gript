@@ -30,7 +30,7 @@ module.exports = function (gulp) {
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
-        sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js-and-modernizr', callback);
+        sequence('inject-bower', 'inject-styles', 'inject-partials', 'inject-js', 'modernizr', callback);
     });
 
     gulp.task('inject-bower', ['bower-download'], function () {
@@ -121,7 +121,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('inject-js-and-modernizr', ['inject-js'], function () {
+    gulp.task('modernizr', function () {
         return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss'])
             .pipe(modernizr('js/modernizr.js', {options: ['addTest', 'html5printshiv', 'testProp', 'fnBind', 'setClasses']}))
             .pipe(gulp.dest('target/dist'))
