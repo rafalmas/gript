@@ -112,13 +112,19 @@ module.exports = function (gulp) {
                     htmlLintReportFile.write(htmlReport.doc().end({pretty: true}));
                     htmlLintReportFile.end();
                 })
-                .pipe(htmlLint({failOnError: false}, reportHtmlIssues));
+                .pipe(htmlLint({
+                    config: path.join(projectRoot, '.htmllintrc'),
+                    failOnError: false
+                }, reportHtmlIssues));
         });
     });
 
     gulp.task('lint-html-index', function () {
         return gulp.src("app/index.html")
-            .pipe(htmlLint({failOnError: false}));
+            .pipe(htmlLint({
+                config: path.join(projectRoot, '.htmllintrc'),
+                failOnError: false
+            }));
     });
 };
 
