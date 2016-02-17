@@ -16,10 +16,13 @@ module.exports = function (gulp) {
         htmlFiles = 'app/**/*.html',
         tsReportFilename = 'target/ts-lint-result.xml',
         htmlReportFilename = 'target/html-lint-result.xml',
+        sassReportFilename = 'target/scss-lint-result.xml',
         tsLintReportFile,
         htmlLintReportFile,
+        sassLintReportFile,
         htmlReport,
         tsReport,
+        sassReport,
         projectRoot = process.cwd(),
         reportIssues = function (filename, issues, report, msgProperty, lineProperty, columnProperty) {
             var fileElement;
@@ -44,6 +47,9 @@ module.exports = function (gulp) {
         },
         reportHtmlIssues = function (filepath, issues) {
             reportIssues(filepath, issues, htmlReport, 'msg', 'line', 'column');
+        },
+        reportSassIssues = function (file) {
+            reportIssues(file.path, file.scsslint.issues, sassReport, 'reason', 'line', 'column');
         };
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
@@ -62,13 +68,22 @@ module.exports = function (gulp) {
     });
 
     gulp.task('lint-scss', function () {
-        return gulp.src(scssFiles)
-            .pipe(scsslint({
-                config: path.join(projectRoot, '.scss-lint.yml'),
-                reporterOutputFormat: 'Checkstyle',
-                filePipeOutput: 'scss-lint-result.xml'
-            }))
-            .pipe(gulp.dest('target'));
+        var stream;
+        fs.unlink(sassReportFilename, function () {
+            sassLintReportFile = fs.createWriteStream(sassReportFilename);
+            sassReport = xml.create('checkstyle');
+            stream = gulp.src(scssFiles)
+                .pipe(scsslint({
+                    config: path.join(projectRoot, '.scss-lint.yml'),
+                    customReport: reportSassIssues
+                }));
+
+            stream.on('end', function () {
+                sassLintReportFile.write(sassReport.doc().end({pretty: true}));
+                sassLintReportFile.end();
+            });
+
+        });
     });
 
     gulp.task('lint-ts', function () {
@@ -80,7 +95,7 @@ module.exports = function (gulp) {
                     tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                     tsLintReportFile.end();
                 })
-                .pipe(tslint())
+                .pipe(tslint({configuration: path.join(projectRoot, 'tslint.json')}))
                 .pipe(tslint.report(reportTypeScriptIssues, {
                     summarizeFailureOutput: true,
                     emitError: false
