@@ -1,4 +1,4 @@
-rd /s /q app\bower_components
+rd /s /q bower_components
 rd /s /q appdata
 rd /s /q coverage
 rd /s /q node_modules

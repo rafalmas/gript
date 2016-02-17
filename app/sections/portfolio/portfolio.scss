@@ -11,3 +11,24 @@
 .pale {
     color: #add8ee !important;
 }
+
+.no-mediaqueries, .no-flexbox {
+    .browser-warning {
+        color: red;
+        font-weight: bold;
+        text-align: center;
+        font-size: 20px;
+    }
+    .no-browser-warning {
+        display: none;
+    }
+}
+
+.mediaqueries.flexbox {
+    .browser-warning {
+        display: none;
+    }
+    .no-browser-warning {
+        display: block;
+    }
+}
