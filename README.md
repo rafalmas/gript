@@ -29,6 +29,7 @@ The `index.html` in the `app` folder is especially important - it contains marke
 - unit tests performed using [Karma](https://karma-runner.github.io) and [PhantomJS](http://phantomjs.org) (tests can be written in JavaScript or TypeScript),
 - unit testing coverage metered by [Istanbul](https://github.com/gotwarlost/istanbul),
 - HTML partials pre-loading into the Angular `$templateCache`,
+- includes custom generated [Modernizr](https://modernizr.com) script
 - full concatenation/minification for all production JS and CSS files,
 - Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change,
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application,
