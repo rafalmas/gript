@@ -74,7 +74,7 @@ module.exports = function (gulp) {
             scssReport = xml.create('checkstyle');
             stream = gulp.src(scssFiles)
                 .pipe(scsslint({
-                    config: path.join(projectRoot, '.scss-lint.yml'),
+                    config: JSON.stringify(path.join(projectRoot, '.scss-lint.yml')),
                     customReport: reportSassIssues
                 }));
 
@@ -127,5 +127,3 @@ module.exports = function (gulp) {
             }));
     });
 };
-
-
