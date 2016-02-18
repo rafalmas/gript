@@ -19,10 +19,10 @@ module.exports = function (gulp) {
         sassReportFilename = 'target/scss-lint-result.xml',
         tsLintReportFile,
         htmlLintReportFile,
-        sassLintReportFile,
+        scssLintReportFile,
         htmlReport,
         tsReport,
-        sassReport,
+        scssReport,
         projectRoot = process.cwd(),
         reportIssues = function (filename, issues, report, msgProperty, lineProperty, columnProperty) {
             var fileElement;
@@ -49,7 +49,7 @@ module.exports = function (gulp) {
             reportIssues(filepath, issues, htmlReport, 'msg', 'line', 'column');
         },
         reportSassIssues = function (file) {
-            reportIssues(file.path, file.scsslint.issues, sassReport, 'reason', 'line', 'column');
+            reportIssues(file.path, file.scsslint.issues, scssReport, 'reason', 'line', 'column');
         };
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
@@ -70,8 +70,8 @@ module.exports = function (gulp) {
     gulp.task('lint-scss', function () {
         var stream;
         fs.unlink(sassReportFilename, function () {
-            sassLintReportFile = fs.createWriteStream(sassReportFilename);
-            sassReport = xml.create('checkstyle');
+            scssLintReportFile = fs.createWriteStream(sassReportFilename);
+            scssReport = xml.create('checkstyle');
             stream = gulp.src(scssFiles)
                 .pipe(scsslint({
                     config: path.join(projectRoot, '.scss-lint.yml'),
@@ -79,8 +79,8 @@ module.exports = function (gulp) {
                 }));
 
             stream.on('end', function () {
-                sassLintReportFile.write(sassReport.doc().end({pretty: true}));
-                sassLintReportFile.end();
+                scssLintReportFile.write(scssReport.doc().end({pretty: true}));
+                scssLintReportFile.end();
             });
 
         });

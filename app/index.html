@@ -20,15 +20,21 @@
 </head>
 
 <body class="no-select">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="navigationController as vm">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" data-collapse="vm.navbar">
-                <ul class="nav navbar-nav">
-                    <li ng-class="{ active: vm.isActive('/welcome')}"><a tabindex="1" href="#welcome" title="Home"><fa name="home"></fa></a></li>
-                    <li ng-class="{ active: vm.isActive('/portfolio')}"><a href="#portfolio" tabindex="2">Portfolio</a></li>
-                    <li ng-class="{ active: vm.isActive('/empty')}"><a href="#empty" tabindex="3">Empty</a></li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-default" role="navigation" ng-controller="navigationController as vm">
+        <div class="collapse navbar-collapse" data-collapse="vm.navbar">
+            <ul class="nav navbar-nav navbar-left">
+                <li ng-class="{ active: vm.isActive('/welcome')}"><a tabindex="1" href="#welcome" title="{{'tab.home' | translate}}"><fa name="home"></fa></a></li>
+                <li ng-class="{ active: vm.isActive('/portfolio')}"><a href="#portfolio" tabindex="2">{{'tab.portfolio' | translate}}</a></li>
+                <li ng-class="{ active: vm.isActive('/empty')}"><a href="#empty" tabindex="3">{{'tab.empty' | translate}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right nav-pills">
+                <li ng-class="{ active: vm.isLanguageActive('en_US')}">
+                    <a ng-click="vm.toggleLanguage('en_US')">EN</a>
+                </li>
+                <li ng-class="{ active: vm.isLanguageActive('pl_PL')}">
+                    <a ng-click="vm.toggleLanguage('pl_PL')">PL</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
