@@ -24,14 +24,14 @@ The `index.html` in the `app` folder is especially important - it contains marke
 
 - JavaScript validation using [ESLint](http://eslint.org),
 - TypeScript validation ([TSLint](http://palantir.github.io/tslint/)) and incremental compilation,
-- SASS validation ([scss-lint](https://github.com/brigade/scss-lint)) and compilation,
+- scss validation ([scss-lint](https://github.com/brigade/scss-lint)) and compilation,
 - HTML validation using [htmllint](https://github.com/htmllint/),
 - unit tests performed using [Karma](https://karma-runner.github.io) and [PhantomJS](http://phantomjs.org) (tests can be written in JavaScript or TypeScript),
 - unit testing coverage metered by [Istanbul](https://github.com/gotwarlost/istanbul),
 - HTML partials pre-loading into the Angular `$templateCache`,
 - includes custom generated [Modernizr](https://modernizr.com) script
 - full concatenation/minification for all production JS and CSS files,
-- Live-reload capability: web app is auto-refreshed if HTML, TypeScript or Sass files change,
+- Live-reload capability: web app is auto-refreshed if HTML, TypeScript or scss files change,
 - watch tasks: if your source files change, they will be checked for errors, compiled and then injected into your application,
  Gript uses [Chokidar](https://github.com/paulmillr/chokidar) which notices the changes instantly, keeping the CPU usage down at the same time,
 - contains the mock server based on `YAML/JSON/JS` configuration files. Refer to the [Mock Server](#mocks) section for usage guidelines.
@@ -48,6 +48,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- sections
     |     |---- img
     |     |---- styles
+    |     |---- resources
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
@@ -70,15 +71,16 @@ which means:
 - `app/sections` : contains the subsections of the application code
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
+- `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
-- `target/tmp` : contains generated files (compiled TypeScript, compiled Sass styles, Angular templates etc.)
+- `target/tmp` : contains generated files (compiled TypeScript, compiled scss styles, Angular templates etc.)
 - `target/dist` : contains app distribution package
 - `mocks` : contains your mock services definitions.
 - `gulpfile.js` : the build files importing the [Gulp](http://gulpjs.com) tasks defined in the `node_modules/gript`
 - `bower.json` : contains [Bower](http://bower.io) dependencies
 - `.eslint.rc.yml` : contains rules for es-linter ([ESLint](http://eslint.org)). Cascading rules configuration is possible.
-- `.scsslint.rc.yml` : contains rules for Sass linter ([scss-lint](https://github.com/brigade/scss-lint))
+- `.scsslint.rc.yml` : contains rules for scss linter ([scss-lint](https://github.com/brigade/scss-lint))
 - `tslint.json` : rules for the TypeScript linter ([TSLint](http://palantir.github.io/tslint/))
 - `.htmllint.rc` : rules for the HTML linter ([htmllint](https://github.com/htmllint))
 
@@ -205,7 +207,7 @@ command will fail, until you create your first piece of logic and its correspond
 
 ## Building your project
 
-The **default** task builds an application and then starts the development server. Your source code (TypeScript, HTML, Sass) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`.
+The **default** task builds an application and then starts the development server. Your source code (TypeScript, HTML, scss) will be watched for changes, and - if neccessary, compiled and injected into the `index.html`.
 Just by running
 
     gulp
@@ -218,13 +220,13 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
 - **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files.
-- **styles** : compiles Sass files
-- **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and Sass into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
+- **styles** : compiles scss files
+- **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and scss into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies
-    - **inject-styles** : compiles and injects Sass styles
+    - **inject-styles** : compiles and injects scss styles
     - **inject-partials** : compiles HTML partials into Angular's `$templateCache` and then injects them into the `index.html`
     - **inject-js** : complies the TypesScript and then injects all JavaScript files
-- **lint** : runs linters on the HTML, Sass, Javascript and TypeScript source files. Refer to the [Linting](#linting) section for possible options.
+- **lint** : runs linters on the HTML, scss, Javascript and TypeScript source files. Refer to the [Linting](#linting) section for possible options.
 	- **lint-js**
 	- **lint-scss**
 	- **lint-ts**
@@ -235,7 +237,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
     - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
     - **clean-js** : removes the `target/tmp/js` directory (compiled TypeScript files)
     - **clean-partials** : removes the `target/tmp/partials` directory (Angular's `$templateCache` Javascript files)
-    - **clean-styles** : removes the `target/tmp/styles` directory (compiled Sass files)
+    - **clean-styles** : removes the `target/tmp/styles` directory (compiled scss files)
     - **clean-bower** : removes the `bower_components` directory
 - **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
 - **images** : copies all image files into the `dist` directory
@@ -251,12 +253,12 @@ You can list all of the available tasks by running the command:
 
 <a name="linting"></a>
 ## Linting
-To ensure the profound checking of the code quality of your application, Gript will check all your HTML, Sass, TypeScript and JavaScript files.
+To ensure the profound checking of the code quality of your application, Gript will check all your HTML, scss, TypeScript and JavaScript files.
 The linting process is executed during the build, and is also included in the `watch` task, to re-lint the file on the fly, after you change it.
 The number of configuration files are being used to customize the linting options:
 
 - `.eslint.yml` contains configuration for the powerful JavaScript linter, the [ESLint](http://eslint.org). Refer to the [Options](http://eslint.org/docs/user-guide/configuring) section for avaialable options.
-- `.scss-lint.yml` contains configuration for Sass linter, the [scss-lint](https://github.com/brigade/scss-lint). Referer to the [Configuration](https://github.com/brigade/scss-lint#configuration) for options.
+- `.scss-lint.yml` contains configuration for scss linter, the [scss-lint](https://github.com/brigade/scss-lint). Referer to the [Configuration](https://github.com/brigade/scss-lint#configuration) for options.
 - `tslint.json` contains options for [TSLint](http://palantir.github.io/tslint/). Refer [here](http://palantir.github.io/tslint/rules/) for the description of rules.
 - `.htmllintrc` contains setup for [htmllint](https://github.com/htmllint). Refer to the [options](https://github.com/htmllint/htmllint/wiki/Options) for possible settings.
 
@@ -297,17 +299,17 @@ You can customize the minification options by modyfying the `minification` secti
 <a name="injection"></a>
 ## Compiled files injection
 
-By default, all TypeScript, Sass and HTML files will be compiled and injected into your app's `index.html` file.
+By default, all TypeScript, scss and HTML files will be compiled and injected into your app's `index.html` file.
 The `target/tmp` directory is the place for the compilation output:
 
 - `target/tmp/js` : will contain compiled TypeScript files
 - `target/tmp/partials` : will contain all HTML partials from your Angular app compiled into Angular `$templateCache`.
-- `target/tmp/styles` : will contain compiled Sass files
+- `target/tmp/styles` : will contain compiled scss files
 
 Compiled scripts and styles will then be injected into the app's `index.html` according to the injection markings:
 
 - `<!-- bower:css --><!-- endbower -->` : Bower CSS dependencies
-- `<!-- inject:css --><!-- endinject -->` : compiled Sass files
+- `<!-- inject:css --><!-- endinject -->` : compiled scss files
 - `<!-- bower:js --><!-- endbower -->` : Bower JS dependencies
 - `<!-- inject:js --><!-- endinject -->` : TypeScript files compiled into JS
 - `<!-- inject:partials --><!-- endinject -->` : HTML partials compiled into Angular's `$templateCache`.

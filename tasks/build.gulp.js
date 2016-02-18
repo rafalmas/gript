@@ -120,7 +120,14 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'lint-js'], function (callback) {
+    gulp.task('resources', function () {
+        return gulp.src('app/resources/**/*')
+            .pipe(gulp.dest('target/dist/resources'))
+            .pipe(gulp.dest('target/tmp/resources'))
+            .pipe(size());
+    });
+
+    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'resources', 'lint-js'], function (callback) {
         callback();
     });
 

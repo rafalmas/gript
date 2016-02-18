@@ -13,6 +13,8 @@
     "angular-resource": "~1.4",
     "angular-route": "~1.4",
     "angular-sanitize": "~1.4",
+    "angular-translate": "~2.9.1",
+    "angular-translate-loader-static-files": "~2.9.1",
     "bootstrap-sass-official": "~3.3"
   },
   "overrides": {

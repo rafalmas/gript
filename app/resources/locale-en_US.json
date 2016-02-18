@@ -1,0 +1,9 @@
+{
+  "tab.home": "Home",
+  "tab.portfolio": "Portfolio",
+  "tab.empty": "Empty",
+  "btn.toggle": "EN/PL",
+  "home.header": "GRIPT sample (Angular + TypeScript + Sass)",
+  "portfolio.header": "Portfolio example",
+  "portfolio.info": "Portfolio included as an example in Gript sample app."
+}
