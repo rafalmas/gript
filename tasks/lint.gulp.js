@@ -122,7 +122,7 @@ module.exports = function (gulp) {
     gulp.task('lint-html-index', function () {
         return gulp.src("app/index.html")
             .pipe(htmlLint({
-                config: JSON.stringify(path.join(projectRoot, '.htmllintrc')),
+                config: path.join(projectRoot, '.htmllintrc'),
                 failOnError: false
             }));
     });
