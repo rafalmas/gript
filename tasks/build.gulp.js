@@ -86,7 +86,7 @@ module.exports = function (gulp) {
     gulp.task('inject-js', function () {
         return gulp.src('app/index.html')
             .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js', 'target/tmp/js/all.js'])
+                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js', 'target/tmp/js/all.js', 'target/tmp/js/modernizr.js'])
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
