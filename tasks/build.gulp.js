@@ -84,9 +84,19 @@ module.exports = function (gulp) {
     });
 
     gulp.task('inject-js', function () {
+        //TypeScript compiled to JavaScript
         return gulp.src('app/index.html')
             .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js', 'target/tmp/js/all.js', 'target/tmp/js/modernizr.js'])
+                gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*Test.js', '!target/tmp/js/**/*test.js'])
+                    .pipe(naturalSort())
+                    .pipe(angularFilesort()),
+                {
+                    relative: true
+                }
+            ))
+            //JavaScript for those who don't use TypeScript
+            .pipe(gulpInject(
+                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js'])
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
@@ -119,7 +129,14 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'resources', 'lint-js'], function (callback) {
+    gulp.task('lib', function () {
+        return gulp.src('app/lib/**/*')
+            .pipe(gulp.dest('target/dist/lib'))
+            .pipe(gulp.dest('target/tmp/lib'))
+            .pipe(size());
+    });
+
+    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'resources', 'lib', 'lint-js'], function (callback) {
         callback();
     });
 
@@ -128,3 +145,4 @@ module.exports = function (gulp) {
         util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
     });
 };
+

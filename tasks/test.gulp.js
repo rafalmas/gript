@@ -24,7 +24,7 @@ module.exports = function (gulp) {
         }).start();
     });
 
-    gulp.task('get-sources', ['compile-tests'], function () {
+    gulp.task('get-sources', ['compile'], function () {
         return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
             .pipe(angularFilesort())
             .pipe(filenames('js'));

@@ -34,6 +34,7 @@ module Portfolio {
         isLanguageActive(language: string):boolean {
             return this.translate.use() === language;
         }
-
     }
+
+    angular.module('portfolio').controller('navigationController', Portfolio.NavigationController);
 }
