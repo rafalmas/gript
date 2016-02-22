@@ -84,7 +84,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('inject-js', function () {
-        //typescript
+        //typescript compiled to JavaScript
         return gulp.src('app/index.html')
             .pipe(gulpInject(
                 gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*Test.js', '!target/tmp/js/**/*test.js'])
