@@ -95,7 +95,7 @@ module.exports = function (gulp) {
                     tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                     tsLintReportFile.end();
                 })
-                .pipe(tslint({configuration: JSON.stringify(path.join(projectRoot, 'tslint.json'))}))
+                .pipe(tslint({configuration: path.join(projectRoot, 'tslint.json')}))
                 .pipe(tslint.report(reportTypeScriptIssues, {
                     summarizeFailureOutput: true,
                     emitError: false
@@ -113,7 +113,7 @@ module.exports = function (gulp) {
                     htmlLintReportFile.end();
                 })
                 .pipe(htmlLint({
-                    config: JSON.stringify(path.join(projectRoot, '.htmllintrc')),
+                    config: path.join(projectRoot, '.htmllintrc'),
                     failOnError: false
                 }, reportHtmlIssues));
         });

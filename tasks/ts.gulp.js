@@ -29,31 +29,14 @@ module.exports = function (gulp) {
     gulp.task('compile', ['lint-ts'], function () {
         var options = _.merge({}, defaults, gulp.config.typeScript),
             tsProject = ts.createProject({
-                compilerOptions: options,
-                out: 'all.js'
+                compilerOptions: options
             }),
-            tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*test.ts'])
+            tsResult = gulp.src(['app/**/*.ts'])
                 .pipe(sourcemaps.init())
                 .pipe(ts(tsProject));
 
         return tsResult.js
             .pipe(sourcemaps.write('maps'))
-            .pipe(gulp.dest('target/tmp/js'));
-    });
-
-    /**
-     * compile all typescript test files and sourcemaps from /app and output them to /target/tmp
-     */
-    gulp.task('compile-tests', function () {
-        var options = _.merge({}, defaults, gulp.config.typeScript),
-            tsProject = ts.createProject({
-                compilerOptions: options,
-                out: 'all_test.js'
-            }),
-            tsResult = gulp.src(['app/**/*Test.ts', 'app/**/*test.ts'])
-                .pipe(ts(tsProject));
-
-        return tsResult.js
             .pipe(gulp.dest('target/tmp/js'));
     });
 };
