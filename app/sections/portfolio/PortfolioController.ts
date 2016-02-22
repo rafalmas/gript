@@ -12,4 +12,6 @@ module Portfolio {
             this.portfolio = portfolioService.getPortfolio();
         }
     }
+
+    angular.module('portfolio').controller('portfolioController', Portfolio.PortfolioController);
 }

@@ -10,7 +10,7 @@ module.exports = function (gulp) {
         tslint = require('gulp-tslint'),
         htmlLint = require('gulp-htmllint'),
         _ = require('lodash'),
-        srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/patch/**/*'],
+        srcFiles = ['app/**/*.js', 'gulpfile.js', 'tasks/*.js', '!app/patch/**/*', '!app/lib/**/*', '!app/resources/**/*'],
         scssFiles = 'app/**/*.scss',
         tsFiles = 'app/**/*.ts',
         htmlFiles = 'app/**/*.html',
@@ -95,7 +95,7 @@ module.exports = function (gulp) {
                     tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                     tsLintReportFile.end();
                 })
-                .pipe(tslint({configuration: JSON.stringify(path.join(projectRoot, 'tslint.json'))}))
+                .pipe(tslint({configuration: path.join(projectRoot, 'tslint.json')}))
                 .pipe(tslint.report(reportTypeScriptIssues, {
                     summarizeFailureOutput: true,
                     emitError: false
@@ -113,7 +113,7 @@ module.exports = function (gulp) {
                     htmlLintReportFile.end();
                 })
                 .pipe(htmlLint({
-                    config: JSON.stringify(path.join(projectRoot, '.htmllintrc')),
+                    config: path.join(projectRoot, '.htmllintrc'),
                     failOnError: false
                 }, reportHtmlIssues));
         });
@@ -122,7 +122,7 @@ module.exports = function (gulp) {
     gulp.task('lint-html-index', function () {
         return gulp.src("app/index.html")
             .pipe(htmlLint({
-                config: JSON.stringify(path.join(projectRoot, '.htmllintrc')),
+                config: path.join(projectRoot, '.htmllintrc'),
                 failOnError: false
             }));
     });
