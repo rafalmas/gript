@@ -5,18 +5,22 @@ module.exports = function (config) {
     config.set({
         basePath: '../../../',
         frameworks: ['jasmine'],
-        files: ['**/*/*_test.js'],
-        exclude: ['**/*/bower_components'],
         preprocessors: {
-            'app/!(bower_components)/!(patch)/**/!(*_test).js': ['coverage']
+            'app/!(patch)/**/!(*_test).js': ['coverage'],
+            'target/tmp/js/**/!(all|*_test).js': ['coverage']
         },
         reporters: ['progress', 'junit', 'coverage'],
         junitReporter: {
-            outputFile: 'target/test-results.xml'
+            outputDir: 'target',
+            outputFile: 'test-results.xml',
+            suite: '',
+            useBrowserName: false
         },
         coverageReporter: {
             type: 'cobertura',
-            dir: 'target/coverage/'
+            dir: 'target',
+            file: 'cobertura-coverage.xml',
+            subdir: '.'
         },
         port: 9876,
         colors: true,

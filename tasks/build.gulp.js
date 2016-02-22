@@ -86,15 +86,7 @@ module.exports = function (gulp) {
     gulp.task('inject-js', function () {
         return gulp.src('app/index.html')
             .pipe(gulpInject(
-                gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*test.js'])
-                    .pipe(naturalSort())
-                    .pipe(angularFilesort()),
-                {
-                    relative: true
-                }
-            ))
-            .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js'])
+                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js', 'target/tmp/js/all.js'])
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
@@ -136,4 +128,3 @@ module.exports = function (gulp) {
         util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
     });
 };
-

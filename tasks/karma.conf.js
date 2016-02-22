@@ -19,7 +19,7 @@ module.exports = function (config) {
         coverageReporter: {
             type: 'cobertura',
             dir: 'target',
-            file: 'coverage-results.xml',
+            file: 'cobertura-coverage.xml',
             subdir: '.'
         },
         port: 9876,
