@@ -32,7 +32,7 @@ module.exports = function (gulp) {
                 livereload.reload();
             });
         });
-        watch(['!app/**/*Test.ts', '!app/**/*.*test.ts', 'app/**/*.ts'], watchOptions, function () {
+        watch(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*.*test.ts'], watchOptions, function () {
             gulp.start('inject-js', function () {
                 livereload.reload();
             });
