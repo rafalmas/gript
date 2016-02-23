@@ -272,7 +272,12 @@ During the linting process, Gript generates Checkstyle-like XML reports in the `
 - `scss-lint-result.xml`
 - `ts-lint-result.xml`
 
-You can make use of them in your continuous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
+The reports from tests execution and code coverage are also generated into the `target` directory:
+
+- `cobertura-coverage.xml`
+- `test-results.xml`
+
+You can use linting, test and coverage reports in your continuous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
 
 ## Modernizr
 During the build process, Gript will analyse your JavaScript and CSS files and generate custom [Modernizr](http://modernizr.com).

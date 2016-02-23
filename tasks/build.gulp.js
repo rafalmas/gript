@@ -26,6 +26,7 @@ module.exports = function (gulp) {
                 caseSensitive: true
             }
         },
+        javaScriptToInject = ['app/**/*.js', 'target/tmp/js/**/*.js', '!target/tmp/js/**/*Test.js', '!target/tmp/js/**/*test.js', '!app/**/*Test.js', '!app/**/*test.js'],
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
@@ -84,19 +85,9 @@ module.exports = function (gulp) {
     });
 
     gulp.task('inject-js', function () {
-        //TypeScript compiled to JavaScript
         return gulp.src('app/index.html')
             .pipe(gulpInject(
-                gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*Test.js', '!target/tmp/js/**/*test.js'])
-                    .pipe(naturalSort())
-                    .pipe(angularFilesort()),
-                {
-                    relative: true
-                }
-            ))
-            //JavaScript for those who don't use TypeScript
-            .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js'])
+                gulp.src(javaScriptToInject)
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
