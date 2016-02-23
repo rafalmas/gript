@@ -90,7 +90,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('inject-js', ['ts'], function () {
+    gulp.task('inject-js', ['test'], function () {
         return gulp.src('app/index.html')
             .pipe(gulpInject(
                 gulp.src(javaScriptToInject)

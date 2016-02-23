@@ -2,8 +2,7 @@
 
 module.exports = function (gulp) {
 
-    var sequence = require('run-sequence').use(gulp),
-        sourcemaps = require('gulp-sourcemaps'),
+    var sourcemaps = require('gulp-sourcemaps'),
         ts = require('gulp-typescript'),
         _ = require('lodash'),
         defaults = {
@@ -22,11 +21,7 @@ module.exports = function (gulp) {
     /**
      * compile all typescript files and sourcemaps from /app and output them to /target/tmp
      */
-    gulp.task('ts', function (callback) {
-        sequence('compile', 'test', callback);
-    });
-
-    gulp.task('compile', ['lint-ts'], function () {
+    gulp.task('ts', ['lint-ts'], function () {
         var options = _.merge({}, defaults, gulp.config.typeScript),
             tsProject = ts.createProject({
                 compilerOptions: options

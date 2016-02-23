@@ -23,7 +23,7 @@ module.exports = function (gulp) {
         }).start();
     });
 
-    gulp.task('get-sources', ['compile'], function () {
+    gulp.task('get-sources', ['ts'], function () {
         return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
             .pipe(filenames('js'));
     });

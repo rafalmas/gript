@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "Gulp Build Setup",
   "dependencies": {
     "bower": "1.7.7",
