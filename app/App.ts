@@ -9,6 +9,7 @@ module App {
     'use strict';
 
     var app = angular.module('gript', ['ngRoute', 'ui.bootstrap', 'picardy.fontawesome', 'pascalprecht.translate', 'portfolio']);
-    app.config(['$routeProvider', App.Routes.configureRoutes]);
-    app.config(['$translateProvider', App.Locales.configureLocales]);
+
+    app.config(Locales);
+    app.config(Routes);
 }
