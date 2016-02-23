@@ -3,7 +3,6 @@
 module.exports = function (gulp) {
 
     var bowerDeps,
-        angularFilesort = require('gulp-angular-filesort'),
         filenames = require("gulp-filenames"),
         Server = require('karma').Server,
         wiredep = require('wiredep');
@@ -26,7 +25,6 @@ module.exports = function (gulp) {
 
     gulp.task('get-sources', ['compile'], function () {
         return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
-            .pipe(angularFilesort())
             .pipe(filenames('js'));
     });
 };
