@@ -129,7 +129,10 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
            hostHeader: 'no-specified-hostHeader',
            url: 'http://no-specified-project-url',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
-           server: {
+           app: {
+			   configFile: 'app/config.json'
+		   },
+		   server: {
                port: 8080,
                host: 'localhost',
                livereload: {
@@ -249,7 +252,8 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
-- **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`  
+- **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
+- **config** : creates an angular constant for the module specified in `gulp.config.module` with the content of the json file placed at `app/config.json` or configured in `gulp.config.app.configFile`   
 
 You can list all of the available tasks by running the command:
 

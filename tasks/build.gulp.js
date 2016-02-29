@@ -133,7 +133,7 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'resources', 'lib', 'lint-js'], function (callback) {
+    gulp.task('build', ['config', 'version', 'inject', 'images', 'fonts', 'resources', 'lib', 'lint-js'], function (callback) {
         callback();
     });
 
