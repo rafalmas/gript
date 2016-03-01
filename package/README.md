@@ -15,6 +15,8 @@ and ensure the profound checking of the code quality at the same time.
 The module orchestrates a collection of [Gulp](http://gulpjs.com) build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
+The [Gript Newsgroup](https://groups.google.com/forum/#!forum/gript) is the place for announcements and discussion about Gript's features. Feel free to join.
+
 The project includes a sample application to make it possible to test the build setup.
 The local sample application exemplifies the needed structure for applications supported by the `gript` npm package.
 The sample application resides in the `app` folder.
