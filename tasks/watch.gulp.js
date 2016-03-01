@@ -44,7 +44,7 @@ module.exports = function (gulp) {
         });
         watch('app/**/*.scss', watchOptions, function () {
             gulp.start('inject-styles', function () {
-                livereload.reload();
+                livereload.reload('*.css');
             });
         });
         watch(['!app/index.html', 'app/**/*.html'], watchOptions, function () {
