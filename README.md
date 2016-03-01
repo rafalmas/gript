@@ -178,6 +178,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            },
            modernizr: {
+		       //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
 			   options: [
 				   'addTest',
 				   'html5printshiv',
