@@ -12,6 +12,9 @@ gulp.config = {
     hostHeader: 'no-specified-hostHeader',
     url: 'http://no-specified-project-url',
     repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
+	app: {
+        configFile: 'app/config.json'
+    },
     server: {
         port: 8080,
         host: 'localhost',
