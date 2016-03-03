@@ -25,9 +25,9 @@ gulp.config = {
     url: 'http://gript',
     repository: 'http://nykredit.github.com/gript.git',
     app: {
-		module: 'gript'
-	},
-	server: {
+        module: 'gript'
+    },
+    server: {
         port: 8080,
         host: 'localhost',
         livereload: {
