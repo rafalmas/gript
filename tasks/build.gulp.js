@@ -84,7 +84,7 @@ module.exports = function (gulp) {
         return gulp.src(['app/**/*.html', '!app/index.html'])
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
-                moduleName: gulp.config.module
+                moduleName: gulp.config.app.module
             }))
             .pipe(gulp.dest('target/tmp/partials'))
             .pipe(size());

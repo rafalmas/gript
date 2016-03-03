@@ -8,7 +8,7 @@ module.exports = function(gulp){
         
         gulp.src(src)
             .pipe(ngConstant({
-                name: gulp.config.module
+                name: gulp.config.app.module
             }))
             .pipe(gulp.dest('target/tmp/js'));
     });
