@@ -14,9 +14,11 @@ module.exports = function (gulp) {
         scssFiles = 'app/**/*.scss',
         tsFiles = 'app/**/*.ts',
         htmlFiles = 'app/**/*.html',
-        tsReportFilename = 'target/ts-lint-result.xml',
-        htmlReportFilename = 'target/html-lint-result.xml',
-        sassReportFilename = 'target/scss-lint-result.xml',
+        target = 'target',
+        tsReportFilename = path.join(target, 'ts-lint-result.xml'),
+        htmlReportFilename = path.join(target, 'html-lint-result.xml'),
+        sassReportFilename = path.join(target, 'scss-lint-result.xml'),
+        javascriptReportFilename = path.join(target, 'es-lint-result.xml'),
         tsLintReportFile,
         htmlLintReportFile,
         scssLintReportFile,
@@ -54,12 +56,16 @@ module.exports = function (gulp) {
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
 
+    function createDir(directoryName) {
+        if (!fs.existsSync(directoryName)) {
+            fs.mkdirSync(directoryName);
+        }
+    }
+
     gulp.task('lint-js', function () {
         var out;
-        if (!fs.existsSync('target')) {
-            fs.mkdirSync('target');
-        }
-        out = fs.createWriteStream('target/es-lint-result.xml');
+        createDir(target);
+        out = fs.createWriteStream(javascriptReportFilename);
         return gulp.src(srcFiles)
             .pipe(eslint())
             .pipe(eslint.format())
@@ -69,6 +75,7 @@ module.exports = function (gulp) {
 
     gulp.task('lint-scss', function () {
         var stream;
+        createDir(target);
         fs.unlink(sassReportFilename, function () {
             scssLintReportFile = fs.createWriteStream(sassReportFilename);
             scssReport = xml.create('checkstyle');
@@ -87,6 +94,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('lint-ts', function () {
+        createDir(target);
         fs.unlink(tsReportFilename, function () {
             tsLintReportFile = fs.createWriteStream(tsReportFilename);
             tsReport = xml.create('checkstyle');
@@ -104,6 +112,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('lint-html', function () {
+        createDir(target);
         fs.unlink(htmlReportFilename, function () {
             htmlLintReportFile = fs.createWriteStream(htmlReportFilename);
             htmlReport = xml.create('checkstyle');
