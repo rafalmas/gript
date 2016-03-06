@@ -200,7 +200,7 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 
 These values are:
 
-- `app.module` : the name of the project. It's also used in Angular `$templateCache` modules.
+- `app.module` : mandatory name of the project. It's being used as a module name when generating Angular modules, like `$templateCache` or constants modules.
 - `hostHeader` host header
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
@@ -256,7 +256,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
 - **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
-- **config** : creates an Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
+- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
 
 You can list all of the available tasks by running the command:
 

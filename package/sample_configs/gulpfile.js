@@ -12,8 +12,8 @@ gulp.config = {
     url: 'http://no-specified-project-url',
     repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
 	app: {
-        configFile: 'app/config.json',
-		module: 'myApp'
+        module: 'myApp',
+        configFile: 'app/config.json'
     },
     server: {
         port: 8080,

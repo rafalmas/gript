@@ -36,7 +36,7 @@ module.exports = function (gulp) {
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
-        sequence('config', 'inject-bower', 'inject-styles', 'inject-partials', 'modernizr', 'inject-js', callback);
+        sequence('check', 'config', 'inject-bower', 'inject-styles', 'inject-partials', 'modernizr', 'inject-js', callback);
     });
 
     gulp.task('inject-bower', ['bower-download'], function () {
@@ -79,13 +79,12 @@ module.exports = function (gulp) {
     });
 
     gulp.task('partials', ['lint-html'], function () {
-        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification),
-            moduleName = gulp.config.module !== 'undefined' ? gulp.config.module : gulp.config.app.module;
+        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
 
         return gulp.src(['app/**/*.html', '!app/index.html'])
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
-                moduleName: moduleName
+                moduleName: gulp.config.app.module
             }))
             .pipe(gulp.dest('target/tmp/partials'))
             .pipe(size());
