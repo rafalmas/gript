@@ -14,7 +14,7 @@ module.exports = function (gulp) {
     }
 
     /**
-     * The tasks cheks if gulpfile.js contains all mandatory configuration. Logs a message and stops the build.
+     * The task checks if gulpfile.js contains all mandatory configuration. Logs a message and stops the build.
      */
     gulp.task('check', function () {
         check('app');
