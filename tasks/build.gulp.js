@@ -79,12 +79,13 @@ module.exports = function (gulp) {
     });
 
     gulp.task('partials', ['lint-html'], function () {
-        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
+        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification),
+            moduleName = gulp.config.module !== 'undefined' ? gulp.config.module : gulp.config.app.module;
 
         return gulp.src(['app/**/*.html', '!app/index.html'])
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
-                moduleName: gulp.config.app.module
+                moduleName: moduleName
             }))
             .pipe(gulp.dest('target/tmp/partials'))
             .pipe(size());

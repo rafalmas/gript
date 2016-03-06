@@ -1,5 +1,5 @@
 {
     "moduleConfig": {
-		example: "This configuration should be placed at 'app/config.json'"
+		"example": "This configuration should be placed at 'app/config.json'"
     }
 }

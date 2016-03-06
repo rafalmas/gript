@@ -55,6 +55,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
+    |     |---- config.json
     |---- /bower_components
     |---- /target
     |     |---- dist
@@ -76,6 +77,7 @@ which means:
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
 - `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
+- `app/config.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled scss styles, Angular templates etc.)
@@ -94,7 +96,7 @@ To make use of the `gript` npm module define the dependency to `gript` in the `p
 
       "dependencies": {
           "gulp": "3.9.0",
-          "gript": "~0.0.9",
+          "gript": "~0.0.34",
           ....
 
 together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
@@ -198,7 +200,7 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 
 These values are:
 
-- `app.module` : the name of the project
+- `app.module` : the name of the project. It's also used in Angular `$templateCache` modules.
 - `hostHeader` host header
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
@@ -254,7 +256,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
 - **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
-- **config** : creates an angular constant for the module specified in `gulp.config.app.module` with the content of the json file placed at `app/config.json` or configured in `gulp.config.app.configFile`   
+- **config** : creates an Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
 
 You can list all of the available tasks by running the command:
 
