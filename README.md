@@ -131,8 +131,8 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
            url: 'http://no-specified-project-url',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
-			   configFile: 'app/config.json',
-			   module: 'yourApp'
+			   module: 'yourApp',
+			   configFile: 'app/config.json'
 		   },
 		   server: {
                port: 8080,
