@@ -2,7 +2,10 @@
 
 module.exports = function (gulp) {
     var _ = require('lodash'),
-        util = require('gulp-util');
+        fs = require('fs'),
+        path = require('path'),
+        util = require('gulp-util'),
+        projectRoot = process.cwd();
 
     function check(element) {
         if (!_.has(gulp.config, element)) {
@@ -13,11 +16,21 @@ module.exports = function (gulp) {
         }
     }
 
+    function checkFile(filename) {
+        if (!fs.existsSync(filename)) {
+            util.log('Your project is missing the file: ' + util.colors.red(filename) + '. Refer to the readme.md');
+            process.exit(1);
+        }
+    }
+
     /**
      * The task checks if gulpfile.js contains all mandatory configuration. Logs a message and stops the build.
      */
     gulp.task('check', function () {
         check('app');
         check('app.module');
+
+        checkFile(path.join(projectRoot, '.scss-lint.yml'));
+        checkFile(path.join(projectRoot, '.eslintrc.yml'));
     });
 };
