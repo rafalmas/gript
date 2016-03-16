@@ -37,18 +37,21 @@ module.exports = function (gulp) {
         };
 
     gulp.task('dist', function (callback) {
-        sequence('clean', 'appcache', callback);
+        sequence('clean', ['appcache-create','appcache-include'], callback);
     });
 
-    gulp.task('appcache', ['minify'], function () {
-        gulp.src(['target/dist/**/*'])
+    gulp.task('appcache-create', ['minify'], function () {
+        return gulp.src(['target/dist/**/*'])
             .pipe(appcache({
                 filename: 'app.manifest',
                 exclude: ['app.manifest', 'index.html'],
                 timestamp: true
             }))
             .pipe(gulp.dest('target/dist'));
-        gulp.src(['target/dist/index.html'])
+    });
+
+    gulp.task('appcache-include', ['minify'], function () {
+        return gulp.src(['target/dist/index.html'])
             .pipe(replace(/<html /, '<html manifest="app.manifest" '))
             .pipe(gulp.dest('target/dist'));
     });
@@ -69,5 +72,3 @@ module.exports = function (gulp) {
             .pipe(size());
     });
 };
-
-
