@@ -2,8 +2,7 @@
 
 module.exports = function (gulp) {
 
-    var sequence = require('run-sequence').use(gulp),
-        sourcemaps = require('gulp-sourcemaps'),
+    var sourcemaps = require('gulp-sourcemaps'),
         ts = require('gulp-typescript'),
         _ = require('lodash'),
         defaults = {
@@ -20,39 +19,19 @@ module.exports = function (gulp) {
         };
 
     /**
-     * compile all typescript files and sourcemaps from /app and output them to /target/tmp/js/all.js
+     * compile all typescript files and sourcemaps from /app and output them to /target/tmp
      */
-    gulp.task('ts', function (callback) {
-        sequence('compile', 'test', callback);
-    });
-
-    gulp.task('compile', ['lint-ts'], function () {
-        var options = _.merge({}, defaults, gulp.config.typeScript),
-            tsProject = ts.createProject({
-                compilerOptions: options,
-                out: 'all.js'
-            }),
-            tsResult = gulp.src(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*test.ts'])
-                .pipe(sourcemaps.init())
-                .pipe(ts(tsProject));
-
-        return tsResult.js
-            .pipe(sourcemaps.write('maps'))
-            .pipe(gulp.dest('target/tmp/js'));
-    });
-
-    /**
-     * compile all typescript files from /app and output them to /target/tmp/js as individual files for unit testing
-     */
-    gulp.task('compile-tests', function () {
+    gulp.task('ts', ['lint-ts'], function () {
         var options = _.merge({}, defaults, gulp.config.typeScript),
             tsProject = ts.createProject({
                 compilerOptions: options
             }),
             tsResult = gulp.src(['app/**/*.ts'])
+                .pipe(sourcemaps.init())
                 .pipe(ts(tsProject));
 
         return tsResult.js
+            .pipe(sourcemaps.write('maps'))
             .pipe(gulp.dest('target/tmp/js'));
     });
 };

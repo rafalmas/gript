@@ -3,7 +3,7 @@
 module.exports = function (config) {
     config.set({
         basePath: '../',
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'angular-filesort'],
         files: ['**/*/*_test.js'],
         exclude: ['**/*/bower_components'],
         preprocessors: {
@@ -21,6 +21,12 @@ module.exports = function (config) {
             dir: 'target',
             file: 'cobertura-coverage.xml',
             subdir: '.'
+        },
+        angularFilesort: {
+            whitelist: [
+                'app/**/*.js',
+                'target/tmp/js/**/*.js'
+            ]
         },
         port: 9876,
         colors: true,

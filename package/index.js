@@ -5,7 +5,9 @@ module.exports = function (gulp) {
     var sequence = require('run-sequence').use(gulp);
 
     gulp.config = {
-        module: 'no-module-specified',
+        app: {
+            module: 'no-module-specified'
+        },
         hostHeader: 'no-hostHeader-sepcified',
         url: 'no-url-specified'
     };

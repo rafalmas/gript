@@ -15,6 +15,8 @@ and ensure the profound checking of the code quality at the same time.
 The module orchestrates a collection of [Gulp](http://gulpjs.com) build functionality into a single npm dependency
 and makes it easier for developers to have and maintain the build setup for own Angular projects.
 
+The [Gript Newsgroup](https://groups.google.com/forum/#!forum/gript) is the place for announcements and discussion about Gript's features. Feel free to join.
+ 
 The project includes a sample application to make it possible to test the build setup.
 The local sample application exemplifies the needed structure for applications supported by the `gript` npm package.
 The sample application resides in the `app` folder. 
@@ -49,9 +51,11 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- img
     |     |---- styles
     |     |---- resources
+    |     |---- lib
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
+    |     |---- config.json
     |---- /bower_components
     |---- /target
     |     |---- dist
@@ -72,6 +76,8 @@ which means:
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
+- `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
+- `app/config.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled scss styles, Angular templates etc.)
@@ -90,7 +96,7 @@ To make use of the `gript` npm module define the dependency to `gript` in the `p
 
       "dependencies": {
           "gulp": "3.9.0",
-          "gript": "~0.0.9",
+          "gript": "~0.0.34",
           ....
 
 together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
@@ -121,11 +127,14 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        
        // Set the config to use across the gulp build
        gulp.config = {
-           module: 'yourApp',
            hostHeader: 'no-specified-hostHeader',
            url: 'http://no-specified-project-url',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
-           server: {
+           app: {
+			   module: 'yourApp',
+			   configFile: 'app/config.json'
+		   },
+		   server: {
                port: 8080,
                host: 'localhost',
                livereload: {
@@ -174,6 +183,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            },
            modernizr: {
+		       //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
 			   options: [
 				   'addTest',
 				   'html5printshiv',
@@ -190,7 +200,7 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 
 These values are:
 
-- `module` : the name of the project
+- `app.module` : mandatory name of the project. It's being used as a module name when generating Angular modules, like `$templateCache` or constants modules.
 - `hostHeader` host header
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
@@ -245,7 +255,8 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
-- **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`  
+- **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
+- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
 
 You can list all of the available tasks by running the command:
 
@@ -270,7 +281,12 @@ During the linting process, Gript generates Checkstyle-like XML reports in the `
 - `scss-lint-result.xml`
 - `ts-lint-result.xml`
 
-You can make use of them in your continuous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
+The reports from tests execution and code coverage are also generated into the `target` directory:
+
+- `cobertura-coverage.xml`
+- `test-results.xml`
+
+You can use linting, test and coverage reports in your continuous integration setup, like [Jenkins](https://jenkins-ci.org) for example.
 
 ## Modernizr
 During the build process, Gript will analyse your JavaScript and CSS files and generate custom [Modernizr](http://modernizr.com).

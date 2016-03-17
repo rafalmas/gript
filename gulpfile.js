@@ -21,10 +21,12 @@ gulp.task('dist:serve', ['dist', 'server:dist']);
 
 // Set the config to use across the gulp build
 gulp.config = {
-    module: 'gript',
     hostHeader: 'gript',
     url: 'http://gript',
     repository: 'http://nykredit.github.com/gript.git',
+    app: {
+        module: 'gript'
+    },
     server: {
         port: 8080,
         host: 'localhost',

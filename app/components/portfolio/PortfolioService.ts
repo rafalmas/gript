@@ -23,4 +23,8 @@ module Portfolio {
             return this.data;
         }
     }
+
+    angular.module('portfolio').factory('portfolioService', [():PortfolioService => {
+        return new PortfolioService();
+    }]);
 }

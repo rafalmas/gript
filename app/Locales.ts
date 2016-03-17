@@ -4,7 +4,7 @@ module App {
     export class Locales {
         static $inject = ['$translateProvider', '$translateStaticFilesLoaderProvider'];
 
-        static configureLocales($translateProvider:angular.translate.ITranslateProvider) {
+        constructor($translateProvider:angular.translate.ITranslateProvider) {
             $translateProvider.useStaticFilesLoader({
                 prefix: 'resources/locale-',
                 suffix: '.json'

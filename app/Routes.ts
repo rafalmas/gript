@@ -4,7 +4,7 @@ module App {
     export class Routes {
         static $inject = ['$routeProvider'];
 
-        static configureRoutes($routeProvider:ng.route.IRouteProvider) {
+        constructor($routeProvider:ng.route.IRouteProvider) {
             $routeProvider.when('/portfolio', {
                 controller: 'portfolioController',
                 templateUrl: 'sections/portfolio/portfolio.html',
