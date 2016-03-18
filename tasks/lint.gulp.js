@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
     var eslint = require('gulp-eslint'),
         fs = require('fs'),
         xml = require('xmlbuilder'),
@@ -81,7 +81,7 @@ module.exports = function (gulp) {
             scssReport = xml.create('checkstyle');
             stream = gulp.src(scssFiles)
                 .pipe(scsslint({
-                    config: JSON.stringify(path.join(projectRoot, '.scss-lint.yml')),
+                    config: JSON.stringify(path.join(projectRoot, paths.linters.scss)),
                     customReport: reportSassIssues
                 }));
 
@@ -103,7 +103,7 @@ module.exports = function (gulp) {
                     tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                     tsLintReportFile.end();
                 })
-                .pipe(tslint({configuration: path.join(projectRoot, 'tslint.json')}))
+                .pipe(tslint({configuration: path.join(projectRoot, paths.linters.ts)}))
                 .pipe(tslint.report(reportTypeScriptIssues, {
                     summarizeFailureOutput: true,
                     emitError: false
@@ -122,16 +122,16 @@ module.exports = function (gulp) {
                     htmlLintReportFile.end();
                 })
                 .pipe(htmlLint({
-                    config: path.join(projectRoot, '.htmllintrc'),
+                    config: path.join(projectRoot, paths.linters.html),
                     failOnError: false
                 }, reportHtmlIssues));
         });
     });
 
     gulp.task('lint-html-index', function () {
-        return gulp.src("app/index.html")
+        return gulp.src(paths.src.index)
             .pipe(htmlLint({
-                config: path.join(projectRoot, '.htmllintrc'),
+                config: path.join(projectRoot, paths.linters.html),
                 failOnError: false
             }));
     });

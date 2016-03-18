@@ -1,11 +1,12 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
-    var release = require('gulp-git-release');
+    var path = require('path'),
+        release = require('gulp-git-release');
 
     gulp.task('prerelease', ['dist'], function () {
-        return gulp.src('target/dist/**').pipe(release({
+        return gulp.src(path.join(paths.target.dist.base, '**')).pipe(release({
             prefix: 'target/dist',
             release: false,
             repository: gulp.config.repository
@@ -13,7 +14,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('release', ['dist'], function () {
-        return gulp.src('target/dist/**').pipe(release({
+        return gulp.src(path.join(paths.target.dist.base, '**')).pipe(release({
             prefix: 'target/dist',
             release: true,
             repository: gulp.config.repository

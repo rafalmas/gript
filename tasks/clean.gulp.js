@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var del = require('del'),
         util = require('gulp-util');
@@ -14,30 +14,30 @@ module.exports = function (gulp) {
     }
 
     gulp.task('clean', function (done) {
-        clean('target', done);
+        clean(paths.target.base, done);
     });
 
     gulp.task('clean-dist', function (done) {
-        clean('target/dist', done);
+        clean(paths.target.dist.base, done);
     });
 
     gulp.task('clean-tmp', function (done) {
-        clean('target/tmp', done);
+        clean(paths.target.tmp.base, done);
     });
 
     gulp.task('clean-js', function (done) {
-        clean('target/tmp/js', done);
+        clean(paths.target.tmp.js, done);
     });
 
     gulp.task('clean-partials', function (done) {
-        clean('target/tmp/partials', done);
+        clean(paths.target.tmp.partials, done);
     });
 
     gulp.task('clean-styles', function (done) {
-        clean('target/tmp/styles', done);
+        clean(paths.target.tmp.styles, done);
     });
 
     gulp.task('clean-bower', function (done) {
-        clean('bower_components', done);
+        clean(paths.bower, done);
     });
 };
