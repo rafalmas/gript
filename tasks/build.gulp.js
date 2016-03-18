@@ -46,7 +46,7 @@ module.exports = function (gulp, paths) {
 
     gulp.task('inject-styles', ['styles'], function () {
         return gulp.src(paths.src.index)
-            .pipe(gulpInject(gulp.src(path.join(paths.target.tmp.styles, '/**/*.css'), {read: false}),
+            .pipe(gulpInject(gulp.src(path.join(paths.target.tmp.styles, '**/*.css'), {read: false}),
                 {
                     relative: true
                 }))
@@ -97,7 +97,7 @@ module.exports = function (gulp, paths) {
     });
 
     gulp.task('fonts', function () {
-        return gulp.src(path.join(paths.bower, '/**/*'))
+        return gulp.src(path.join(paths.bower, '**/*'))
             .pipe(filter(paths.src.fonts))
             .pipe(flatten())
             .pipe(gulp.dest(paths.target.dist.fonts))
