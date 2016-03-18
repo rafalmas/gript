@@ -97,7 +97,13 @@ module.exports = function (gulp, paths) {
     });
 
     gulp.task('fonts', function () {
-        return gulp.src(path.join(paths.bower, '**/*'))
+        var foldersToScan = gulp.config.hasOwnProperty('fontsScan') ? gulp.config.fontsScan : [ paths.bower ],
+            folders = foldersToScan.map(function (folder) {
+                util.log('extracting fonts from ' + folder);
+                return path.join(projectRoot, folder, '**/*');
+            });
+
+        return gulp.src(folders)
             .pipe(filter(paths.src.fonts))
             .pipe(flatten())
             .pipe(gulp.dest(paths.target.dist.fonts))

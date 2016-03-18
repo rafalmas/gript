@@ -192,7 +192,11 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
 				   'setClasses'
 			   ],
 			   'feature-detects': []
-		   }
+		   },
+           fontsScan: [
+               'bower_components/font-awesome', 
+               'bower_components/bootstrap-sass-official'
+           ]
 	   };
 ```
 
@@ -249,7 +253,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
     - **clean-partials** : removes the `target/tmp/partials` directory (Angular's `$templateCache` Javascript files)
     - **clean-styles** : removes the `target/tmp/styles` directory (compiled scss files)
     - **clean-bower** : removes the `bower_components` directory
-- **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
+- **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app. It will search the whole `bower_components` directory, unless you configure it otherwise in the `fontsScan` array in the config section of the `gulpfile.js`.
 - **images** : copies all image files into the `dist` directory
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
