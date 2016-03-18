@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
     var _ = require('lodash'),
         fs = require('fs'),
         path = require('path'),
@@ -30,7 +30,7 @@ module.exports = function (gulp) {
         check('app');
         check('app.module');
 
-        checkFile(path.join(projectRoot, '.scss-lint.yml'));
-        checkFile(path.join(projectRoot, '.eslintrc.yml'));
+        checkFile(path.join(projectRoot, paths.linters.scss));
+        checkFile(path.join(projectRoot, paths.linters.eslint));
     });
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var connect = require('gulp-connect'),
         _ = require('lodash'),
@@ -21,7 +21,7 @@ module.exports = function (gulp) {
 
     gulp.task('server:dist', ['mocks'], function () {
         connect.server({
-            root: 'target/dist'
+            root: paths.target.dist.base
         });
     });
 };
