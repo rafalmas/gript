@@ -55,7 +55,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
-    |     |---- config.json
+    |     |---- constants.json
     |---- /bower_components
     |---- /target
     |     |---- dist
@@ -77,7 +77,7 @@ which means:
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
 - `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
-- `app/config.json`: optional constants file from which Angular constants module will be generated
+- `app/constants.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled scss styles, Angular templates etc.)
@@ -264,7 +264,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
 - **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
-- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
+- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.constantsFile`. The default is `app/constants.json`.
 
 You can list all of the available tasks by running the command:
 
