@@ -237,7 +237,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files.
+- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All `*.tpl.html` files are considered as templates.
 - **styles** : compiles scss files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and scss into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies

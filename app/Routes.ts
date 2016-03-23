@@ -7,14 +7,14 @@ module App {
         constructor($routeProvider:ng.route.IRouteProvider) {
             $routeProvider.when('/portfolio', {
                 controller: 'portfolioController',
-                templateUrl: 'sections/portfolio/portfolio.html',
+                templateUrl: 'sections/portfolio/portfolio.tpl.html',
                 controllerAs: 'vm'
             });
             $routeProvider.when('/welcome', {
-                templateUrl: 'sections/welcome/welcome.html',
+                templateUrl: 'sections/welcome/welcome.tpl.html',
             });
             $routeProvider.when('/empty', {
-                templateUrl: 'sections/empty/empty.html',
+                templateUrl: 'sections/empty/empty.tpl.html',
             });
             $routeProvider.otherwise({redirectTo: '/welcome'});
         }
