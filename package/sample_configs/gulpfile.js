@@ -73,5 +73,9 @@ gulp.config = {
             'setClasses'
         ],
         'feature-detects': []
-    }
+    },
+    fontsScan: [
+        'bower_components/font-awesome',
+        'bower_components/bootstrap-sass-official'
+    ]
 };

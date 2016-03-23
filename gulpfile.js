@@ -125,7 +125,11 @@ gulp.config = {
             mangle: true,
             preserveComments: false
         }
-    }
+    },
+    fontsScan: [
+        'bower_components/font-awesome',
+        'bower_components/bootstrap-sass-official'
+    ]
 };
 
 // verify that the build setup can produce the expected artifacts
