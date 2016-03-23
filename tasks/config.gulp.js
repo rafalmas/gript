@@ -4,7 +4,7 @@ module.exports = function (gulp, paths) {
     var ngConstant = require('gulp-ng-constant');
 
     gulp.task('config', function () {
-        var src = gulp.config.app && gulp.config.app.configFile ? gulp.config.app.configFile : paths.src.config;
+        var src = gulp.config.app && gulp.config.app.constantsFile ? gulp.config.app.constantsFile : paths.src.constants;
 
         gulp.src(src)
             .pipe(ngConstant({
