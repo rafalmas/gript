@@ -10,7 +10,7 @@ $box-table-hover-color: lighten($box-text-color, 83.7%) !default;
 /* override feedback variables*/
 $feedback-color: $box-table-body-text-color !default;
 
-@import "styles/feedback";
+@import "feedback";
 
 .box {
     @include vendor-prefix(background-clip, border-box);

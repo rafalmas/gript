@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var mocks = require('gulp-stubby-server'),
         _ = require('lodash'),
@@ -11,7 +11,7 @@ module.exports = function (gulp) {
             admin: 8051,
             relativeFilesPath: true,
             files: [
-                'mocks/*.{json,yaml,js}'
+                paths.src.mocks
             ]
         };
 

@@ -1,17 +1,17 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var bowerDeps,
-        angularFilesort = require('gulp-angular-filesort'),
         filenames = require("gulp-filenames"),
+        path = require('path'),
         Server = require('karma').Server,
         wiredep = require('wiredep');
 
     // Runs the unit tests
     gulp.task('test', ['get-sources'], function (done) {
         bowerDeps = wiredep({
-            directory: 'bower_components',
+            directory: paths.bower,
             dependencies: true,
             devDependencies: true
         });
@@ -24,9 +24,13 @@ module.exports = function (gulp) {
         }).start();
     });
 
-    gulp.task('get-sources', ['compile'], function () {
-        return gulp.src(['app/**/*.js', 'target/tmp/js/**/*.js', 'target/tmp/partials/**/*.js'], {base: '.'})
-            .pipe(angularFilesort())
+    gulp.task('get-sources', ['ts'], function () {
+        return gulp.src(
+            [
+                path.join(paths.src.app, '**/*.js'),
+                path.join(paths.target.tmp.js, '**/*.js'),
+                path.join(paths.target.tmp.partials, '**/*.js')
+            ], {base: '.'})
             .pipe(filenames('js'));
     });
 };

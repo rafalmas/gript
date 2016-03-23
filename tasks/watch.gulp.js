@@ -1,9 +1,10 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
-    var watch = require('gulp-watch'),
+    var path = require('path'),
         livereload = require('gulp-livereload'),
+        watch = require('gulp-watch'),
         _ = require('lodash'),
         defaults = {
             livereload: {
@@ -27,24 +28,24 @@ module.exports = function (gulp) {
                 livereload.reload();
             });
         });
-        watch(['app/**/*.js'], watchOptions, function () {
+        watch(path.join(paths.src.app, '**/*.js'), watchOptions, function () {
             gulp.start(['lint-js', 'test'], function () {
                 livereload.reload();
             });
         });
-        watch(['!app/**/*Test.ts', '!app/**/*.*test.ts', 'app/**/*.ts'], watchOptions, function () {
+        watch(['app/**/*.ts', '!app/**/*Test.ts', '!app/**/*.*test.ts'], watchOptions, function () {
             gulp.start('inject-js', function () {
                 livereload.reload();
             });
         });
-        watch(['app/**/*Test.ts', 'app/**/*.*test.ts'], watchOptions, function () {
+        watch([path.join(paths.src.app, '**/*Test.ts'), path.join(paths.src.app, '**/*.*test.ts')], watchOptions, function () {
             gulp.start('test', function () {
                 livereload.reload();
             });
         });
-        watch('app/**/*.scss', watchOptions, function () {
+        watch(path.join(paths.src.app, '**/*.scss'), watchOptions, function () {
             gulp.start('inject-styles', function () {
-                livereload.reload();
+                livereload.reload('*.css');
             });
         });
         watch(['!app/index.html', 'app/**/*.html'], watchOptions, function () {

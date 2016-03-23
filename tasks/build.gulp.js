@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var angularFilesort = require('gulp-angular-filesort'),
         bower = require('gulp-bower'),
@@ -29,24 +29,24 @@ module.exports = function (gulp) {
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
-        sequence('inject-bower', 'inject-styles', 'inject-partials', 'ts', 'modernizr', 'inject-js', callback);
+        sequence('check', 'config', 'inject-bower', 'inject-styles', 'inject-partials', 'modernizr', 'inject-js', callback);
     });
 
     gulp.task('inject-bower', ['bower-download'], function () {
-        return gulp.src('app/index.html')
+        return gulp.src(paths.src.index)
             .pipe(wiredep({
-                directory: 'bower_components'
+                directory: paths.bower
             }))
             .pipe(gulp.dest('app'));
     });
 
     gulp.task('bower-download', function () {
-        return bower(path.join(projectRoot, 'bower_components'));
+        return bower(path.join(projectRoot, paths.bower));
     });
 
     gulp.task('inject-styles', ['styles'], function () {
-        return gulp.src('app/index.html')
-            .pipe(gulpInject(gulp.src('target/tmp/styles/**/*.css', {read: false}),
+        return gulp.src(paths.src.index)
+            .pipe(gulpInject(gulp.src(path.join(paths.target.tmp.styles, '**/*.css'), {read: false}),
                 {
                     relative: true
                 }))
@@ -54,15 +54,15 @@ module.exports = function (gulp) {
     });
 
     gulp.task('styles', ['lint-scss'], function () {
-        return gulp.src(['app/app.scss'])
+        return gulp.src(paths.src.scss)
             .pipe(sass())
-            .pipe(gulp.dest('target/tmp/styles'));
+            .pipe(gulp.dest(paths.target.tmp.styles));
     });
 
     gulp.task('inject-partials', ['partials'], function () {
-        return gulp.src('app/index.html')
+        return gulp.src(paths.src.index)
             .pipe(gulpInject(
-                gulp.src('target/tmp/partials/**/*.js', {read: false}),
+                gulp.src(path.join(paths.target.tmp.partials, '**/*.js'), {read: false}),
                 {
                     starttag: '<!-- inject:partials -->',
                     relative: true
@@ -74,65 +74,55 @@ module.exports = function (gulp) {
     gulp.task('partials', ['lint-html'], function () {
         var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
 
-        return gulp.src(['app/**/*.html', '!app/index.html'])
+        return gulp.src(paths.src.html)
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
-                moduleName: gulp.config.module
+                moduleName: gulp.config.app.module
             }))
-            .pipe(gulp.dest('target/tmp/partials'))
+            .pipe(gulp.dest(paths.target.tmp.partials))
             .pipe(size());
     });
 
-    gulp.task('inject-js', function () {
-        //TypeScript compiled to JavaScript
-        return gulp.src('app/index.html')
+    gulp.task('inject-js', ['test'], function () {
+        return gulp.src(paths.src.index)
             .pipe(gulpInject(
-                gulp.src(['target/tmp/js/**/*.js', '!target/tmp/js/**/*Test.js', '!target/tmp/js/**/*test.js'])
+                gulp.src(paths.javaScriptToInject)
                     .pipe(naturalSort())
                     .pipe(angularFilesort()),
                 {
                     relative: true
                 }
             ))
-            //JavaScript for those who don't use TypeScript
-            .pipe(gulpInject(
-                gulp.src(['app/**/*.js', '!app/**/*Test.js', '!app/**/*test.js'])
-                    .pipe(naturalSort())
-                    .pipe(angularFilesort()),
-                {
-                    relative: true
-                }
-            ))
-            .pipe(gulp.dest('app'));
+            .pipe(gulp.dest(paths.src.app));
     });
 
     gulp.task('fonts', function () {
-        return gulp.src('bower_components/**/*')
-            .pipe(filter('**/*.{eot,ttf,woff,woff2}'))
+        return gulp.src(path.join(paths.bower, '**/*'))
+            .pipe(filter(paths.src.fonts))
             .pipe(flatten())
-            .pipe(gulp.dest('target/tmp/fonts'))
-            .pipe(gulp.dest('target/dist/fonts'))
+            .pipe(gulp.dest(paths.target.dist.fonts))
+            .pipe(gulp.dest(paths.target.tmp.fonts))
             .pipe(size());
     });
 
     gulp.task('images', function () {
-        return gulp.src('app/**/img/**/*')
-            .pipe(gulp.dest('target/dist'))
-            .pipe(gulp.dest('target/tmp'))
+        return gulp.src(paths.src.img)
+            .pipe(gulp.dest(paths.target.dist.base))
+            .pipe(gulp.dest(paths.target.tmp.base))
             .pipe(size());
     });
 
     gulp.task('resources', function () {
-        return gulp.src('app/resources/**/*')
-            .pipe(gulp.dest('target/dist/resources'))
-            .pipe(gulp.dest('target/tmp/resources'))
+        return gulp.src(paths.src.resources)
+            .pipe(gulp.dest(paths.target.dist.resources))
+            .pipe(gulp.dest(paths.target.tmp.resources))
             .pipe(size());
     });
 
     gulp.task('lib', function () {
-        return gulp.src('app/lib/**/*')
-            .pipe(gulp.dest('target/dist/lib'))
-            .pipe(gulp.dest('target/tmp/lib'))
+        return gulp.src(paths.src.lib)
+            .pipe(gulp.dest(paths.target.dist.lib))
+            .pipe(gulp.dest(paths.target.tmp.lib))
             .pipe(size());
     });
 

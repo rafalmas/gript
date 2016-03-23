@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var appcache = require('gulp-appcache'),
         debug = require('gulp-debug'),
@@ -8,6 +8,7 @@ module.exports = function (gulp) {
         htmlmin = require('gulp-htmlmin'),
         minifyCss = require('gulp-cssnano'),
         ngAnnotate = require('gulp-ng-annotate'),
+        path = require('path'),
         replace = require('gulp-replace'),
         rev = require('gulp-rev'),
         revReplace = require('gulp-rev-replace'),
@@ -37,27 +38,30 @@ module.exports = function (gulp) {
         };
 
     gulp.task('dist', function (callback) {
-        sequence('clean', 'appcache', callback);
+        sequence('clean', ['appcache-create', 'appcache-include'], callback);
     });
 
-    gulp.task('appcache', ['minify'], function () {
-        gulp.src(['target/dist/**/*'])
+    gulp.task('appcache-create', ['minify'], function () {
+        return gulp.src(path.join(paths.target.dist.base, '**/*'))
             .pipe(appcache({
                 filename: 'app.manifest',
                 exclude: ['app.manifest', 'index.html'],
                 timestamp: true
             }))
-            .pipe(gulp.dest('target/dist'));
-        gulp.src(['target/dist/index.html'])
+            .pipe(gulp.dest(paths.target.dist.base));
+    });
+
+    gulp.task('appcache-include', ['minify'], function () {
+        return gulp.src(path.join(paths.target.dist.base, 'index.html'))
             .pipe(replace(/<html /, '<html manifest="app.manifest" '))
-            .pipe(gulp.dest('target/dist'));
+            .pipe(gulp.dest(paths.target.dist.base));
     });
 
     gulp.task('minify', ['build'], function () {
         var minificationOptions = _.merge({}, minifyDefaults, gulp.config.minification);
 
-        return gulp.src('app/index.html')
-            .pipe(useref({ searchPath: ['app', 'bower_components', 'target/tmp']}))
+        return gulp.src(paths.src.index)
+            .pipe(useref({ searchPath: [paths.src.app, paths.bower, paths.target.tmp]}))
             .pipe(gulpIf(['**/*.js', '**/*.css'], rev()))
             .pipe(gulpIf('*.js', ngAnnotate()))
             .pipe(gulpIf('*.js', uglify(minificationOptions.javascript)))
@@ -65,9 +69,7 @@ module.exports = function (gulp) {
             .pipe(debug())
             .pipe(revReplace())
             .pipe(gulpIf('*.html', htmlmin(minificationOptions.html)))
-            .pipe(gulp.dest('target/dist'))
+            .pipe(gulp.dest(paths.target.dist.base))
             .pipe(size());
     });
 };
-
-

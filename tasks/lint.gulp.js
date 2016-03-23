@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
     var eslint = require('gulp-eslint'),
         fs = require('fs'),
         xml = require('xmlbuilder'),
@@ -14,9 +14,11 @@ module.exports = function (gulp) {
         scssFiles = 'app/**/*.scss',
         tsFiles = 'app/**/*.ts',
         htmlFiles = 'app/**/*.html',
-        tsReportFilename = 'target/ts-lint-result.xml',
-        htmlReportFilename = 'target/html-lint-result.xml',
-        sassReportFilename = 'target/scss-lint-result.xml',
+        target = 'target',
+        tsReportFilename = path.join(target, 'ts-lint-result.xml'),
+        htmlReportFilename = path.join(target, 'html-lint-result.xml'),
+        sassReportFilename = path.join(target, 'scss-lint-result.xml'),
+        javascriptReportFilename = path.join(target, 'es-lint-result.xml'),
         tsLintReportFile,
         htmlLintReportFile,
         scssLintReportFile,
@@ -54,12 +56,16 @@ module.exports = function (gulp) {
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
 
+    function createDir(directoryName) {
+        if (!fs.existsSync(directoryName)) {
+            fs.mkdirSync(directoryName);
+        }
+    }
+
     gulp.task('lint-js', function () {
         var out;
-        if (!fs.existsSync('target')) {
-            fs.mkdirSync('target');
-        }
-        out = fs.createWriteStream('target/es-lint-result.xml');
+        createDir(target);
+        out = fs.createWriteStream(javascriptReportFilename);
         return gulp.src(srcFiles)
             .pipe(eslint())
             .pipe(eslint.format())
@@ -69,12 +75,13 @@ module.exports = function (gulp) {
 
     gulp.task('lint-scss', function () {
         var stream;
+        createDir(target);
         fs.unlink(sassReportFilename, function () {
             scssLintReportFile = fs.createWriteStream(sassReportFilename);
             scssReport = xml.create('checkstyle');
             stream = gulp.src(scssFiles)
                 .pipe(scsslint({
-                    config: JSON.stringify(path.join(projectRoot, '.scss-lint.yml')),
+                    config: JSON.stringify(path.join(projectRoot, paths.linters.scss)),
                     customReport: reportSassIssues
                 }));
 
@@ -87,6 +94,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('lint-ts', function () {
+        createDir(target);
         fs.unlink(tsReportFilename, function () {
             tsLintReportFile = fs.createWriteStream(tsReportFilename);
             tsReport = xml.create('checkstyle');
@@ -95,7 +103,7 @@ module.exports = function (gulp) {
                     tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                     tsLintReportFile.end();
                 })
-                .pipe(tslint({configuration: path.join(projectRoot, 'tslint.json')}))
+                .pipe(tslint({configuration: path.join(projectRoot, paths.linters.ts)}))
                 .pipe(tslint.report(reportTypeScriptIssues, {
                     summarizeFailureOutput: true,
                     emitError: false
@@ -104,6 +112,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('lint-html', function () {
+        createDir(target);
         fs.unlink(htmlReportFilename, function () {
             htmlLintReportFile = fs.createWriteStream(htmlReportFilename);
             htmlReport = xml.create('checkstyle');
@@ -113,16 +122,16 @@ module.exports = function (gulp) {
                     htmlLintReportFile.end();
                 })
                 .pipe(htmlLint({
-                    config: path.join(projectRoot, '.htmllintrc'),
+                    config: path.join(projectRoot, paths.linters.html),
                     failOnError: false
                 }, reportHtmlIssues));
         });
     });
 
     gulp.task('lint-html-index', function () {
-        return gulp.src("app/index.html")
+        return gulp.src(paths.src.index)
             .pipe(htmlLint({
-                config: path.join(projectRoot, '.htmllintrc'),
+                config: path.join(projectRoot, paths.linters.html),
                 failOnError: false
             }));
     });

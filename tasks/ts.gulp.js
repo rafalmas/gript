@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
-    var sequence = require('run-sequence').use(gulp),
+    var path = require('path'),
         sourcemaps = require('gulp-sourcemaps'),
         ts = require('gulp-typescript'),
         _ = require('lodash'),
@@ -22,21 +22,17 @@ module.exports = function (gulp) {
     /**
      * compile all typescript files and sourcemaps from /app and output them to /target/tmp
      */
-    gulp.task('ts', function (callback) {
-        sequence('compile', 'test', callback);
-    });
-
-    gulp.task('compile', ['lint-ts'], function () {
+    gulp.task('ts', ['lint-ts'], function () {
         var options = _.merge({}, defaults, gulp.config.typeScript),
             tsProject = ts.createProject({
                 compilerOptions: options
             }),
-            tsResult = gulp.src(['app/**/*.ts'])
+            tsResult = gulp.src(path.join(paths.src.app, '**/*.ts'))
                 .pipe(sourcemaps.init())
                 .pipe(ts(tsProject));
 
         return tsResult.js
             .pipe(sourcemaps.write('maps'))
-            .pipe(gulp.dest('target/tmp/js'));
+            .pipe(gulp.dest(paths.target.tmp.js));
     });
 };
