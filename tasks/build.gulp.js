@@ -74,7 +74,7 @@ module.exports = function (gulp, paths) {
     gulp.task('partials', ['lint-html'], function () {
         var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
 
-        return gulp.src(paths.src.html)
+        return gulp.src(paths.src.htmlPartials)
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
                 moduleName: gulp.config.app.module
@@ -118,6 +118,13 @@ module.exports = function (gulp, paths) {
             .pipe(size());
     });
 
+    gulp.task('staticFiles', function () {
+        return gulp.src(paths.src.staticFiles)
+            .pipe(gulp.dest(paths.target.dist.base))
+            .pipe(gulp.dest(paths.target.tmp.base))
+            .pipe(size());
+    });
+
     gulp.task('resources', function () {
         return gulp.src(paths.src.resources)
             .pipe(gulp.dest(paths.target.dist.resources))
@@ -132,7 +139,7 @@ module.exports = function (gulp, paths) {
             .pipe(size());
     });
 
-    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'resources', 'lib', 'lint-js'], function (callback) {
+    gulp.task('build', ['version', 'inject', 'images', 'fonts', 'staticFiles', 'resources', 'lib', 'lint-js'], function (callback) {
         callback();
     });
 
