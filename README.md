@@ -76,7 +76,7 @@ which means:
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
-- `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
+- `app/lib`: the place for JavaScript libraries not coming from Bower. It will be excluded from linting.
 - `app/constants.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
