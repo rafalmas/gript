@@ -22,6 +22,10 @@ gulp.config = {
             port: 35729
         }
     },
+    serverDist: {
+        port: 8080,
+        host: 'localhost'  
+    },
     mocks: {
         location: 'localhost',
         stubs: 8050,

@@ -12,6 +12,11 @@ module.exports = function (gulp, paths) {
             livereload: {
                 port: 35729
             }
+        },
+        distDefaults = {
+            root: paths.target.dist.base,
+            port: 8080,
+            host: 'localhost'
         };
 
     gulp.task('server', ['mocks'], function () {
@@ -20,8 +25,7 @@ module.exports = function (gulp, paths) {
     });
 
     gulp.task('server:dist', ['mocks'], function () {
-        connect.server({
-            root: paths.target.dist.base
-        });
+        var options = _.merge({}, distDefaults, gulp.config.serverDist);
+        connect.server(options);
     });
 };

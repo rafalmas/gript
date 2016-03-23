@@ -96,7 +96,7 @@ To make use of the `gript` npm module define the dependency to `gript` in the `p
 
       "dependencies": {
           "gulp": "3.9.0",
-          "gript": "~0.0.34",
+          "gript": "~0.0.38",
           ....
 
 together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
@@ -140,6 +140,10 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                livereload: {
                    port: 35729
                }
+           },
+           serverDist: {
+               port: 8080,
+               host: 'localhost'
            },
            mocks: {
 			   location: 'localhost',
