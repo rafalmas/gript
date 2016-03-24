@@ -217,7 +217,7 @@ These values are:
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
 - `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.
-- `proxy` proxy configuration, like url or host header
+- `proxy` proxy port configuration
 - `mocks` mock server configuration
 - `typescript` typescript compilation options
 - `minification` minification related options
