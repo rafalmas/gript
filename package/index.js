@@ -60,8 +60,11 @@ module.exports = function (gulp) {
         app: {
             module: 'no-module-specified'
         },
-        hostHeader: 'no-hostHeader-sepcified',
-        url: 'no-url-specified'
+        proxy: {
+            hostHeader: 'no-specified-hostHeader',
+            url: 'http://no-specified-project-url',
+            port: 8001
+        }
     };
 
     require("fs").readdirSync(__dirname + "/tasks").forEach(function(file) {

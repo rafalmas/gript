@@ -1,3 +1,7 @@
+## Gript 0.0.39 (24-03-2016)
+
+ - proxy port can now be customized in config. Proxy options like `url` and `hostHeader` moved to the `proxy` section of the config
+
 ## Gript 0.0.38 (23-03-2016)
 
  - dist server port and hostname can now be customized in the gulpfile.js config
