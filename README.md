@@ -127,6 +127,8 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        
        // Set the config to use across the gulp build
        gulp.config = {
+           hostHeader: 'gript',
+           url: 'http://gript',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
 			   module: 'yourApp',
@@ -144,8 +146,6 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                host: 'localhost'
            },
            proxy: {
-               hostHeader: 'no-specified-hostHeader',
-               url: 'http://no-specified-project-url',
                port: 8001
            },
            mocks: {
@@ -212,6 +212,8 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 These values are:
 
 - `app.module` : mandatory name of the project. It's being used as a module name when generating Angular modules, like `$templateCache` or constants modules.
+- `hostHeader` host header
+- `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
 - `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.

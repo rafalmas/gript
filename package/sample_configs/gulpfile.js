@@ -26,6 +26,9 @@ gulp.config = {
         port: 8080,
         host: 'localhost'  
     },
+    proxy: {
+        port: 8001
+    },
     mocks: {
         location: 'localhost',
         stubs: 8050,
