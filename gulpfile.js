@@ -73,8 +73,6 @@ gulp.task('dist:serve', ['dist', 'server:dist']);
 
 // Set the config to use across the gulp build
 gulp.config = {
-    hostHeader: 'gript',
-    url: 'http://gript',
     repository: 'http://nykredit.github.com/gript.git',
     app: {
         module: 'gript'
@@ -89,6 +87,11 @@ gulp.config = {
     serverDist: {
         port: 8080,
         host: 'localhost'
+    },
+    proxy: {
+        hostHeader: 'gript',
+        url: 'http://gript',
+        port: 8001
     },
     mocks: {
         location: 'localhost',
