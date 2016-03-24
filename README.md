@@ -131,10 +131,10 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
            url: 'http://gript',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
-			   module: 'yourApp',
-			   constantsFile: 'app/constants.json'
-		   },
-		   server: {
+               module: 'yourApp',
+               constantsFile: 'app/constants.json'
+           },
+           server: {
                port: 8080,
                host: 'localhost',
                livereload: {
@@ -149,15 +149,15 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                port: 8001
            },
            mocks: {
-			   location: 'localhost',
-			   stubs: 8050,
-			   tls: 8443,
-			   admin: 8051,
-			   relativeFilesPath: true,
-			   files: [
-				   'mocks/*.{json,yaml,js}'
-			   ]
-		   },
+               location: 'localhost',
+               stubs: 8050,
+               tls: 8443,
+               admin: 8051,
+               relativeFilesPath: true,
+               files: [
+                   'mocks/*.{json,yaml,js}'
+               ]
+           },
            typeScript: {
                compilerOptions: {
                    noImplicitAny: true,
@@ -190,15 +190,15 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            },
            modernizr: {
-		       //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
-			   options: [
-				   'addTest',
-				   'html5printshiv',
-				   'testProp',
-				   'fnBind',
-				   'setClasses'
-			   ],
-			   'feature-detects': []
+               //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
+               options: [
+                   'addTest',
+                   'html5printshiv',
+                   'testProp',
+                   'fnBind',
+                   'setClasses'
+               ],
+               'feature-detects': []
 		   },
            fontsScan: [
                'bower_components/font-awesome', 
