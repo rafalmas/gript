@@ -12,30 +12,28 @@ module.exports = function (gulp) {
 
     gulp.task('proxy', function () {
 
-        var proxyOptions = _.merge({}, proxyDefaults, gulp.config.proxy);
+        var proxyOptions = _.merge({}, proxyDefaults, gulp.config.proxy),
+            proxy;
 
-        console.log(proxyOptions);
-
-        if (!_.has(proxyOptions, 'url')) {
-            util.log('Your proxy config is missing the mandatory '
+        if (!_.has(gulp.config, 'url')) {
+            util.log('Your config is missing the mandatory '
                 + util.colors.red('url') + ' value. Refer to the readme.md and check the gulpfile.js');
             process.exit(1);
         }
 
-        var proxy = httpProxy.createProxyServer({});
+        proxy = httpProxy.createProxyServer({});
 
-        if (!_.has(proxyOptions, 'hostHeader')) {
+        if (_.has(gulp.config, 'hostHeader')) {
             proxy.on('proxyReq', function (proxyReq) {
-                proxyReq.setHeader('Host', proxyOptions.hostHeader);
+                proxyReq.setHeader('Host', gulp.config.hostHeader);
             });
+        } else {
+            util.log('Warning - Your config is missing the ' + util.colors.red('hostHeader') + ' value.');
         }
-
-
-        console.log(proxyOptions);
 
         http.createServer(function (req, res) {
             proxy.web(req, res, {
-                target: proxyOptions.url
+                target: gulp.config.url
             });
         }).listen(proxyOptions.port);
     });
