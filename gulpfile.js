@@ -166,8 +166,9 @@ gulp.task('bumpVersion', function () {
  * Tags the git repository with the version number from package.json
  */
 gulp.task('tag', function () {
+    git.commit('bumps package version', {cwd: projectRoot});
+
     return gulp.src(path.join(projectRoot, 'package.json'))
-    .pipe(git.commit('bumps package version', {cwd: projectRoot}))
     .pipe(tagVersion({cwd: projectRoot}));
 });
 
