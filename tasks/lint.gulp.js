@@ -62,6 +62,12 @@ module.exports = function (gulp, paths) {
         }
     }
 
+    function removeDir(directoryName) {
+        if (fs.existsSync(directoryName)) {
+            fs.unlinkSync(directoryName);
+        }
+    }
+
     gulp.task('lint-js', function () {
         var out;
         createDir(target);
@@ -76,7 +82,7 @@ module.exports = function (gulp, paths) {
     gulp.task('lint-scss', function () {
         var stream;
         createDir(target);
-        fs.unlinkSync(scssReportFilename);
+        removeDir(scssReportFilename);
         scssLintReportFile = fs.createWriteStream(scssReportFilename);
         scssReport = xml.create('checkstyle');
         stream = gulp.src(scssFiles)
@@ -95,7 +101,7 @@ module.exports = function (gulp, paths) {
 
     gulp.task('lint-ts', function () {
         createDir(target);
-        fs.unlinkSync(tsReportFilename);
+        removeDir(tsReportFilename);
         tsLintReportFile = fs.createWriteStream(tsReportFilename);
         tsReport = xml.create('checkstyle');
         return gulp.src(tsFiles)
@@ -112,7 +118,7 @@ module.exports = function (gulp, paths) {
 
     gulp.task('lint-html', function () {
         createDir(target);
-        fs.unlinkSync(htmlReportFilename);
+        removeDir(htmlReportFilename);
         htmlLintReportFile = fs.createWriteStream(htmlReportFilename);
         htmlReport = xml.create('checkstyle');
         return gulp.src(htmlFiles)
