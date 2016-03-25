@@ -1,3 +1,18 @@
+## Gript 0.0.41 (25-03-2016)
+
+ - implemented **#6** (Automate release process). Gript's own `gulpfile.js` contains new tasks:
+ 	- `bumpVersion` - bumps package version number in `package.json` and `package/package.json`
+ 	- `tag` - Tags the git repository with the version number from `package.json`
+ 	- `pushTags` - pushes tags to `master`
+ 	- `push` - pushes source to `master`
+ 	- `npmPublish` - publishes to npm.js. This is an interactive task, asks for npm username and password
+ 	- `publish` - executes all of the above in the sequence.
+ - `Gulp` upgraded to 3.91.
+ 
+## Gript 0.0.40 (25-03-2016)
+
+ - fixed **#58** (html-lint doesn't pick up all files)
+
 ## Gript 0.0.39 (24-03-2016)
 
  - proxy port can now be customized in the config.

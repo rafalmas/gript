@@ -1,19 +1,15 @@
 'use strict';
 
-var gulp = require('gulp'),
+var bump = require('gulp-bump'),
+    gulp = require('gulp'),
     git = require('gulp-git'),
-    bump = require('gulp-bump'),
-    filter = require('gulp-filter'),
-    tag_version = require('gulp-tag-version'),
     ex = require('gulp-expect-file'),
-    replace = require('gulp-replace'),
-    git = require('gulp-git'),
-    bump = require('gulp-bump'),
-    filter = require('gulp-filter'),
     merge = require('merge-stream'),
     path = require('path'),
-    tag_version = require('gulp-tag-version'),
+    replace = require('gulp-replace'),
     sequence = require('run-sequence').use(gulp),
+    spawn = require('child_process').spawn,
+    tagVersion = require('gulp-tag-version'),
     projectRoot = process.cwd(),
     paths = {
         bower: 'bower_components',
@@ -153,19 +149,55 @@ gulp.config = {
 
 /**
  * Bumps package version number in package.json and package/package.json
- * Creates GIT tag
  */
-gulp.task('bump', function () {
+gulp.task('bumpVersion', function () {
     var stream1 = gulp.src(path.join(projectRoot, 'package.json'))
             .pipe(bump())
             .pipe(gulp.dest(path.join(projectRoot))),
 
         stream2 = gulp.src(path.join(projectRoot, 'package', 'package.json'))
             .pipe(bump())
-            .pipe(gulp.dest(path.join(projectRoot, 'package')))
-            .pipe(tag_version({cwd: projectRoot}));
+            .pipe(gulp.dest(path.join(projectRoot, 'package')));
 
     return merge(stream1, stream2);
+});
+
+/**
+ * Tags the git repository with the version number from package.json
+ */
+gulp.task('tag', function () {
+    return gulp.src(path.join(projectRoot, 'package.json'))
+    .pipe(git.commit('bumps package version', {cwd: projectRoot}))
+    .pipe(tagVersion({cwd: projectRoot}));
+});
+
+function gitPush(args) {
+    return git.push('origin', 'master', {args: args}, function (err) {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
+gulp.task('pushTags', function () {
+    return gitPush(' --tags');
+});
+
+gulp.task('push', function () {
+    return gitPush(' -f');
+});
+
+/**
+ * Publishes to npm repository. This is an interactive task, asks for npm username and password.
+ */
+gulp.task('npmPublish', function (done) {
+    spawn('npm', ['publish', path.join(projectRoot, 'target', 'gript')], { stdio: 'inherit' }).on('close', done);
+});
+/**
+ * Increases version number, tags the repository, pushes source and tags to master and then publishes to npm.js
+ */
+gulp.task('publish', function () {
+    return sequence('bumpVersion', 'tag', 'push', 'pushTags', 'npmPublish');
 });
 
 // verify that the build setup can produce the expected artifacts
