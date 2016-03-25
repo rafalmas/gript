@@ -1,9 +1,20 @@
 'use strict';
 
 var gulp = require('gulp'),
+    git = require('gulp-git'),
+    bump = require('gulp-bump'),
+    filter = require('gulp-filter'),
+    tag_version = require('gulp-tag-version'),
     ex = require('gulp-expect-file'),
     replace = require('gulp-replace'),
+    git = require('gulp-git'),
+    bump = require('gulp-bump'),
+    filter = require('gulp-filter'),
+    merge = require('merge-stream'),
+    path = require('path'),
+    tag_version = require('gulp-tag-version'),
     sequence = require('run-sequence').use(gulp),
+    projectRoot = process.cwd(),
     paths = {
         bower: 'bower_components',
         src: {
@@ -139,6 +150,23 @@ gulp.config = {
         'bower_components/bootstrap-sass-official'
     ]
 };
+
+/**
+ * Bumps package version number in package.json and package/package.json
+ * Creates GIT tag
+ */
+gulp.task('bump', function () {
+    var stream1 = gulp.src(path.join(projectRoot, 'package.json'))
+            .pipe(bump())
+            .pipe(gulp.dest(path.join(projectRoot))),
+
+        stream2 = gulp.src(path.join(projectRoot, 'package', 'package.json'))
+            .pipe(bump())
+            .pipe(gulp.dest(path.join(projectRoot, 'package')))
+            .pipe(tag_version({cwd: projectRoot}));
+
+    return merge(stream1, stream2);
+});
 
 // verify that the build setup can produce the expected artifacts
 gulp.task('verify-package-foundation', ['build'], function () {
