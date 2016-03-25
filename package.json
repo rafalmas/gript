@@ -22,7 +22,7 @@
     "gulp-filenames": "2.0.0",
     "gulp-filter": "3.0.1",
     "gulp-flatten": "0.2.0",
-    "gulp-htmllint": "0.0.6",
+    "gulp-htmllint": "0.0.7",
     "gulp-if": "2.0.0",
     "gulp-inject": "3.0.0",
     "gulp-livereload": "3.8.1",
