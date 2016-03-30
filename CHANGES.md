@@ -1,3 +1,11 @@
+## Gript 0.0.42 (30-03-2016)
+
+ - implemented [#46](https://github.com/Nykredit/gript/issues/46). From now on, Gript will continue with the default rules and issue a warning if any of the linter configuration is missing:
+    - scss-lint.yml
+    - .htmllintrc
+    - tslint.json
+ - merged [#40](https://github.com/Nykredit/gript/pull/40)
+ 
 ## Gript 0.0.41 (25-03-2016)
 
  - implemented **#6** (Automate release process). Gript's own `gulpfile.js` contains new tasks:
