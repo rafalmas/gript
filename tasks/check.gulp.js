@@ -30,7 +30,6 @@ module.exports = function (gulp, paths) {
         check('app');
         check('app.module');
 
-        checkFile(path.join(projectRoot, paths.linters.scss));
         checkFile(path.join(projectRoot, paths.linters.eslint));
     });
 };

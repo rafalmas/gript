@@ -52,6 +52,9 @@ module.exports = function (gulp, paths) {
         },
         reportSassIssues = function (file) {
             reportIssues(file.path, file.scsslint.issues, scssReport, 'reason', 'line', 'column');
+        },
+        logMissingConfig = function (fileName) {
+            util.log(util.colors.yellow('Warning: ') + 'the ' + fileName + ' file is missing, using defaults.');
         };
 
     gulp.task('lint', ['lint-js', 'lint-ts', 'lint-scss', 'lint-html']);
@@ -72,6 +75,7 @@ module.exports = function (gulp, paths) {
         var out;
         createDir(target);
         out = fs.createWriteStream(javascriptReportFilename);
+
         return gulp.src(srcFiles)
             .pipe(eslint())
             .pipe(eslint.format())
@@ -79,17 +83,31 @@ module.exports = function (gulp, paths) {
             .pipe(eslint.failAfterError());
     });
 
+    function getScssLinterConfig() {
+        var configFile = path.join(projectRoot, paths.linters.scss),
+            config = {
+                customReport: reportSassIssues
+            };
+
+        if (fs.existsSync(configFile)) {
+            config.config = JSON.stringify(configFile);
+        } else {
+            logMissingConfig(configFile);
+        }
+
+        return config;
+    }
+
     gulp.task('lint-scss', function () {
-        var stream;
+        var stream,
+            config = getScssLinterConfig();
+
         createDir(target);
         removeDir(scssReportFilename);
         scssLintReportFile = fs.createWriteStream(scssReportFilename);
         scssReport = xml.create('checkstyle');
         stream = gulp.src(scssFiles)
-            .pipe(scsslint({
-                config: JSON.stringify(path.join(projectRoot, paths.linters.scss)),
-                customReport: reportSassIssues
-            }));
+            .pipe(scsslint(config));
 
         stream.on('end', function () {
             scssLintReportFile.write(scssReport.doc().end({pretty: true}));
@@ -99,44 +117,74 @@ module.exports = function (gulp, paths) {
         return stream;
     });
 
+    function getTsLinterConfig() {
+        var configFile = path.join(projectRoot, paths.linters.ts),
+            config = {};
+
+        if (fs.existsSync(configFile)) {
+            config.configuration = configFile;
+        } else {
+            logMissingConfig(configFile);
+        }
+
+        return config;
+    }
+
     gulp.task('lint-ts', function () {
+        var config = getTsLinterConfig();
+
         createDir(target);
         removeDir(tsReportFilename);
         tsLintReportFile = fs.createWriteStream(tsReportFilename);
         tsReport = xml.create('checkstyle');
+
         return gulp.src(tsFiles)
             .on('end', function () {
                 tsLintReportFile.write(tsReport.doc().end({pretty: true}));
                 tsLintReportFile.end();
             })
-            .pipe(tslint({configuration: path.join(projectRoot, paths.linters.ts)}))
+            .pipe(tslint(config))
             .pipe(tslint.report(reportTypeScriptIssues, {
                 summarizeFailureOutput: true,
                 emitError: false
             }));
     });
 
+    function getHtmlLinterConfig() {
+        var configFile = path.join(projectRoot, paths.linters.html),
+            config = {
+                failOnError: false
+            };
+
+        if (fs.existsSync(configFile)) {
+            config.config = configFile;
+        } else {
+            logMissingConfig(configFile);
+        }
+
+        return config;
+    }
+
     gulp.task('lint-html', function () {
+        var config = getHtmlLinterConfig();
+
         createDir(target);
         removeDir(htmlReportFilename);
         htmlLintReportFile = fs.createWriteStream(htmlReportFilename);
         htmlReport = xml.create('checkstyle');
+
         return gulp.src(htmlFiles)
             .on('end', function () {
                 htmlLintReportFile.write(htmlReport.doc().end({pretty: true}));
                 htmlLintReportFile.end();
             })
-            .pipe(htmlLint({
-                config: path.join(projectRoot, paths.linters.html),
-                failOnError: false
-            }, reportHtmlIssues));
+            .pipe(htmlLint(config, reportHtmlIssues));
     });
 
     gulp.task('lint-html-index', function () {
+        var config = getHtmlLinterConfig();
+
         return gulp.src(paths.src.index)
-            .pipe(htmlLint({
-                config: path.join(projectRoot, paths.linters.html),
-                failOnError: false
-            }));
+            .pipe(htmlLint(config));
     });
 };
