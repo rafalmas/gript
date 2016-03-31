@@ -55,7 +55,7 @@ The use of the this Gulp build tool is based on applications code being structur
     |     |---- index.html
     |     |---- app.js
     |     |---- .eslint.rc.yml
-    |     |---- config.json
+    |     |---- constants.json
     |---- /bower_components
     |---- /target
     |     |---- dist
@@ -76,8 +76,8 @@ which means:
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
-- `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
-- `app/config.json`: optional constants file from which Angular constants module will be generated
+- `app/lib`: the place for JavaScript libraries not coming from Bower. It will be excluded from linting.
+- `app/constants.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
 - `target/tmp` : contains generated files (compiled TypeScript, compiled scss styles, Angular templates etc.)
@@ -96,7 +96,7 @@ To make use of the `gript` npm module define the dependency to `gript` in the `p
 
       "dependencies": {
           "gulp": "3.9.0",
-          "gript": "~0.0.34",
+          "gript": "~0.0.38",
           ....
 
 together with your other npm dependencies. Gript is available in the [npm repository](https://www.npmjs.com/package/gript).
@@ -127,30 +127,37 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        
        // Set the config to use across the gulp build
        gulp.config = {
-           hostHeader: 'no-specified-hostHeader',
-           url: 'http://no-specified-project-url',
+           hostHeader: 'gript',
+           url: 'http://gript',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
-			   module: 'yourApp',
-			   configFile: 'app/config.json'
-		   },
-		   server: {
+               module: 'yourApp',
+               constantsFile: 'app/constants.json'
+           },
+           server: {
                port: 8080,
                host: 'localhost',
                livereload: {
                    port: 35729
                }
            },
+           serverDist: {
+               port: 8080,
+               host: 'localhost'
+           },
+           proxy: {
+               port: 8001
+           },
            mocks: {
-			   location: 'localhost',
-			   stubs: 8050,
-			   tls: 8443,
-			   admin: 8051,
-			   relativeFilesPath: true,
-			   files: [
-				   'mocks/*.{json,yaml,js}'
-			   ]
-		   },
+               location: 'localhost',
+               stubs: 8050,
+               tls: 8443,
+               admin: 8051,
+               relativeFilesPath: true,
+               files: [
+                   'mocks/*.{json,yaml,js}'
+               ]
+           },
            typeScript: {
                compilerOptions: {
                    noImplicitAny: true,
@@ -183,16 +190,20 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            },
            modernizr: {
-		       //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
-			   options: [
-				   'addTest',
-				   'html5printshiv',
-				   'testProp',
-				   'fnBind',
-				   'setClasses'
-			   ],
-			   'feature-detects': []
-		   }
+               //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
+               options: [
+                   'addTest',
+                   'html5printshiv',
+                   'testProp',
+                   'fnBind',
+                   'setClasses'
+               ],
+               'feature-detects': []
+		   },
+           fontsScan: [
+               'bower_components/font-awesome', 
+               'bower_components/bootstrap-sass-official'
+           ]
 	   };
 ```
 
@@ -205,6 +216,11 @@ These values are:
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
+- `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.
+- `proxy` proxy port configuration
+- `mocks` mock server configuration
+- `typescript` typescript compilation options
+- `minification` minification related options
 
 You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you a very simple build configuration as a starting scenario.
@@ -229,7 +245,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files.
+- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All `*.tpl.html` files are considered as templates.
 - **styles** : compiles scss files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and scss into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies
@@ -249,14 +265,14 @@ The `gulpfile.js` from Gript contains also these specific tasks:
     - **clean-partials** : removes the `target/tmp/partials` directory (Angular's `$templateCache` Javascript files)
     - **clean-styles** : removes the `target/tmp/styles` directory (compiled scss files)
     - **clean-bower** : removes the `bower_components` directory
-- **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app
+- **fonts** : searches for all `eot`, `ttf`, `woff` , `woff2` files, flattens the directory structure and copies them into your app. It will search the whole `bower_components` directory, unless you configure it otherwise in the `fontsScan` array in the config section of the `gulpfile.js`.
 - **images** : copies all image files into the `dist` directory
 - **watch** : watches the source code for changes and runs the relevant task(s) whenever something changes
 - **server** : starts a development server
 - **server:dist** : starts a server using the deployment directory (`target/dist`)
 - **mocks** : starts a server with mock services. Refer to the [Mock server](#mocks) section for guidelines.
 - **modernizr** : builds custom [Modernizr](http://modernizr.com) script and injects it into `index.html`
-- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.configFile`. The default is `app/config.json`.
+- **config** : creates an optional Angular constants module with values from the file specified in `gulp.config.app.constantsFile`. The default is `app/constants.json`.
 
 You can list all of the available tasks by running the command:
 

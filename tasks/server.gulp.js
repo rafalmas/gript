@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
     var connect = require('gulp-connect'),
         _ = require('lodash'),
@@ -12,6 +12,11 @@ module.exports = function (gulp) {
             livereload: {
                 port: 35729
             }
+        },
+        distDefaults = {
+            root: paths.target.dist.base,
+            port: 8080,
+            host: 'localhost'
         };
 
     gulp.task('server', ['mocks'], function () {
@@ -20,8 +25,7 @@ module.exports = function (gulp) {
     });
 
     gulp.task('server:dist', ['mocks'], function () {
-        connect.server({
-            root: 'target/dist'
-        });
+        var options = _.merge({}, distDefaults, gulp.config.serverDist);
+        connect.server(options);
     });
 };

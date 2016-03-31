@@ -1,8 +1,9 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
 
-    var sourcemaps = require('gulp-sourcemaps'),
+    var path = require('path'),
+        sourcemaps = require('gulp-sourcemaps'),
         ts = require('gulp-typescript'),
         _ = require('lodash'),
         defaults = {
@@ -26,12 +27,12 @@ module.exports = function (gulp) {
             tsProject = ts.createProject({
                 compilerOptions: options
             }),
-            tsResult = gulp.src(['app/**/*.ts'])
+            tsResult = gulp.src(path.join(paths.src.app, '**/*.ts'))
                 .pipe(sourcemaps.init())
                 .pipe(ts(tsProject));
 
         return tsResult.js
             .pipe(sourcemaps.write('maps'))
-            .pipe(gulp.dest('target/tmp/js'));
+            .pipe(gulp.dest(paths.target.tmp.js));
     });
 };

@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.35",
+  "version": "0.0.42",
   "description": "Gulp Build Setup",
   "dependencies": {
     "bower": "1.7.7",
@@ -22,7 +22,7 @@
     "gulp-filter": "3.0.1",
     "gulp-flatten": "0.2.0",
     "gulp-git-release": "1.0.5",
-    "gulp-htmllint": "0.0.6",
+    "gulp-htmllint": "0.0.7",
     "gulp-if": "2.0.0",
     "gulp-inject": "3.0.0",
     "gulp-livereload": "3.8.1",
@@ -59,6 +59,7 @@
     "karma-angular-filesort": "1.0.1",
     "karma-junit-reporter": "0.3.8",
     "karma-phantomjs-launcher": "0.2.3",
+	"karma-ng-html2js-preprocessor": "0.2.1",
     "lodash": "4.3.0",
     "phantomjs": "1.9.19",
     "karma-sinon": "1.0.4",

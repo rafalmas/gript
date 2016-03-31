@@ -13,7 +13,7 @@ gulp.config = {
     repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
 	app: {
         module: 'myApp',
-        configFile: 'app/config.json'
+        constantsFile: 'app/constants.json'
     },
     server: {
         port: 8080,
@@ -21,6 +21,13 @@ gulp.config = {
         livereload: {
             port: 35729
         }
+    },
+    serverDist: {
+        port: 8080,
+        host: 'localhost'  
+    },
+    proxy: {
+        port: 8001
     },
     mocks: {
         location: 'localhost',
@@ -73,5 +80,9 @@ gulp.config = {
             'setClasses'
         ],
         'feature-detects': []
-    }
+    },
+    fontsScan: [
+        'bower_components/font-awesome',
+        'bower_components/bootstrap-sass-official'
+    ]
 };

@@ -1,7 +1,8 @@
 'use strict';
 
-module.exports = function (gulp) {
+module.exports = function (gulp, paths) {
     var modernizr = require('gulp-modernizr'),
+        path = require('path'),
         _ = require('lodash'),
         modernizrDefaults = {
             options: [
@@ -13,13 +14,19 @@ module.exports = function (gulp) {
             ],
             'feature-detects': []
         },
-        files = ['app/**/*.js', 'target/tmp/js/**/*.js', 'app/**/*.css', 'app/**/*.scss', '!target/tmp/js/modernizr.js'];
+        files = [
+            path.join(paths.src.app, '**/*.js'),
+            path.join(paths.src.app, '**/*.css'),
+            path.join(paths.src.app, '**/*.scss'),
+            path.join(paths.target.tmp.js, '**/*.js'),
+            '!target/tmp/js/modernizr.js'
+        ];
 
     gulp.task('modernizr', function () {
         var modernizrOptions = _.assign({}, modernizrDefaults, gulp.config.modernizr);
 
         return gulp.src(files)
             .pipe(modernizr('js/modernizr.js', modernizrOptions))
-            .pipe(gulp.dest('target/tmp'));
+            .pipe(gulp.dest(paths.target.tmp.base));
     });
 };
