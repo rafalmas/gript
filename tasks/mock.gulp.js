@@ -2,7 +2,9 @@
 
 module.exports = function (gulp, paths) {
 
-    var mocks = require('gulp-stubby-server'),
+    var argv = require('yargs').argv,
+        mocks = require('gulp-stubby-server'),
+        util = require('gulp-util'),
         _ = require('lodash'),
         defaults = {
             location: 'localhost',
@@ -16,8 +18,12 @@ module.exports = function (gulp, paths) {
         };
 
     gulp.task('mocks', function (cb) {
-        var config = _.merge({}, defaults, gulp.config.mocks);
-
-        mocks(config, cb);
+        var config;
+        if (argv.nomocks === undefined) {
+            config = _.merge({}, defaults, gulp.config.mocks);
+            mocks(config, cb);
+        } else {
+            util.log('mock server disabled due to --nomocks');
+        }
     });
 };

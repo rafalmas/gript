@@ -360,6 +360,11 @@ By default, the `mocks` Gulp task will start together with the `server` and `ser
 Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get you started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
 To create new mocked service, simply put the new definition of the endpoint into the `mocks` folder.
+You can disable the mock server by using `--nomocks` option when executing any of the tasks, for example:
+
+```
+gulp --nomocks
+```
 
 ## External dependencies
 
