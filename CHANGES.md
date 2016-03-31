@@ -1,3 +1,7 @@
+## Gript 0.0.43 (31-03-2016)
+
+ - implemented [#60](https://github.com/Nykredit/gript/issues/60). You can prevent the mocks server form starting by using the `--nomocks` command line option.
+
 ## Gript 0.0.42 (30-03-2016)
 
  - implemented [#46](https://github.com/Nykredit/gript/issues/46). From now on, Gript will continue with the default rules and issue a warning if any of the linter configuration is missing:
