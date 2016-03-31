@@ -70,7 +70,8 @@
     "sinon": "1.17.3",
     "vinyl-source-stream": "1.1.0",
     "wiredep": "3.0.0",
-    "xmlbuilder": "4.2.1"
+    "xmlbuilder": "4.2.1",
+    "yargs":"4.3.2"
   },
   "keywords": [
     "gulp",
