@@ -76,7 +76,7 @@ which means:
 - `app/components`: contains the components (directives, services etc.) embedded in the application
 - `app/app.js` or `app/App.ts` : the entry point of the [Angular](https://angularjs.org) application
 - `app/resources`: the place for other resources, like translation files. This will be copied to /target/dist
-- `app/lib`: the place for JavaScript libraries not coming for Bower. It will be excluded from linting.
+- `app/lib`: the place for JavaScript libraries not coming from Bower. It will be excluded from linting.
 - `app/constants.json`: optional constants file from which Angular constants module will be generated
 - `bower_components` : libraries downloaded by [Bower](http://bower.io/)
 - `node_modules` : tools downloaded by [npm](https://www.npmjs.org/)
@@ -127,10 +127,14 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        
        // Set the config to use across the gulp build
        gulp.config = {
-           hostHeader: 'no-specified-hostHeader',
-           url: 'http://no-specified-project-url',
+           hostHeader: 'gript',
+           url: 'http://gript',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
+               module: 'yourApp',
+               constantsFile: 'app/constants.json'
+           },
+           server: {
 			   module: 'yourApp',
 			   configFile: 'app/config.json'
 		   },
@@ -146,16 +150,19 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                port: 8080,
                host: 'localhost'
            },
+           proxy: {
+               port: 8001
+           },
            mocks: {
-			   location: 'localhost',
-			   stubs: 8050,
-			   tls: 8443,
-			   admin: 8051,
-			   relativeFilesPath: true,
-			   files: [
-				   'mocks/*.{json,yaml,js}'
-			   ]
-		   },
+               location: 'localhost',
+               stubs: 8050,
+               tls: 8443,
+               admin: 8051,
+               relativeFilesPath: true,
+               files: [
+                   'mocks/*.{json,yaml,js}'
+               ]
+           },
            typeScript: {
                compilerOptions: {
                    noImplicitAny: true,
@@ -188,15 +195,15 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                }
            },
            modernizr: {
-		       //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
-			   options: [
-				   'addTest',
-				   'html5printshiv',
-				   'testProp',
-				   'fnBind',
-				   'setClasses'
-			   ],
-			   'feature-detects': []
+               //cssprefix: true, // add this line to fix conflicts with bootstrap (e.g not adding class 'hidden' to html tag)
+               options: [
+                   'addTest',
+                   'html5printshiv',
+                   'testProp',
+                   'fnBind',
+                   'setClasses'
+               ],
+               'feature-detects': []
 		   },
            fontsScan: [
                'bower_components/font-awesome', 
@@ -213,8 +220,13 @@ These values are:
 - `hostHeader` host header
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
-- `server` configuration options for the web server like port number, live reload port number, host name etc.
 - `partials` is a glob pattern to specify what files should bne considered as Angular `$templateCache` templates. Refer to the [Partials](#partials) section for details.
+- `server` configuration options for the web server like port number, live reload port number, host name etc.
+- `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.
+- `proxy` proxy port configuration
+- `mocks` mock server configuration
+- `typescript` typescript compilation options
+- `minification` minification related options
  
 You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you a very simple build configuration as a starting scenario.
@@ -377,6 +389,11 @@ By default, the `mocks` Gulp task will start together with the `server` and `ser
 Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get you started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
 To create new mocked service, simply put the new definition of the endpoint into the `mocks` folder.
+You can disable the mock server by using `--nomocks` option when executing any of the tasks, for example:
+
+```
+gulp --nomocks
+```
 
 ## External dependencies
 
