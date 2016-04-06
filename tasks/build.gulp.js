@@ -129,11 +129,11 @@ module.exports = function (gulp, paths) {
     gulp.task('staticFiles', function () {
         var staticFiles = ['app/**/*.html', 'app/**/*.json', '!app/index.html'];
 
-        //exclude partials from copying
         if (!_.has(gulp.config, 'partials')) {
             gulp.config.partials = partialsDefaults;
         }
 
+        //exclude partials from copying
         gulp.config.partials.map(function (file) {
             if (file.startsWith('!')) {
                 staticFiles.push(file.substr(1));
