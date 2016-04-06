@@ -1,3 +1,10 @@
+## Gript 0.0.44 (06-04-2016)
+`$templateCache` partials are now configurable.
+Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. 
+You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`.
+This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial.
+
+
 ## Gript 0.0.43 (31-03-2016)
 
  - implemented [#60](https://github.com/Nykredit/gript/issues/60). You can prevent the mocks server form starting by using the `--nomocks` command line option.

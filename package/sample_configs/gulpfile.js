@@ -15,6 +15,7 @@ gulp.config = {
         module: 'myApp',
         constantsFile: 'app/constants.json'
     },
+    partials: ['app/**/*.html'],
     server: {
         port: 8080,
         host: 'localhost',
