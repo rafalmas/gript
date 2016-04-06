@@ -142,7 +142,7 @@ module.exports = function (gulp, paths) {
             }
         });
 
-        return orderedSrc(staticFiles, {base: '.'})
+        return orderedSrc(staticFiles, {base: 'app'})
             .pipe(gulp.dest(paths.target.dist.base))
             .pipe(gulp.dest(paths.target.tmp.base))
             .pipe(size());
