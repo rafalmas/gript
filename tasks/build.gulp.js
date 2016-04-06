@@ -11,6 +11,7 @@ module.exports = function (gulp, paths) {
         htmlmin = require('gulp-htmlmin'),
         naturalSort = require('gulp-natural-sort'),
         ngHtml2js = require('gulp-ng-html2js'),
+        orderedSrc = require('gulp-src-ordered-globs'),
         path = require('path'),
         sass = require('gulp-sass'),
         sequence = require('run-sequence').use(gulp),
@@ -26,6 +27,7 @@ module.exports = function (gulp, paths) {
                 caseSensitive: true
             }
         },
+        partialsDefaults = ['app/**/*.html'],
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
@@ -74,7 +76,13 @@ module.exports = function (gulp, paths) {
     gulp.task('partials', ['lint-html'], function () {
         var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
 
-        return gulp.src(paths.src.htmlPartials)
+        if (!_.has(gulp.config, 'partials')) {
+            gulp.config.partials = partialsDefaults;
+        }
+
+        gulp.config.partials.push('!' + paths.src.index);
+
+        return gulp.src(gulp.config.partials)
             .pipe(htmlmin(minificationOptions.html))
             .pipe(ngHtml2js({
                 moduleName: gulp.config.app.module
@@ -119,7 +127,22 @@ module.exports = function (gulp, paths) {
     });
 
     gulp.task('staticFiles', function () {
-        return gulp.src(paths.src.staticFiles)
+        var staticFiles = ['app/**/*.html', 'app/**/*.json', '!app/index.html'];
+
+        //exclude partials from copying
+        if (!_.has(gulp.config, 'partials')) {
+            gulp.config.partials = partialsDefaults;
+        }
+
+        gulp.config.partials.map(function (file) {
+            if (file.startsWith('!')) {
+                staticFiles.push(file.substr(1));
+            } else {
+                staticFiles.push('!' + file);
+            }
+        });
+
+        return orderedSrc(staticFiles, {base: '.'})
             .pipe(gulp.dest(paths.target.dist.base))
             .pipe(gulp.dest(paths.target.tmp.base))
             .pipe(size());

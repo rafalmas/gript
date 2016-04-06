@@ -41,6 +41,7 @@
     "gulp-scss-lint": "0.3.9",
     "gulp-size": "2.0.0",
     "gulp-sourcemaps": "1.6.0",
+    "gulp-src-ordered-globs": "1.0.3",
     "gulp-stubby-server": "0.1.6",
     "gulp-tslint": "4.3.1",
     "gulp-util": "3.0.7",

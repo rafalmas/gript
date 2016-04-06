@@ -11,12 +11,10 @@ var gulp = require('gulp'),
             index: 'app/index.html',
             scss: 'app/app.scss',
             constants: 'app/constants.json',
-            htmlPartials: ['app/**/*.tpl.html', '!app/index.html'],
             img: 'app/**/img/**/*',
             resources: 'app/resources/**/*',
             lib: 'app/lib/**/*',
             fonts: '**/*.{eot,ttf,woff,woff2}',
-            staticFiles: ['app/**/*.html', 'app/**/*.json', '!app/**/*.tpl.html', '!app/index.html'],
             mocks: 'mocks/*.{json,yaml,js}'
         },
         target: {
@@ -79,6 +77,7 @@ gulp.config = {
     app: {
         module: 'gript'
     },
+    partials: ['app/**/*.html'],
     server: {
         port: 8080,
         host: 'localhost',

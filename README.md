@@ -134,6 +134,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
 			   module: 'yourApp',
 			   configFile: 'app/config.json'
 		   },
+		   partials: ['app/**/*.html'],
 		   server: {
                port: 8080,
                host: 'localhost',
@@ -213,7 +214,8 @@ These values are:
 - `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
-
+- `partials` is a glob pattern to specify what files should bne considered as Angular `$templateCache` templates. Refer to the [Partials](#partials) section for details.
+ 
 You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you a very simple build configuration as a starting scenario.
 
@@ -237,7 +239,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All `*.tpl.html` files are considered as templates.
+- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All files matching `partials` config glob are considered as templates.
 - **styles** : compiles scss files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and scss into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies
@@ -269,6 +271,21 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 You can list all of the available tasks by running the command:
 
     gulp --tasks
+
+<a name="partials"></a>
+## Partials
+The `partials` task will create Angular `$templateCache` files from your HTML files. The resulting JavaScript files will be created in the `target/tmp/partials` directory.
+These files will then be injected into the `index.html` file, according to `<!-- inject:partials --><!-- endinject -->` markings.
+The `dist` task will minify and concatenate them with other JavaScript files from your application.
+Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`. This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial. 
+
+For example:
+```
+partials: ['app/**/*.html', '!app/sections/welcome/testOauth.html']
+```
+ 
+will generate `$templateCache` from all HTML files except the `app/sections/welcome/testOauth.html`.
+Take note that all files excluded from partials generation will be just copied to the `target` directory. At the same time, all files considered as partials will not be copied - after the conversion to JavaScript we don't need them anymore.
 
 <a name="linting"></a>
 ## Linting
