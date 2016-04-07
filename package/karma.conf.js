@@ -28,6 +28,14 @@ module.exports = function (config) {
                 'target/tmp/js/**/*.js'
             ]
         },
+        plugins: [
+            'karma-jasmine',
+            'karma-angular-filesort',
+            'karma-phantomjs-launcher',
+            'karma-junit-reporter',
+            'karma-coverage',
+            'karma-ng-html2js-preprocessor'
+        ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
