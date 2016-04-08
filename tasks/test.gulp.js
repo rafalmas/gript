@@ -17,7 +17,7 @@ module.exports = function (gulp, paths) {
         });
         new Server({
             configFile: __dirname + '/karma.conf.js',
-            files: bowerDeps.js.concat('node_modules/sinon/pkg/sinon.js', filenames.get('js')),
+            files: bowerDeps.js.concat(filenames.get('js')),
             singleRun: true
         }, function () {
             done();

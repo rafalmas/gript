@@ -4,7 +4,7 @@ module.exports = function (config) {
     'use strict';
     config.set({
         basePath: '../../../',
-        frameworks: ['jasmine', 'angular-filesort'],
+        frameworks: ['jasmine', 'sinon', 'angular-filesort'],
         preprocessors: {
             'app/!(patch)/**/!(*_test).js': ['coverage'],
             'target/tmp/js/**/!(all|*_test).js': ['coverage']
@@ -30,6 +30,7 @@ module.exports = function (config) {
         },
         plugins: [
             'karma-jasmine',
+            'karma-sinon',
             'karma-angular-filesort',
             'karma-phantomjs-launcher',
             'karma-junit-reporter',

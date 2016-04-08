@@ -3,7 +3,7 @@
 module.exports = function (config) {
     config.set({
         basePath: '../',
-        frameworks: ['jasmine', 'angular-filesort'],
+        frameworks: ['jasmine', 'sinon', 'angular-filesort'],
         files: ['**/*/*_test.js'],
         exclude: ['**/*/bower_components'],
         preprocessors: {
@@ -30,6 +30,7 @@ module.exports = function (config) {
         },
         plugins: [
             'karma-jasmine',
+            'karma-sinon',
             'karma-angular-filesort',
             'karma-phantomjs-launcher',
             'karma-junit-reporter',
