@@ -1,3 +1,12 @@
+## Gript 0.0.47 (08-04-2016)
+
+ - dependencies updated:
+    - phantomjs: 2.1,
+    - karma": 0.13.22,
+    - karma-coverage: 0.5.5,
+    - karma-jasmine: 0.3.8,
+    - karma-spec-reporter: 0.0.26
+
 ## Gript 0.0.46 (08-04-2016)
 
  - fixed [#66](https://github.com/Nykredit/gript/issues/66) - missing Karma plugins in the `package/karma.conf.js` 
