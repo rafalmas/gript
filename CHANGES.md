@@ -1,3 +1,11 @@
+## Gript 0.0.46 (08-04-2016)
+
+ - fixed [#66](https://github.com/Nykredit/gript/issues/66) - missing Karma plugins in the `package/karma.conf.js` 
+ - implemented [#42](https://github.com/Nykredit/gript/issues/42). Sinon is now loaded as Karma plugin in `karma.conf.js`. Reference to aboslute path to `sinon.js` in the `test` task removed.
+ 
+## Gript 0.0.45 (07-04-2016)
+fixed a `dist` path typo
+
 ## Gript 0.0.44 (06-04-2016)
 `$templateCache` partials are now configurable.
 Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. 
