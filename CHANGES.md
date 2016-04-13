@@ -1,3 +1,7 @@
+## Gript 0.0.48 (13-04-2016)
+
+- implemented [#67](https://github.com/Nykredit/gript/issues/67). Karma settings are now exposed in the `gulpfile.js`, so you can run your tests in Chrome, for example. The `tasks/test.gulp.js` contains the default Karma configuration. 
+
 ## Gript 0.0.47 (08-04-2016)
 
  - dependencies updated:

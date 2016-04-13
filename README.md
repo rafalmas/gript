@@ -263,7 +263,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 	- **lint-scss**
 	- **lint-ts**
 	- **lint-html**
-- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
+- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Refer to the [Testing](#testing) section for details.
 - **clean** : removes the whole `target` directory (temporary generated files and distribution package)
     - **clean-dist** : removes the `target/dist` directory (the distribution package)
     - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
@@ -283,6 +283,29 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 You can list all of the available tasks by running the command:
 
     gulp --tasks
+
+<a name="testing"></a>
+## Testing
+Gript will automatically run your tests using [Karma](https://karma-runner.github.io). Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
+Your tests will be executed using headless, [PhantomJS](http://phantomjs.org) browser. You can customize this behavior altogether with other Karma options in the `karma` section of the `gulpfile.js`.
+For example, if you need to run your tests under Chrome browser, amend the default configuration:
+ 
+ ```
+  karma: {
+         frameworks: ['jasmine', 'sinon', 'angular-filesort'],
+         plugins: [
+             'karma-jasmine',
+             'karma-sinon',
+             'karma-angular-filesort',
+             'karma-phantomjs-launcher',
+             'karma-chrome-launcher',
+             'karma-junit-reporter',
+             'karma-coverage',
+             'karma-ng-html2js-preprocessor'
+         ],
+         browsers: ['Chrome']
+     }
+ ```
 
 <a name="partials"></a>
 ## Partials
