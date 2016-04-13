@@ -209,6 +209,9 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                'bower_components/font-awesome', 
                'bower_components/bootstrap-sass-official'
            ]
+           karma: {
+               browsers: ['PhantomJS']
+           }
 	   };
 ```
 
