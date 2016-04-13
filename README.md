@@ -291,6 +291,7 @@ You can list all of the available tasks by running the command:
 ## Testing
 Gript will automatically run your tests using [Karma](https://karma-runner.github.io). Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
 Your tests will be executed using headless, [PhantomJS](http://phantomjs.org) browser. You can customize this behavior altogether with other Karma options in the `karma` section of the `gulpfile.js`.
+Refer to [Karma Configuration docs](https://karma-runner.github.io/0.13/config/configuration-file.html) for possible options and values. 
 For example, if you need to run your tests under Chrome browser, amend the default configuration:
  
  ```
