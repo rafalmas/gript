@@ -64,7 +64,8 @@ module.exports = function (gulp, paths) {
     gulp.task('inject-partials', ['partials'], function () {
         return gulp.src(paths.src.index)
             .pipe(gulpInject(
-                gulp.src(path.join(paths.target.tmp.partials, '**/*.js'), {read: false}),
+                gulp.src(path.join(paths.target.tmp.partials, '**/*.js'))
+                    .pipe(naturalSort()),
                 {
                     starttag: '<!-- inject:partials -->',
                     relative: true
