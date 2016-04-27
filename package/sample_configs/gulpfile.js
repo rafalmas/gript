@@ -8,8 +8,6 @@ require('gript')(gulp);
 
 // Set the config to use across the gulp build
 gulp.config = {
-    hostHeader: 'no-specified-hostHeader',
-    url: 'http://no-specified-project-url',
     repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
 	app: {
         module: 'myApp',
@@ -28,7 +26,9 @@ gulp.config = {
         host: 'localhost'  
     },
     proxy: {
-        port: 8001
+        port: 8001,
+        hostHeader: 'no-specified-hostHeader',
+        targetURL: 'http://no-specified-project-url'
     },
     mocks: {
         location: 'localhost',

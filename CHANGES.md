@@ -1,3 +1,7 @@
+## Gript 0.0.49 (27-04-2016)
+
+- proxy task is now optional. It will start only if you specify `proxy` section in your `gulpfile.js`. 
+
 ## Gript 0.0.48 (13-04-2016)
 
 - implemented [#67](https://github.com/Nykredit/gript/issues/67). Karma settings are now exposed in the `gulpfile.js`, so you can run your tests in Chrome, for example. The `tasks/test.gulp.js` contains the default Karma configuration. 
