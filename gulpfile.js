@@ -6,7 +6,6 @@ var bump = require('gulp-bump'),
     ex = require('gulp-expect-file'),
     merge = require('merge-stream'),
     path = require('path'),
-    replace = require('gulp-replace'),
     sequence = require('run-sequence').use(gulp),
     spawn = require('child_process').spawn,
     tagVersion = require('gulp-tag-version'),
@@ -18,12 +17,10 @@ var bump = require('gulp-bump'),
             index: 'app/index.html',
             scss: 'app/app.scss',
             constants: 'app/constants.json',
-            htmlPartials: ['app/**/*.tpl.html', '!app/index.html'],
             img: 'app/**/img/**/*',
             resources: 'app/resources/**/*',
             lib: 'app/lib/**/*',
             fonts: '**/*.{eot,ttf,woff,woff2}',
-            staticFiles: ['app/**/*.html', 'app/**/*.json', '!app/**/*.tpl.html', '!app/index.html'],
             mocks: 'mocks/*.{json,yaml,js}'
         },
         target: {
@@ -80,12 +77,11 @@ gulp.task('dist:serve', ['dist', 'server:dist']);
 
 // Set the config to use across the gulp build
 gulp.config = {
-    url: 'http://gript',
-    hostHeader: 'gript',
     repository: 'http://nykredit.github.com/gript.git',
     app: {
         module: 'gript'
     },
+    partials: ['app/**/*.html'],
     server: {
         port: 8080,
         host: 'localhost',
@@ -98,7 +94,9 @@ gulp.config = {
         host: 'localhost'
     },
     proxy: {
-        port: 8001
+        port: 8001,
+        targetURL: 'http://gript',
+        hostHeader: 'gript'
     },
     mocks: {
         location: 'localhost',
@@ -228,12 +226,7 @@ gulp.task('verify-package-foundation', ['build'], function () {
 
 gulp.task('create-package', ['dist'], function () {
     gulp.src(['tasks/*.js', '!tasks/karma.conf.js'])
-        .pipe(gulp.dest('target/gript/tasks'))
-        .on('finish', function () {
-            gulp.src('target/gript/tasks/test.gulp.js')
-                .pipe(replace('node_modules/sinon', 'node_modules/gript/node_modules/sinon'))
-                .pipe(gulp.dest('target/gript/tasks'));
-        });
+        .pipe(gulp.dest('target/gript/tasks'));
     gulp.src('package/sample_configs/**/*')
         .pipe(gulp.dest('target/gript/sample_configs'));
     gulp.src('package/sample_configs/.*')

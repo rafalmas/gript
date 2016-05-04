@@ -10,12 +10,10 @@ module.exports = function (gulp) {
                 index: 'app/index.html',
                 scss: 'app/app.scss',
                 config: 'app/config.json',
-                htmlPartials: ['app/**/*.tpl.html', '!app/index.html'],
                 img: 'app/**/img/**/*',
                 resources: 'app/resources/**/*',
                 lib: 'app/lib/**/*',
                 fonts: '**/*.{eot,ttf,woff,woff2}',
-                staticFiles: ['app/**/*.html', 'app/**/*.json', '!app/**/*.tpl.html', '!app/index.html'],
                 mocks: 'mocks/*.{json,yaml,js}'
             },
             target: {

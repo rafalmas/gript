@@ -1,3 +1,39 @@
+## Gript 0.0.49 (27-04-2016)
+
+- proxy task is now optional. It will start only if you specify `proxy` section in your `gulpfile.js`. 
+
+## Gript 0.0.48 (13-04-2016)
+
+- implemented [#67](https://github.com/Nykredit/gript/issues/67). Karma settings are now exposed in the `gulpfile.js`, so you can run your tests in Chrome, for example. The `tasks/test.gulp.js` contains the default Karma configuration. 
+
+## Gript 0.0.47 (08-04-2016)
+
+ - dependencies updated:
+    - phantomjs: 2.1,
+    - karma": 0.13.22,
+    - karma-coverage: 0.5.5,
+    - karma-jasmine: 0.3.8,
+    - karma-spec-reporter: 0.0.26
+
+## Gript 0.0.46 (08-04-2016)
+
+ - fixed [#66](https://github.com/Nykredit/gript/issues/66) - missing Karma plugins in the `package/karma.conf.js` 
+ - implemented [#42](https://github.com/Nykredit/gript/issues/42). Sinon is now loaded as Karma plugin in `karma.conf.js`. Reference to aboslute path to `sinon.js` in the `test` task removed.
+ 
+## Gript 0.0.45 (07-04-2016)
+fixed a `dist` path typo
+
+## Gript 0.0.44 (06-04-2016)
+`$templateCache` partials are now configurable.
+Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. 
+You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`.
+This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial.
+
+
+## Gript 0.0.43 (31-03-2016)
+
+ - implemented [#60](https://github.com/Nykredit/gript/issues/60). You can prevent the mocks server form starting by using the `--nomocks` command line option.
+
 ## Gript 0.0.42 (30-03-2016)
 
  - implemented [#46](https://github.com/Nykredit/gript/issues/46). From now on, Gript will continue with the default rules and issue a warning if any of the linter configuration is missing:

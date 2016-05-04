@@ -127,14 +127,17 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        
        // Set the config to use across the gulp build
        gulp.config = {
-           hostHeader: 'gript',
-           url: 'http://gript',
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
            app: {
                module: 'yourApp',
                constantsFile: 'app/constants.json'
            },
            server: {
+			   module: 'yourApp',
+			   configFile: 'app/config.json'
+		   },
+		   partials: ['app/**/*.html'],
+		   server: {
                port: 8080,
                host: 'localhost',
                livereload: {
@@ -146,7 +149,9 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                host: 'localhost'
            },
            proxy: {
-               port: 8001
+               port: 8001,
+               hostHeader: 'gript',
+               targetURL: 'http://gript'
            },
            mocks: {
                location: 'localhost',
@@ -204,6 +209,9 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                'bower_components/font-awesome', 
                'bower_components/bootstrap-sass-official'
            ]
+           karma: {
+               browsers: ['PhantomJS']
+           }
 	   };
 ```
 
@@ -212,16 +220,15 @@ Be sure to set values for the configuration in your copy of the `sample_configs/
 These values are:
 
 - `app.module` : mandatory name of the project. It's being used as a module name when generating Angular modules, like `$templateCache` or constants modules.
-- `hostHeader` host header
-- `url` the url of your project
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
+- `partials` is a glob pattern to specify what files should bne considered as Angular `$templateCache` templates. Refer to the [Partials](#partials) section for details.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
 - `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.
-- `proxy` proxy port configuration
+- `proxy` optional proxy port, host header and target URL configuration. The proxy will start only if you specify `proxy` section in your `gulpfile.js`.
 - `mocks` mock server configuration
 - `typescript` typescript compilation options
 - `minification` minification related options
-
+ 
 You may kickstart your project by copying `sample_configs/gulpfile.js` to the root of your own project.
 This gives you a very simple build configuration as a starting scenario.
 
@@ -245,7 +252,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 - **build** : builds the application for the development
 - **dist** : builds and minifies the application for the deployment. The application will be copied to `target/dist` directory.
 - **ts** : compiles your app TypeScript files
-- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All `*.tpl.html` files are considered as templates.
+- **partials** : compiles HTML partials into Angular's `$templateCache` Javascript files. All files matching `partials` config glob are considered as templates.
 - **styles** : compiles scss files
 - **inject** : injects Bower dependencies, compiled HTML partials, TypeScript and scss into your app's `index.html`. Files will be injected according to the marking in the `index.html` file. Refer to the [Files injection](#injection) section of this readme for details.
     - **inject-bower** : downloads and injects [Bower](http://bower.io/) dependencies
@@ -257,7 +264,7 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 	- **lint-scss**
 	- **lint-ts**
 	- **lint-html**
-- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
+- **test** : runs the unit tests through [Karma](http://karma-runner.github.io) - NOTE: fails if no tests are available. Refer to the [Testing](#testing) section for details.
 - **clean** : removes the whole `target` directory (temporary generated files and distribution package)
     - **clean-dist** : removes the `target/dist` directory (the distribution package)
     - **clean-tmp** : removes the `target/tmp` directory (all temporary generated files)
@@ -277,6 +284,45 @@ The `gulpfile.js` from Gript contains also these specific tasks:
 You can list all of the available tasks by running the command:
 
     gulp --tasks
+
+<a name="testing"></a>
+## Testing
+Gript will automatically run your tests using [Karma](https://karma-runner.github.io). Your tests can be written in JavaScript or TypeScript (they will be compiled first). Tests filenames must end in `test` or `Test` (for example `PortfolioServiceTest.ts`, `PortfolioService_test.ts`, `portfolioService_test.js`).
+Your tests will be executed using headless, [PhantomJS](http://phantomjs.org) browser. You can customize this behavior altogether with other Karma options in the `karma` section of the `gulpfile.js`.
+Refer to [Karma Configuration docs](https://karma-runner.github.io/0.13/config/configuration-file.html) for possible options and values. 
+For example, if you need to run your tests under Chrome browser, amend the default configuration:
+ 
+ ```
+  karma: {
+         frameworks: ['jasmine', 'sinon', 'angular-filesort'],
+         plugins: [
+             'karma-jasmine',
+             'karma-sinon',
+             'karma-angular-filesort',
+             'karma-phantomjs-launcher',
+             'karma-chrome-launcher',
+             'karma-junit-reporter',
+             'karma-coverage',
+             'karma-ng-html2js-preprocessor'
+         ],
+         browsers: ['Chrome']
+     }
+ ```
+
+<a name="partials"></a>
+## Partials
+The `partials` task will create Angular `$templateCache` files from your HTML files. The resulting JavaScript files will be created in the `target/tmp/partials` directory.
+These files will then be injected into the `index.html` file, according to `<!-- inject:partials --><!-- endinject -->` markings.
+The `dist` task will minify and concatenate them with other JavaScript files from your application.
+Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`. This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial. 
+
+For example:
+```
+partials: ['app/**/*.html', '!app/sections/welcome/testOauth.html']
+```
+ 
+will generate `$templateCache` from all HTML files except the `app/sections/welcome/testOauth.html`.
+Take note that all files excluded from partials generation will be just copied to the `target` directory. At the same time, all files considered as partials will not be copied - after the conversion to JavaScript we don't need them anymore.
 
 <a name="linting"></a>
 ## Linting
@@ -368,6 +414,11 @@ By default, the `mocks` Gulp task will start together with the `server` and `ser
 Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get you started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
 To create new mocked service, simply put the new definition of the endpoint into the `mocks` folder.
+You can disable the mock server by using `--nomocks` option when executing any of the tasks, for example:
+
+```
+gulp --nomocks
+```
 
 ## External dependencies
 

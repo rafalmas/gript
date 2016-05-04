@@ -1,16 +1,20 @@
 'use strict';
 
 module.exports = function (gulp, paths) {
-    var ngConstant = require('gulp-ng-constant');
+    var fs = require('fs'),
+        ngConstant = require('gulp-ng-constant'),
+        _ = require('lodash');
 
     gulp.task('config', function () {
-        var src = gulp.config.app && gulp.config.app.constantsFile ? gulp.config.app.constantsFile : paths.src.constants;
+        var src = (_.has(gulp.config, 'app') && _.has(gulp.config.app, 'constantsFile')) ? gulp.config.app.constantsFile : paths.src.constants;
 
-        gulp.src(src)
-            .pipe(ngConstant({
-                name: gulp.config.app.module,
-                deps: false
-            }))
-            .pipe(gulp.dest(paths.target.tmp.js));
+        if (fs.existsSync(src)) {
+            gulp.src(src)
+                .pipe(ngConstant({
+                    name: gulp.config.app.module,
+                    deps: false
+                }))
+                .pipe(gulp.dest(paths.target.tmp.js));
+        }
     });
 };
