@@ -105,7 +105,7 @@ module.exports = function (gulp, paths) {
             .pipe(gulp.dest(paths.src.app));
     });
 
-    gulp.task('fonts', function () {
+    gulp.task('fonts', ['bower-download'], function () {
         var foldersToScan = gulp.config.hasOwnProperty('fontsScan') ? gulp.config.fontsScan : [ paths.bower ],
             folders = foldersToScan.map(function (folder) {
                 util.log('extracting fonts from ' + folder);
@@ -172,4 +172,3 @@ module.exports = function (gulp, paths) {
         util.log(util.colors.blue.bold("Gript building " + json.name + " " + json.version + "..."));
     });
 };
-
