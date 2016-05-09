@@ -31,7 +31,7 @@ module.exports = function (gulp, paths) {
         projectRoot = process.cwd();
 
     gulp.task('inject', function (callback) {
-        sequence('check', 'config', 'inject-bower', 'inject-styles', 'inject-partials', 'modernizr', 'inject-js', callback);
+        sequence('check', 'config', 'inject-bower', 'inject-styles', 'inject-partials', 'multiMocks', 'modernizr', 'inject-js', callback);
     });
 
     gulp.task('inject-bower', ['bower-download'], function () {

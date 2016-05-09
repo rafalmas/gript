@@ -10,6 +10,8 @@
     "angular": "~1.4",
     "angular-bootstrap": "~0.13",
     "angular-fontawesome": "~0.4",
+    "angular-mocks": "1.2.29",
+    "angular-multimocks": "0.6.8",
     "angular-resource": "~1.4",
     "angular-route": "~1.4",
     "angular-sanitize": "~1.4",

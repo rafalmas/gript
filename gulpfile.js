@@ -98,16 +98,6 @@ gulp.config = {
         targetURL: 'http://gript',
         hostHeader: 'gript'
     },
-    mocks: {
-        location: 'localhost',
-        stubs: 8050,
-        tls: 8443,
-        admin: 8051,
-        relativeFilesPath: true,
-        files: [
-            'mocks/*.{json,yaml,js}'
-        ]
-    },
     typeScript: {
         compilerOptions: {
             noImplicitAny: true,

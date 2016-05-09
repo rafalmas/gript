@@ -31,14 +31,19 @@ gulp.config = {
         targetURL: 'http://no-specified-project-url'
     },
     mocks: {
-        location: 'localhost',
-        stubs: 8050,
-        tls: 8443,
-        admin: 8051,
-        relativeFilesPath: true,
-        files: [
-            'mocks/*.{json,yaml,js}'
-        ]
+        stubby: {
+            location: 'localhost',
+            stubs: 8050,
+            tls: 8443,
+            admin: 8051,
+            relativeFilesPath: true,
+            files: [
+                'mocks/*.{json,yaml,js}'
+            ]
+        },
+        multimocks: {
+            src: 'multiMocks'
+        }
     },
     typeScript: {
         compilerOptions: {

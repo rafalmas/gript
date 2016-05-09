@@ -154,14 +154,19 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
                targetURL: 'http://gript'
            },
            mocks: {
-               location: 'localhost',
-               stubs: 8050,
-               tls: 8443,
-               admin: 8051,
-               relativeFilesPath: true,
-               files: [
-                   'mocks/*.{json,yaml,js}'
-               ]
+               stubby: {
+                   location: 'localhost',
+                   stubs: 8050,
+                   tls: 8443,
+                   admin: 8051,
+                   relativeFilesPath: true,
+                   files: [
+                       'mocks/*.{json,yaml,js}'
+                   ]
+               },
+               multimocks: {
+                   src: 'multiMocks'
+               }
            },
            typeScript: {
                compilerOptions: {
@@ -403,8 +408,33 @@ Refer to `app/index.html` or `sample_configs/index.html` for an example how to d
 
 <a name="mocks"></a>
 ## Mock server
-The mock server implementation in Gript is using [stubby4node](https://github.com/mrak/stubby4node).
-It's a highly configurable server for mocking/stubbing external systems during development.
+There are two mock engines implementations included in Gript: [stubby4node](https://github.com/mrak/stubby4node) and [Angular-Multimocks](https://github.com/wongatech/angular-multimocks).
+[stubby4node](https://github.com/mrak/stubby4node) allows you to have a mock server running during the development, using the standard `gulp` or `gulp server` tasks.
+[Angular-Multimocks](https://github.com/wongatech/angular-multimocks), on the other hand - will generate some source code which will enable mocking services within your application (useful when you want to deploy your application with mocked services).
+You setup the mock configuration in the `mocks` section in the `gulpfile.js`:
+    
+```
+mocks: {
+    stubby: {
+        location: 'localhost',
+        stubs: 8050,
+        tls: 8443,
+        admin: 8051,
+        relativeFilesPath: true,
+        files: [
+            'mocks/*.{json,yaml,js}'
+        ]
+    },
+    multimocks: {
+        src: 'multiMocks'
+    }
+}
+```
+
+You have an option to start both of them, just a single one or none. If the configuration for the specific mock engine is not present in the `gulpfile.js` - it will not be started.
+
+### stubby4node
+[stubby4node](https://github.com/mrak/stubby4node) It's a highly configurable server for mocking/stubbing external systems during development.
 Gript takes endpoint descriptors in the form of a YAML or JSON files that tell it how to respond to incoming requests.
 For each incoming request, configured endpoints are checked in-order until a match is found.
 The endpoints can contain regular expressions, any of HTTP methods, queries, headers, dynamic token interpolation, defined fake response latency and so on.
@@ -414,12 +444,25 @@ By default, the `mocks` Gulp task will start together with the `server` and `ser
 Gript contains some simple endpoints definitions in the `mocks` and `sample_config/mocks` directory to get you started.
 You can customize the mocks directory name and server ports in the `mocks` section of your `gulpfile.js`.
 To create new mocked service, simply put the new definition of the endpoint into the `mocks` folder.
-You can disable the mock server by using `--nomocks` option when executing any of the tasks, for example:
+You can disable the runtime mock server by using `--nomocks` option when executing any of the tasks, for example:
 
 ```
 gulp --nomocks
 ```
 
+### Angular-multimocks
+[Angular-Multimocks](https://github.com/wongatech/angular-multimocks) lets you test how your app behaves with different responses from an API. Angular Multimocks allows you to define sets of mock API responses for different scenarios as JSON files.
+The only mandatory configuration option exposed for Angular-multimocks is the `src`: the directory to load mock files from.
+Gript will read your mock files and generate the needed source files (mock scenarios) into the `multimocks.js` file in the `target/tmp/js` folder. They will be minified and concatenated with your other JS files when doing `dist`.
+Take note that if you want [Angular-Multimocks](https://github.com/wongatech/angular-multimocks) to do it's job, you need to include `angular-multimocks` and `Angular Mocks` (which [Angular-Multimocks](https://github.com/wongatech/angular-multimocks) depends on) in your `bower.rc`:
+
+```
+ "angular-mocks": "1.2.29",
+ "angular-multimocks": "0.6.8",
+```
+The `sample_configs` contains `multiMocks` directory with example `mockResources.json` and some mock responses to get you started.
+Refer to the [Angular-Multimocks](https://github.com/wongatech/angular-multimocks) documentation for more details.
+     
 ## External dependencies
 
 Gript makes use of [node-gyp](https://github.com/nodejs/node-gyp) which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js.

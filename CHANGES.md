@@ -1,3 +1,9 @@
+## Gript 0.0.50 (09-05-2016)
+
+- implemented [#68](https://github.com/Nykredit/gript/issues/68) "Making an api mock without starting a real server"
+There are two mock engines implementations included in Gript now: runtime [stubby4node](https://github.com/mrak/stubby4node) and generation-based [Angular-Multimocks](https://github.com/wongatech/angular-multimocks).
+You have an option to start both of them, just a single one or none.
+
 ## Gript 0.0.49 (27-04-2016)
 
 - proxy task is now optional. It will start only if you specify `proxy` section in your `gulpfile.js`. 
