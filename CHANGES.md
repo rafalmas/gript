@@ -1,3 +1,7 @@
+## Gript 0.0.51 (12-05-2016)
+
+- fixed [#76](https://github.com/Nykredit/gript/issues/76) Gript proxy crashes
+
 ## Gript 0.0.50 (09-05-2016)
 
 - implemented [#68](https://github.com/Nykredit/gript/issues/68) "Making an api mock without starting a real server"

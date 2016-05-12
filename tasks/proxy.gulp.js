@@ -31,7 +31,7 @@ module.exports = function (gulp) {
 
             if (_.has(gulp.config.proxy, 'hostHeader')) {
                 proxy.on('proxyReq', function (proxyReq) {
-                    proxyReq.setHeader('Host', gulp.config.hostHeader);
+                    proxyReq.setHeader('Host', gulp.config.proxy.hostHeader);
                 });
             } else {
                 util.log('Warning - Your proxy config is missing the ' + util.colors.red('hostHeader') + ' value.');
