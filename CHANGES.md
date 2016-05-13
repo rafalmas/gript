@@ -1,3 +1,7 @@
+## Gript 0.0.52 (13-05-2016)
+
+- implemented [#77](https://github.com/Nykredit/gript/issues/77).  `gulp-ng-html2js` options are now exposed in the config in the `gulpfile.js`. 
+
 ## Gript 0.0.51 (12-05-2016)
 
 - fixed [#76](https://github.com/Nykredit/gript/issues/76) Gript proxy crashes

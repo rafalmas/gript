@@ -319,8 +319,7 @@ For example, if you need to run your tests under Chrome browser, amend the defau
 The `partials` task will create Angular `$templateCache` files from your HTML files. The resulting JavaScript files will be created in the `target/tmp/partials` directory.
 These files will then be injected into the `index.html` file, according to `<!-- inject:partials --><!-- endinject -->` markings.
 The `dist` task will minify and concatenate them with other JavaScript files from your application.
-Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`. This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial. 
-
+Gript considers all HTML files in the `app` directory (except the `index.html`) as partials by default. You can change this behaviour by setting up the `partials` configuration value in the `gulpfile.js`. This may come in handy when you don't want a specific HTML file to be converted to Angular `$templateCache` partial.
 For example:
 ```
 partials: ['app/**/*.html', '!app/sections/welcome/testOauth.html']
@@ -328,6 +327,17 @@ partials: ['app/**/*.html', '!app/sections/welcome/testOauth.html']
  
 will generate `$templateCache` from all HTML files except the `app/sections/welcome/testOauth.html`.
 Take note that all files excluded from partials generation will be just copied to the `target` directory. At the same time, all files considered as partials will not be copied - after the conversion to JavaScript we don't need them anymore.
+
+If you need to customize the partials generation, use the `partialsOptions` in the `gulpfile.js`, for example:
+
+```
+partials: ['app/**/*.html'],
+partialsOptions: {
+    prefix: './'
+},
+```
+
+Refer to the [gulp-ng-html2js](https://www.npmjs.com/package/gulp-ng-html2js) documentation for possible options. 
 
 <a name="linting"></a>
 ## Linting

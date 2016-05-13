@@ -75,7 +75,10 @@ module.exports = function (gulp, paths) {
     });
 
     gulp.task('partials', ['lint-html'], function () {
-        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification);
+        var minificationOptions = _.merge({}, partialsMinifyDefaults, gulp.config.minification),
+            ngHtml2JsOptions = {
+                moduleName: gulp.config.app.module
+            };
 
         if (!_.has(gulp.config, 'partials')) {
             gulp.config.partials = partialsDefaults;
@@ -83,11 +86,13 @@ module.exports = function (gulp, paths) {
 
         gulp.config.partials.push('!' + paths.src.index);
 
+        if (_.has(gulp.config, 'partialsOptions')) {
+            ngHtml2JsOptions  = _.merge(ngHtml2JsOptions, gulp.config.partialsOptions);
+        }
+
         return gulp.src(gulp.config.partials)
             .pipe(htmlmin(minificationOptions.html))
-            .pipe(ngHtml2js({
-                moduleName: gulp.config.app.module
-            }))
+            .pipe(ngHtml2js(ngHtml2JsOptions))
             .pipe(gulp.dest(paths.target.tmp.partials))
             .pipe(size());
     });
