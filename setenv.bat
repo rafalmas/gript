@@ -1,4 +1,4 @@
-call cfg nodejs 4.2.2 git 2.6.3 ruby 2.2.2 python 2.7.10
+call cfg nodejs 4.4.5 git 2.6.3 ruby 2.2.2 python 2.7.10
 
 REM Fetch npm dependencies
 set PATH=%PATH%;%cd%\node_modules\.bin
