@@ -16,7 +16,7 @@ module.exports = function (gulp, paths) {
             files: ['**/*/*_test.js'],
             exclude: ['**/*/bower_components'],
             preprocessors: {
-                '!(patch)/**/!(*_test).js': ['coverage']
+                '!(bower_components|node_modules|patch)/**/!(modernizr|*_test).js': ['coverage']
             },
             reporters: ['progress', 'junit', 'coverage'],
             junitReporter: {
