@@ -1,3 +1,9 @@
+## Gript 0.0.53 (27-06-2016)
+
+- Enabled custom params when starting protractor.
+- fixed [#70](https://github.com/Nykredit/gript/issues/70). modernizr.js, bower_components and node_modules excluded from coverage.
+ 
+
 ## Gript 0.0.52 (13-05-2016)
 
 - implemented [#77](https://github.com/Nykredit/gript/issues/77).  `gulp-ng-html2js` options are now exposed in the config in the `gulpfile.js`. 
