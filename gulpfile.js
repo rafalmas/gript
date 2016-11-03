@@ -249,8 +249,6 @@ gulp.task('verify-package', function () {
         .pipe(ex.real('target/gript/sample_configs/bower.json'));
     gulp.src('target/gript/tasks/*.gulp.js')
         .pipe(ex.real('target/gript/tasks/*.gulp.js'));
-    gulp.src('target/gript/tasks/*.conf.js')
-        .pipe(ex.real('target/gript/tasks/karma.conf.js'));
     gulp.src('target/gript/README.md')
         .pipe(ex.real('target/gript/README.md'));
     gulp.src('target/gript/CHANGES.md')
