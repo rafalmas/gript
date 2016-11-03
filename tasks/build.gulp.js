@@ -87,7 +87,7 @@ module.exports = function (gulp, paths) {
         gulp.config.partials.push('!' + paths.src.index);
 
         if (_.has(gulp.config, 'partialsOptions')) {
-            ngHtml2JsOptions  = _.merge(ngHtml2JsOptions, gulp.config.partialsOptions);
+            ngHtml2JsOptions = _.merge(ngHtml2JsOptions, gulp.config.partialsOptions);
         }
 
         return gulp.src(gulp.config.partials)
