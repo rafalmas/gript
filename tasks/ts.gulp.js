@@ -10,7 +10,7 @@ module.exports = function (gulp, paths) {
             noImplicitAny: false,
             target: "es5",
             sourceMap: true,
-            declarationFiles: true,
+            declarationFiles: false,
             noResolve: false,
             removeComments: false,
             preserveConstEnums: true
