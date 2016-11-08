@@ -99,16 +99,13 @@ gulp.config = {
         hostHeader: 'gript'
     },
     typeScript: {
-        compilerOptions: {
-            noImplicitAny: true,
-            target: "es5",
-            sourceMap: true,
-            declarationFiles: true,
-            noExternalResolve: false,
-            sortOutput: true,
-            removeComments: false,
-            preserveConstEnums: true
-        }
+        noImplicitAny: false,
+        target: "es5",
+        sourceMap: true,
+        declarationFiles: true,
+        noResolve: false,
+        removeComments: false,
+        preserveConstEnums: true
     },
     minification: {
         html: {

@@ -3,7 +3,7 @@
 
 module Portfolio {
 
-    interface INavigationController {
+    export interface INavigationController {
         isActive(path: string) : boolean;
         toggleLanguage(language: string): void;
         isLanguageActive(language: string) : boolean;
