@@ -1,9 +1,6 @@
-/// <reference path='../../../bower_components/DefinitelyTyped/angularjs/angular.d.ts' />
-/// <reference path='../../../bower_components/DefinitelyTyped/angular-translate/angular-translate.d.ts' />
-
 module Portfolio {
 
-    interface INavigationController {
+    export interface INavigationController {
         isActive(path: string) : boolean;
         toggleLanguage(language: string): void;
         isLanguageActive(language: string) : boolean;
