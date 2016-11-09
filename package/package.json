@@ -1,6 +1,6 @@
 {
   "name": "gript",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "Gulp Build Setup",
   "dependencies": {
     "angular-multimocks": "0.6.8",
