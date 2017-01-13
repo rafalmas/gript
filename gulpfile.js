@@ -78,6 +78,7 @@ gulp.task('dist:serve', ['dist', 'server:dist']);
 // Set the config to use across the gulp build
 gulp.config = {
     repository: 'http://nykredit.github.com/gript.git',
+    skipAppCacheGeneration: true,
     app: {
         module: 'gript'
     },

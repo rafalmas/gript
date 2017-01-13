@@ -38,7 +38,11 @@ module.exports = function (gulp, paths) {
         };
 
     gulp.task('dist', function (callback) {
-        sequence('clean', ['appcache-create', 'appcache-include'], callback);
+        if (gulp.config.skipAppCacheGeneration) {
+            sequence('clean', ['minify'], callback);
+        } else {
+            sequence('clean', ['appcache-create', 'appcache-include'], callback);
+        }
     });
 
     gulp.task('appcache-create', ['minify'], function () {
