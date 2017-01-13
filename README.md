@@ -128,6 +128,7 @@ This `sample_configs/gulpfile.js` can be used as a starter for your project. Thi
        // Set the config to use across the gulp build
        gulp.config = {
            repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
+           skipAppCacheGeneration: true,
            app: {
                module: 'yourApp',
                constantsFile: 'app/constants.json'
@@ -226,6 +227,7 @@ These values are:
 
 - `app.module` : mandatory name of the project. It's being used as a module name when generating Angular modules, like `$templateCache` or constants modules.
 - `repository` the GIT url of your application, used in the `release` and `prerelease` tasks.
+- `skipAppCacheGeneration` allows to do not generate appcache manifest as it is [not recommended anymore](https://html.spec.whatwg.org/multipage/browsers.html#offline)
 - `partials` is a glob pattern to specify what files should bne considered as Angular `$templateCache` templates. Refer to the [Partials](#partials) section for details.
 - `server` configuration options for the web server like port number, live reload port number, host name etc.
 - `serverDist` configuration options for the web server started from `dist` by using `server:dist` task.
