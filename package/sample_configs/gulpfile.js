@@ -9,7 +9,8 @@ require('gript')(gulp);
 // Set the config to use across the gulp build
 gulp.config = {
     repository: 'http://git.nykreditnet.net/scm/dist/xpa-no-specified-project.git',
-	app: {
+    skipAppCacheGeneration: true,
+    app: {
         module: 'myApp',
         constantsFile: 'app/constants.json'
     },
